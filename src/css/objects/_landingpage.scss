@@ -1,0 +1,19 @@
+.landing-top {
+    height: 100vh;
+    background-image: url(https://cdn.shopify.com/s/files/1/0150/3760/t/17/assets/home-banner200.jpg);
+    background-position: center;
+    // background-size: cover;
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+}
+
+.landing-top-container {
+    // height: 100%;
+    // margin-top: 4rem;
+    color: #fff;
+    // padding: 0 10em;
+
+    h1{
+        padding-top: 50vh;
+    }
+}

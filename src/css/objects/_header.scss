@@ -1,0 +1,73 @@
+header {
+    position: fixed;
+    top: 0;
+    height: 4rem;
+    background-color: $white;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.5em;
+    padding: 1rem;
+
+    #bars {
+        font-size: 1.5rem;
+
+        &:hover{
+            cursor: pointer;
+        }
+
+        @include laptop {
+            display: none;
+        }
+    }
+
+    .mobile-cart {
+        i {
+            font-size: 1.5rem;
+
+            @include laptop {
+                display: none;
+            }
+        }
+    }
+
+    .header-left {
+        margin: 0;
+        display: none;
+
+        li {
+            float: left;
+
+            &:not(:last-child) {
+                padding-right: 2em;
+            }
+        }
+
+        @include laptop {
+            display: block;
+        }
+    }
+
+    .header-center {
+        margin: 0;
+
+    }
+
+    .header-right {
+        margin: 0;
+        display: none;
+
+        li {
+            float: left;
+
+            &:not(:last-child) {
+                padding-right: 2em;
+            }
+
+            i {
+                font-size: 1.3rem;
+            }
+        }
+    }
+}
