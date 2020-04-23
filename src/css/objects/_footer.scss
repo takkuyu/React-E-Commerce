@@ -1,0 +1,43 @@
+footer {
+  background-color: $Dark-Blue;
+  color: $white;
+  text-align: center;
+  padding: $pad-double;
+
+  .hash-tag {
+      margin: 0;
+      font-weight: 100;
+      font-size: 1.5em;
+  }
+
+  ul.media-list {
+      padding-top: $pad;
+
+      li {
+          display: inline-block;
+          font-size: 1.3em;
+
+          &:not(:last-child) {
+              margin-right: $pad;
+          }
+      }
+  }
+
+  ul {
+      li {
+          &:not(:last-child) {
+              padding-bottom: $pad-half;
+          }
+      }
+
+      li.list-title {
+          font-weight: bold;
+          font-size: 1.3em;
+          padding-bottom: $pad;
+      }
+  }
+
+  .typography {
+      font-size: 1em;
+  }
+}

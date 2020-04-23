@@ -13,9 +13,11 @@ $GLOBAL ELEMENTS
 @import "objects/header";
 @import "objects/header-modal";
 @import "objects/landingpage";
+@import "objects/footer";
 
 
 /*------------------------------------*\
-    $COMPONENTS
+$COMPONENTS
 \*------------------------------------*/
+@import "objects/landingpage-image-gallery";
 

@@ -1,29 +1,21 @@
+// ＠TODO: turn to variables
+
 .landing-top {
-    // margin-top: 4rem;
-    height: 60em;
     height: 100vh;
-    // background-image: url(https://images.pexels.com/photos/267320/pexels-photo-267320.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
     background-image: url(https://images.pexels.com/photos/1478442/pexels-photo-1478442.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
-    // background-image: url(../../img/hero-bg.jpg);
-    // background-position: bottom -600px left 0; 
     background-position: center center;
-    // background-size: 100% auto;
     background-size: cover;
     background-repeat: no-repeat;
     display: flex;
-    // flex-direction: column;
     align-items: center;
     justify-content: center;
-    // padding: 40vh 1em 2em;
     position: relative;
-    // z-index: -1;
     overflow: hidden;
-    // padding-top: 5rem;
     padding: 5rem 1em 0;
+    margin-bottom: 2.4em;
 
     h1 {
         font-size: 25px; // mobile
-        // font-size: 72px;
         text-align: center;
         font-weight: 600;
         font-style: oblique;
@@ -55,7 +47,6 @@
 }
 
 .shop-btn {
-    // padding-top: 3em;
     padding-bottom: 3em;
     position: absolute;
     bottom: 0;
@@ -63,7 +54,6 @@
     p {
         display: inline-block;
         font-size: 1.5em;
-        // font-size: 3em; //desktop
         border-bottom: $white .1rem solid;
         padding: 0 .5rem .2rem;
         font-weight: 500;
@@ -71,7 +61,7 @@
         margin: 0;
 
         &:hover {
-            cursor: pointer !important;
+            cursor: pointer;
         }
 
         &:not(:last-child) {
@@ -88,65 +78,35 @@
     }
 }
 
+.landing-about{
+    margin-bottom: 5em;
+    padding: 0 2.4em;
+    text-align: center;
 
-
-.landing-image-gallery {
-    padding-top: 5em;
-    padding: 2.4em 2.4em 0;
-    // padding-bottom: 1em;
-
-    .shoes-image-gallery {
-        padding: 8em 1em 1em;
-        background-position: center;
-        background-size: cover;
-        object-fit: cover;
-        background-repeat: no-repeat;
-        text-align: center;
-        color: $white;
-
-        h1 {
-            font-size: 2.5em;
-            font-weight: bold;
-            margin-bottom: 2rem;
-            letter-spacing: 1px;
-        }
-
-        >p {
-            font-size: 1.8em;
-            margin: 0;
-            font-weight: bold;
-        }
-
-
-        .shop-btn {
-            padding-top: 5em;
-            position: static;
-
-            p {
-                border-bottom: $white 2px solid;
-
-                &:not(:last-child) {
-                    margin-right: 2em;
-                }
-            }
-        }
+    h1{
+        padding-bottom: 1.75rem;
+        font-size: 1.75rem;
+        margin: 0;
     }
+    p{
+        font-size: 2.5em;
+        font-weight: 600;
+        margin: 0;
 
-    .shoes-type-classic {
-        background-image: url(https://images.unsplash.com/photo-1532471965572-092fb677a6a1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80);
-    }
-
-    .shoes-type-new {
-        background-image: url(https://images.unsplash.com/photo-1549298916-b41d501d3772?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1300&q=80);
-    }
-
-    .shoes-type-boots {
-        background-image: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .1)), url(https://images.unsplash.com/photo-1481729379561-01e43a3e1ed4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1436&q=80);
+        @include tablet{
+            font-size: 3em;
+        }
+        @include laptop{
+            font-size: 3.5em;
+        }
+        @include desktop{
+            font-size: 4em;
+        }
     }
 }
 
+
 .landing-newsletter {
-    padding-top: 5em;
     padding-bottom: 5em;
     text-align: center;
 
@@ -154,7 +114,7 @@
     h2 {
         padding-bottom: 1.75rem;
         font-size: 1.75rem;
-
+        margin: 0;
     }
 
     p {
@@ -197,7 +157,7 @@
     h2 {
         padding-bottom: 1.75rem;
         font-size: 1.75rem;
-
+        margin: 0;
     }
 
     ul {
@@ -220,46 +180,3 @@
     }
 }
 
-footer {
-    background-color: $Dark-Blue;
-    color: $white;
-    text-align: center;
-    padding: $pad-double;
-
-    .hash-tag {
-        margin: 0;
-        font-weight: 100;
-        font-size: 1.5em;
-    }
-
-    ul.media-list {
-        padding-top: $pad;
-
-        li {
-            display: inline-block;
-            font-size: 1.3em;
-
-            &:not(:last-child) {
-                margin-right: $pad;
-            }
-        }
-    }
-
-    ul {
-        li {
-            &:not(:last-child) {
-                padding-bottom: $pad-half;
-            }
-        }
-
-        li.list-title {
-            font-weight: bold;
-            font-size: 1.3em;
-            padding-bottom: $pad;
-        }
-    }
-
-    .typography {
-        font-size: 1em;
-    }
-}
