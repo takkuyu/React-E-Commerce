@@ -1,34 +1,25 @@
 header {
     position: fixed;
     top: 0;
-    height: 4rem;
+    height: 5rem;
     background-color: $white;
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 1.5em;
-    padding: 1rem;
+    padding: 0 1rem;
+    z-index: 999;
 
     #bars {
         font-size: 1.5rem;
+        width: 1.3rem;
 
-        &:hover{
+        &:hover {
             cursor: pointer;
         }
 
         @include laptop {
             display: none;
-        }
-    }
-
-    .mobile-cart {
-        i {
-            font-size: 1.5rem;
-
-            @include laptop {
-                display: none;
-            }
         }
     }
 
@@ -38,9 +29,15 @@ header {
 
         li {
             float: left;
+            font-size: $font-size-med;
 
             &:not(:last-child) {
                 padding-right: 2em;
+            }
+
+            &:hover {
+                cursor: pointer;
+                transform: scale(1.1, 1.1);
             }
         }
 
@@ -51,22 +48,74 @@ header {
 
     .header-center {
         margin: 0;
+        font-size: $font-size-med;
 
     }
 
     .header-right {
         margin: 0;
         display: none;
+        font-size: $font-size-med;
 
         li {
-            float: left;
 
             &:not(:last-child) {
-                padding-right: 2em;
+                margin-right: 2em;
+            }
+
+            &:hover {
+                cursor: pointer;
+                transform: scale(1.1, 1.1);
             }
 
             i {
                 font-size: 1.3rem;
+            }
+        }
+
+        @include laptop {
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+    }
+
+
+    #shopping-cart {
+
+        .fa-stack[data-count] {
+            font-size: 1.2rem;
+
+            .fa-circle {
+                color: rgba(0, 0, 0, .7);
+            }
+
+            &::after {
+                position: absolute;
+                right: 0%;
+                top: 1%;
+                content: attr(data-count);
+                font-size: 30%;
+                padding: .7em;
+                border-radius: 50%;
+                line-height: .8em;
+                color: white;
+                background: rgba(255, 0, 0, .85);
+                text-align: center;
+                min-width: 1em;
+                font-weight: bold;
+            }
+        }
+
+        &:hover {
+            cursor: pointer;
+            transform: scale(1.1, 1.1);
+        }
+
+        @include laptop {
+
+            &.shopping-cart-mobile {
+                display: none;
             }
         }
     }

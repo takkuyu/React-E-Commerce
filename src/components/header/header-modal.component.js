@@ -3,17 +3,21 @@ import React from 'react';
 function HeaderModal() {
   return (
       <div id='modal' className="header-modal-container">
-        <div className="header-modal">
           <nav>
             <ul>
-              <li><a href=''>Home</a></li>
-              <li><a href=''>About</a></li>
-              <li><a href=''>Contact</a></li>
-              <li><a href=''>Blog</a></li>
-              <li><a href=''>Careers</a></li>
+              <li className='men-list'>
+                <a href=''>MEN</a>
+                <i class="fas fa-chevron-right"></i>
+              </li>
+              <li className='women-list'>
+                <a href=''>WOMEN</a>
+                <i class="fas fa-chevron-right"></i>
+              </li>
+              <li><a href=''>STORES</a></li>
+              <li><a href=''>Account</a></li>
+              <li><a href=''>Help</a></li>
             </ul>
           </nav>
-        </div>
       </div>
   );
 }

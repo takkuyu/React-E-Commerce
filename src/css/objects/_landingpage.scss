@@ -1,19 +1,265 @@
 .landing-top {
+    // margin-top: 4rem;
+    height: 60em;
     height: 100vh;
-    background-image: url(https://cdn.shopify.com/s/files/1/0150/3760/t/17/assets/home-banner200.jpg);
-    background-position: center;
-    // background-size: cover;
-    background-size: auto 100%;
+    // background-image: url(https://images.pexels.com/photos/267320/pexels-photo-267320.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
+    background-image: url(https://images.pexels.com/photos/1478442/pexels-photo-1478442.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
+    // background-image: url(../../img/hero-bg.jpg);
+    // background-position: bottom -600px left 0; 
+    background-position: center center;
+    // background-size: 100% auto;
+    background-size: cover;
     background-repeat: no-repeat;
+    display: flex;
+    // flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    // padding: 40vh 1em 2em;
+    position: relative;
+    // z-index: -1;
+    overflow: hidden;
+    // padding-top: 5rem;
+    padding: 5rem 1em 0;
+
+    h1 {
+        font-size: 25px; // mobile
+        // font-size: 72px;
+        text-align: center;
+        font-weight: 600;
+        font-style: oblique;
+        text-transform: uppercase;
+        color: $white;
+        line-height: 1.4;
+        letter-spacing: 4px;
+        letter-spacing: 10px;
+        transform: rotate(-5deg);
+        margin: 0;
+        // text-shadow: rgb(190, 190, 190) 0px 0px 5px;
+
+        @include large-phone {
+            font-size: 35px;
+        }
+
+        @include tablet {
+            font-size: 45px;
+        }
+
+        @include laptop {
+            font-size: 55px;
+        }
+
+        @include desktop {
+            font-size: 72px;
+        }
+    }
 }
 
-.landing-top-container {
-    // height: 100%;
-    // margin-top: 4rem;
-    color: #fff;
-    // padding: 0 10em;
+.shop-btn {
+    // padding-top: 3em;
+    padding-bottom: 3em;
+    position: absolute;
+    bottom: 0;
 
-    h1{
-        padding-top: 50vh;
+    p {
+        display: inline-block;
+        font-size: 1.5em;
+        // font-size: 3em; //desktop
+        border-bottom: $white .1rem solid;
+        padding: 0 .5rem .2rem;
+        font-weight: 500;
+        color: $white;
+        margin: 0;
+
+        &:hover {
+            cursor: pointer !important;
+        }
+
+        &:not(:last-child) {
+            margin-right: 3em;
+        }
+
+        @include tablet {
+            font-size: 1.75em;
+        }
+
+        @include desktop {
+            font-size: 2em;
+        }
+    }
+}
+
+
+
+.landing-image-gallery {
+    padding-top: 5em;
+    padding: 2.4em 2.4em 0;
+    // padding-bottom: 1em;
+
+    .shoes-image-gallery {
+        padding: 8em 1em 1em;
+        background-position: center;
+        background-size: cover;
+        object-fit: cover;
+        background-repeat: no-repeat;
+        text-align: center;
+        color: $white;
+
+        h1 {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 2rem;
+            letter-spacing: 1px;
+        }
+
+        >p {
+            font-size: 1.8em;
+            margin: 0;
+            font-weight: bold;
+        }
+
+
+        .shop-btn {
+            padding-top: 5em;
+            position: static;
+
+            p {
+                border-bottom: $white 2px solid;
+
+                &:not(:last-child) {
+                    margin-right: 2em;
+                }
+            }
+        }
+    }
+
+    .shoes-type-classic {
+        background-image: url(https://images.unsplash.com/photo-1532471965572-092fb677a6a1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80);
+    }
+
+    .shoes-type-new {
+        background-image: url(https://images.unsplash.com/photo-1549298916-b41d501d3772?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1300&q=80);
+    }
+
+    .shoes-type-boots {
+        background-image: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .1)), url(https://images.unsplash.com/photo-1481729379561-01e43a3e1ed4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1436&q=80);
+    }
+}
+
+.landing-newsletter {
+    padding-top: 5em;
+    padding-bottom: 5em;
+    text-align: center;
+
+
+    h2 {
+        padding-bottom: 1.75rem;
+        font-size: 1.75rem;
+
+    }
+
+    p {
+        font-size: 1.5em;
+    }
+
+
+    .email-input {
+        height: 3em;
+        // width: 15em;
+        width: 60%;
+        max-width: 40em;
+        display: inline-block;
+        border: rgba(0, 0, 0, .2) 1px solid;
+        border-right: none;
+        border-radius: 5px 0px 0px 5px;
+        padding-left: .5em;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    button {
+        background-color: $black;
+        color: #fff;
+        // padding: 1em;
+        height: 3em;
+        width: 20%;
+        max-width: 15em;
+        border: none;
+        border-radius: 0 5px 5px 0px;
+    }
+}
+
+.landing-partners {
+    text-align: center;
+    padding-bottom: 5em;
+
+    h2 {
+        padding-bottom: 1.75rem;
+        font-size: 1.75rem;
+
+    }
+
+    ul {
+        margin: 0;
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+
+        li {
+            width: 50%;
+
+            &:nth-child(n+1):nth-child(-n+2) {
+                padding-bottom: 2em;
+            }
+
+            img {
+                width: 10em;
+            }
+        }
+    }
+}
+
+footer {
+    background-color: $Dark-Blue;
+    color: $white;
+    text-align: center;
+    padding: $pad-double;
+
+    .hash-tag {
+        margin: 0;
+        font-weight: 100;
+        font-size: 1.5em;
+    }
+
+    ul.media-list {
+        padding-top: $pad;
+
+        li {
+            display: inline-block;
+            font-size: 1.3em;
+
+            &:not(:last-child) {
+                margin-right: $pad;
+            }
+        }
+    }
+
+    ul {
+        li {
+            &:not(:last-child) {
+                padding-bottom: $pad-half;
+            }
+        }
+
+        li.list-title {
+            font-weight: bold;
+            font-size: 1.3em;
+            padding-bottom: $pad;
+        }
+    }
+
+    .typography {
+        font-size: 1em;
     }
 }

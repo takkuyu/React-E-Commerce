@@ -10,7 +10,7 @@
 }
 
 /* Small devices (landscape phones, 576px and up) */
-@mixin phone {
+@mixin large-phone {
     @media (min-width: ($bp-small-2)) {
         @content;
     }
