@@ -1,43 +1,54 @@
 footer {
-  background-color: $Dark-Blue;
-  color: $white;
-  text-align: center;
-  padding: $pad-double;
+    background-color: $Dark-Blue;
+    color: $white;
+    text-align: center;
+    padding: $pad-double;
 
-  .hash-tag {
-      margin: 0;
-      font-weight: 100;
-      font-size: 1.5em;
-  }
+    .hash-tag {
+        margin: 0;
+        font-weight: 100;
+        font-size: 1.5em;
+    }
 
-  ul.media-list {
-      padding-top: $pad;
+    ul.media-list {
+        padding-top: $pad;
 
-      li {
-          display: inline-block;
-          font-size: 1.3em;
+        li {
+            display: inline-block;
+            font-size: 1.3em;
 
-          &:not(:last-child) {
-              margin-right: $pad;
-          }
-      }
-  }
+            &:not(:last-child) {
+                margin-right: $pad;
+            }
+        }
+    }
 
-  ul {
-      li {
-          &:not(:last-child) {
-              padding-bottom: $pad-half;
-          }
-      }
+    .footer-list {
 
-      li.list-title {
-          font-weight: bold;
-          font-size: 1.3em;
-          padding-bottom: $pad;
-      }
-  }
+        ul {
+            li {
+                &:not(:last-child) {
+                    padding-bottom: $pad-half;
+                }
+            }
 
-  .typography {
-      font-size: 1em;
-  }
+            li.list-title {
+                font-weight: bold;
+                font-size: 1.3em;
+                padding-bottom: $pad;
+            }
+        }
+
+        @include tablet{
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20%;
+            margin-bottom: 2rem;
+        }
+    }
+
+
+    .typography {
+        font-size: 1em;
+    }
 }

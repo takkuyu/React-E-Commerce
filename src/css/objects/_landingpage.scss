@@ -12,7 +12,7 @@
     position: relative;
     overflow: hidden;
     padding: 5rem 1em 0;
-    margin-bottom: 2.4em;
+    margin-bottom: 10em;
 
     h1 {
         font-size: 25px; // mobile
@@ -78,28 +78,31 @@
     }
 }
 
-.landing-about{
-    margin-bottom: 5em;
+.landing-about {
+    margin-bottom: 10em;
     padding: 0 2.4em;
     text-align: center;
 
-    h1{
+    h1 {
         padding-bottom: 1.75rem;
         font-size: 1.75rem;
         margin: 0;
     }
-    p{
+
+    p {
         font-size: 2.5em;
         font-weight: 600;
         margin: 0;
 
-        @include tablet{
+        @include tablet {
             font-size: 3em;
         }
-        @include laptop{
+
+        @include laptop {
             font-size: 3.5em;
         }
-        @include desktop{
+
+        @include desktop {
             font-size: 4em;
         }
     }
@@ -107,27 +110,42 @@
 
 
 .landing-newsletter {
-    padding-bottom: 5em;
+    margin-bottom: 10em;
     text-align: center;
 
 
     h2 {
         padding-bottom: 1.75rem;
-        font-size: 1.75rem;
+        font-size: 2.8em;
         margin: 0;
+
+
+        @include laptop {
+            font-size: 3.5em;
+        }
+
+    
     }
 
     p {
         font-size: 1.5em;
+
+        @include laptop {
+            font-size: 2em;
+        }
+
+     
     }
 
+    .subscribe-wrapper {
+        display: flex;
+        justify-content: center;
+    }
 
     .email-input {
         height: 3em;
-        // width: 15em;
         width: 60%;
         max-width: 40em;
-        display: inline-block;
         border: rgba(0, 0, 0, .2) 1px solid;
         border-right: none;
         border-radius: 5px 0px 0px 5px;
@@ -136,28 +154,44 @@
         &:focus {
             outline: none;
         }
+
+        @include laptop {
+            height: 2.5rem;
+            font-size: 1.5em;
+        }
+
     }
 
     button {
         background-color: $black;
         color: #fff;
-        // padding: 1em;
         height: 3em;
         width: 20%;
         max-width: 15em;
         border: none;
         border-radius: 0 5px 5px 0px;
+
+        @include laptop {
+            height: 2.5rem;
+            font-size: 1.5em;
+        }
+
     }
 }
 
 .landing-partners {
     text-align: center;
-    padding-bottom: 5em;
+    margin-bottom: 10em;
 
     h2 {
         padding-bottom: 1.75rem;
-        font-size: 1.75rem;
+        font-size: 2.8em;
         margin: 0;
+
+        @include laptop {
+            font-size: 3.5em;
+        }
+   
     }
 
     ul {
@@ -175,8 +209,15 @@
 
             img {
                 width: 10em;
+
+                @include laptop {
+                    width: 15em;
+                }
+
+                @include desktop {
+                    width: 20em;
+                }
             }
         }
     }
 }
-

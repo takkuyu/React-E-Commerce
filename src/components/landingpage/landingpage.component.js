@@ -20,9 +20,9 @@ function LandingMain() {
       <div className='landing-about'>
         <Container>
 
-        <h1>LOGO</h1>
-        <p>
-        It started with a simple idea: Create quality, well-designed products that I wanted myself.
+          <h1>LOGO</h1>
+          <p>
+            It started with a simple idea: Create quality, well-designed products that I wanted myself.
         </p>
         </Container>
       </div>
@@ -33,8 +33,10 @@ function LandingMain() {
         <Container>
           <h2>Keep In Touch</h2>
           <p>subscribe to our newsletter to hear about the latest news, promotions and more</p>
-          <input class='email-input' type='email' placeholder='Enter Email address' />
-          <button>SIGN UP</button>
+          <div className='subscribe-wrapper'>
+            <input class='email-input' type='email' placeholder='Enter Email address' />
+            <button>SIGN UP</button>
+          </div>
         </Container>
       </div>
 
