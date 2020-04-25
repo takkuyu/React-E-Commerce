@@ -1,9 +1,10 @@
 import React from 'react';
+import logo from '../../img/takaya-logo-white.png';
 
 function Footer() {
   return (
     <footer>
-      <h3>LOGO</h3>
+      <img src={logo} alt='logo' />
       <div>
         <p className='hash-tag'>#LETSWEARMODERN</p>
         <ul className='media-list'>

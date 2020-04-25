@@ -1,23 +1,45 @@
 import React from 'react';
 import HeaderModal from './header-modal.component';
 import { CSSTransition } from 'react-transition-group';
+import logo from '../../img/takaya-logo.png';
 
 
 class Header extends React.Component {
   constructor() {
     super()
     this.state = {
-      modal: false
+      modal: false,
+      gender: ''
     }
     this.displayModal = this.displayModal.bind(this); // @Note: needed for setState
+    this.hideModal = this.hideModal.bind(this); // @Note: needed for setState
   }
 
-  displayModal() {
-    this.setState({ modal: !this.state.modal })
+  displayModal(gender) {
+
+    this.setState({
+      modal: true,
+      gender: gender
+    })
+  }
+
+  hideModal() {
+    this.setState({
+      modal: !this.state.modal,
+      gender: ''
+    })
   }
 
   render() {
-    const modal = (this.state.modal ? <HeaderModal /> : '')
+    const modal = (
+      this.state.modal ?
+        <HeaderModal
+          hideModal={this.hideModal}
+          gender={this.state.gender}
+        />
+        :
+        '')
+
     const modal_icon = (this.state.modal ?
       <i id='bars' className="fas fa-times" onClick={this.displayModal} ></i>
       :
@@ -27,10 +49,13 @@ class Header extends React.Component {
       <header className="landing-header">
         {modal_icon}
         <ul className='header-left'>
-          <li>MEN</li>
-          <li>WOMEN</li>
+          <li className={`${this.state.gender === 'Men' ? "is-active" : "inactive"}`} onClick={() => { this.displayModal('Men') }}>MEN</li>
+          <li className={`${this.state.gender === 'Women' ? "is-active" : "inactive"}`} onClick={() => { this.displayModal('Women') }}>WOMEN</li>
         </ul>
-        <p className='header-center'>Logo</p>
+        <div className='header-logo'>
+
+          <img src={logo} alt='logo' />
+        </div>
         <ul className='header-right'>
           <li>SIGNIN</li>
           <li>STORES</li>

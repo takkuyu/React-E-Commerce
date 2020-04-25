@@ -2,6 +2,7 @@ import React from 'react';
 import Header from '../header/header.component';
 import ImageGallery from '../landingpage/image-gallery.component';
 import Footer from '../footer/footer.component';
+import logo from '../../img/takaya-logo.png';
 import {
   Container
 } from 'reactstrap';
@@ -19,8 +20,7 @@ function LandingMain() {
       </div>
       <div className='landing-about'>
         <Container>
-
-          <h1>LOGO</h1>
+          <img src={logo} alt='logo' />
           <p>
             It started with a simple idea: Create quality, well-designed products that I wanted myself.
         </p>

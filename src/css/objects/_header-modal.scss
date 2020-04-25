@@ -1,6 +1,6 @@
 .header-modal-container {
     box-shadow: 0 -1px 8px rgba(0, 0, 0, .1);
-    height: 100vh;
+    // height: 100vh;
     width: 100vw;
     position: fixed;
     z-index: 999;
@@ -8,36 +8,126 @@
     left: 0;
     background-color: $Very-Light-Gray;
 
-    ul {
-        list-style-type: none;
-        margin: 0;
+    .mobile-modal-wrapper {
+        @include laptop {
+            display: none;
+        }
 
-        li {
-            font-size: .75rem;
-            padding: 1rem 1.5rem;
-            // text-align: center;
-            border-bottom: rgba(0, 0, 0, .2) 1px solid;
+        height: 100vh;
 
-            &:nth-child(n):nth-child(-n+3) {
-                font-weight: bold;
-            }
+        ul {
+            list-style-type: none;
+            margin: 0;
 
-            &:hover{
-                cursor: pointer;
-            }
+            li {
+                font-size: .75rem;
+                padding: 1rem 1.5rem;
+                // text-align: center;
+                border-bottom: rgba(0, 0, 0, .2) 1px solid;
 
-            a {
-                color: hsl(233, 26%, 24%);
+                &:nth-child(n):nth-child(-n+3) {
+                    font-weight: bold;
+                }
 
                 &:hover {
-                    text-decoration: none;
+                    cursor: pointer;
+                }
+
+                a {
+                    color: hsl(233, 26%, 24%);
+
+                    &:hover {
+                        text-decoration: none;
+                    }
+                }
+            }
+
+            .men-list,
+            .women-list {
+                display: flex;
+                justify-content: space-between;
+            }
+        }
+    }
+
+    .desktop-modal-wrapper {
+
+        display: none;
+    
+        @include laptop {
+            display: block;
+        }
+
+        // background-color: red;
+        width: 100%;
+
+        // position: fixed;
+        .modal-list {
+            width: 100%;
+            display: flex;
+            padding-top: 5em;
+            padding-bottom: 5em;
+
+            ul {
+                width: 25%;
+
+                li {
+                    font-size: 1.5em;
+
+                    &:not(:last-child) {
+                        margin-bottom: .7rem;
+                    }
+
+                    &.list-title {
+                        font-size: 2em;
+                        font-weight: 500;
+                        margin-bottom: 1rem;
+                    }
+
+                    img {
+                        width: 15em;
+                        height: 5em;
+                        object-fit: cover;
+
+                    }
+                }
+            }
+
+            ul.collections {
+                width: 50%;
+
+                .collection-item-wrapper {
+                    display: flex;
+
+                    li.collection-item {
+                        color: $white;
+                        width: 50%;
+                        height: 10em;
+                        background-position: center;
+                        background-size: cover;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        font-weight: 600;
+                        margin: 0;
+                    }
                 }
             }
         }
+    }
 
-        .men-list, .women-list{
-            display: flex;
-            justify-content: space-between;
+
+    .blanket {
+
+        @include laptop {
+            background-color: rgba(0, 0, 0, 0.7);
+            height: 100vh;
+            /* z-index: -1; */
+            position: absolute;
+            width: 100vw;
+
         }
     }
+
+
 }

@@ -1,8 +1,11 @@
 // ＠TODO: turn to variables
+// @TODO: turn img src into actual img path
 
 .landing-top {
     height: 100vh;
     background-image: url(https://images.pexels.com/photos/1478442/pexels-photo-1478442.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
+    // background-image: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .1)),url(https://images.unsplash.com/photo-1474420955179-b061b669ba2f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80);
+    // background-image: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .1)),url(https://images.unsplash.com/photo-1522032238811-74bc59578599?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1267&q=80);
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -83,11 +86,13 @@
     padding: 0 2.4em;
     text-align: center;
 
-    h1 {
-        padding-bottom: 1.75rem;
-        font-size: 1.75rem;
-        margin: 0;
+   img{
+       width: 10em;
+    @include tablet {
+        width: 15em;
     }
+
+   }
 
     p {
         font-size: 2.5em;

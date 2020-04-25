@@ -39,6 +39,11 @@ header {
                 cursor: pointer;
                 transform: scale(1.1, 1.1);
             }
+
+            &.is-active {
+                transform: scale(1.1, 1.1);
+            }
+
         }
 
         @include laptop {
@@ -46,10 +51,23 @@ header {
         }
     }
 
-    .header-center {
-        margin: 0;
-        font-size: $font-size-med;
+    .header-logo {
 
+        img {
+            height: auto;
+            width: 10em;
+        }
+
+        @include laptop {
+
+            position: absolute;
+            left: 0;
+            right: 0;
+            z-index: -5;
+            width: 100%;
+            height: auto;
+            text-align: center;
+        }
     }
 
     .header-right {
