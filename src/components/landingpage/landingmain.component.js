@@ -16,7 +16,7 @@ function LandingMain() {
           <p>SHOP WOMEN</p>
         </div>
       </div>
-      
+
       <div className='landing-about'>
         <Container>
           <img src={logo} alt='logo' />
@@ -33,7 +33,7 @@ function LandingMain() {
           <h2>Keep In Touch</h2>
           <p>subscribe to our newsletter to hear about the latest news, promotions and more</p>
           <div className='subscribe-wrapper'>
-            <input class='email-input' type='email' placeholder='Enter Email address' />
+            <input className='email-input' type='email' placeholder='Enter Email address' />
             <button>SIGN UP</button>
           </div>
         </Container>

@@ -17,11 +17,11 @@ function HeaderModal({ hideModal, gender }) {
         <ul>
           <li className='men-list'>
             <a href=''>MEN</a>
-            <i class="fas fa-chevron-right"></i>
+            <i className="fas fa-chevron-right"></i>
           </li>
           <li className='women-list'>
             <a href=''>WOMEN</a>
-            <i class="fas fa-chevron-right"></i>
+            <i className="fas fa-chevron-right"></i>
           </li>
           <li><a href=''>STORES</a></li>
           <li><a href=''>Account</a></li>

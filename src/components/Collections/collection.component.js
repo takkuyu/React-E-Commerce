@@ -5,14 +5,15 @@ import {
 import MensSneakers from './Mens/mens-sneakers';
 import SearchFilter from './search-filter.component'
 
-class Mens extends React.Component {
+class CollectionPage extends React.Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       searchFilter: '',
       isModalOpen: false
     }
+    // console.log(props)
   }
 
   displaysearchFilter(type) {
@@ -52,7 +53,7 @@ class Mens extends React.Component {
           <Container>
             <p className='search-result'>All - 80 results</p>
             <ul>
-              <li onClick={() => { this.displaysearchFilter('size') }}>Size<i className="fas fa-angle-down"></i></li>
+              <li onClick={() => { this.displaysearchFilter('size') }}>Price<i className="fas fa-angle-down"></i></li>
               <li onClick={() => { this.displaysearchFilter('color') }}>Color<i className="fas fa-angle-down"></i></li>
               <li onClick={() => { this.displaysearchFilter('style') }}>Style<i className="fas fa-angle-down"></i></li>
             </ul>
@@ -62,10 +63,8 @@ class Mens extends React.Component {
         <SearchFilter type={this.state.searchFilter} />
 
         <div className='collections-items-container'>
-          {/* <Container> */}
           <p className='search-result'>All - 80 results</p>
           <MensSneakers />
-          {/* </Container> */}
         </div>
       </div>
     );
@@ -73,4 +72,4 @@ class Mens extends React.Component {
   }
 };
 
-export default Mens;
+export default CollectionPage;

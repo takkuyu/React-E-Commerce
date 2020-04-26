@@ -43,11 +43,11 @@
       justify-content: center;
     }
 
-
     li {
       line-height: 3em;
       height: 3em;
-      width: 3em;
+      width: auto;
+      padding: 0 1em;
       border:  1px solid rgb(211, 212, 213);
       font-size: 1.6em;
       text-align: center;
@@ -65,16 +65,13 @@
     }
 
     &.search-filter-color li {
-      // height: 3em;
       border: none;
+      padding:0;
+      width: 3em;
       border-radius: 50%;
 
     }
 
-    &.search-filter-style li {
-      width: auto;
-      padding: 0 1em;
-    }
   }
 
 }

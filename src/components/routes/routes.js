@@ -11,7 +11,7 @@ import LandingMain from '../../components/landingpage/landingmain.component';
 const Routes = () => {
 
   return (
-    <section style={{ marginTop: '5rem' }}>
+    <section>
       <Header />
       <Switch>
         {/* <Route
@@ -26,11 +26,13 @@ const Routes = () => {
           }
         /> */}
         {/* <Route path="/collections" exact component={Collections} /> */}
-        <Route exact path='/' component={LandingMain} />
-
-        <Route path="/collections/mens" exact component={CollectionPage} />
         {/* <Route path="/pages" exact component={Pages} /> */}
-
+        <Route path='/' exact component={LandingMain} />
+        <Route path="/collections/mens" exact component={CollectionPage} />
+        <Route path="/collections/mens/sneakers" exact component={CollectionPage} />
+        <Route path="/collections/mens/activeshoes" exact component={CollectionPage} />
+        <Route path="/collections/mens/boots" exact component={CollectionPage} />
+        <Route path="/collections/women" exact component={CollectionPage} />
       </Switch>
       <Footer />
     </section>

@@ -3,20 +3,17 @@ import {
   Container
 } from 'reactstrap';
 
-const SearchFilter = ({ type }) => {
+const Routes = ({ type }) => {
 
   return (
     <div className='search-filter'>
       <Container>
         <div className={`search-filter-size-wrapper ${type === 'size' ? "open" : ""}`}>
           <ul className={`search-filter-size`} >
-            <li>8</li>
-            <li>9</li>
-            <li>10</li>
-            <li>11</li>
-            <li>12</li>
-            <li>13</li>
-            <li>14</li>
+            <li>$50 - $100</li>
+            <li>$100 - $150</li>
+            <li>$150 - $200</li>
+            <li>$200 - $300</li>
           </ul>
         </div>
 
@@ -46,4 +43,4 @@ const SearchFilter = ({ type }) => {
   );
 };
 
-export default SearchFilter;
+export default Routes;
