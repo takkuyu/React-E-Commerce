@@ -21,3 +21,13 @@ h4,
 h5 {
   font-weight: 300;
 }
+
+a{
+  
+  color: $black;
+  &:hover{
+    text-decoration: none;
+    color: rgb(66, 66, 66);
+    // transform: scale(1.1, 1.1);
+  }
+}

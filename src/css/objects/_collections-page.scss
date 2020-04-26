@@ -1,0 +1,106 @@
+.collections-container {
+
+  p {
+    margin: 0;
+  }
+
+  .collections-top {
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+
+
+    img {
+      width: 100%;
+      max-height: 50em;
+      object-fit: cover;
+
+      @include laptop {
+
+        width: 60%;
+      }
+    }
+
+    .collections-top-content {
+      width: 100%;
+      height: auto;
+      padding: 3em 3.6em;
+      color: $white;
+      background-color: #212a2f;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      h1 {
+        font-size: $font-size-xl;
+      }
+
+      p {
+        font-size: $font-size-med;
+      }
+
+      @include laptop {
+
+        width: 40%;
+      }
+    }
+  }
+
+  .search-bar {
+    // border-bottom: 1px solid rgb(211, 212, 213);
+
+
+    .container {
+      border-bottom: 1px solid rgb(211, 212, 213);
+
+      @include laptop {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+      }
+    }
+
+
+    p.search-result {
+      display: none;
+      font-size: $font-size-med;
+      font-weight: 500;
+
+      @include laptop {
+        display: block;
+      }
+    }
+
+    ul {
+      @include laptop {
+        width: 60%;
+      }
+
+      margin: 0;
+      height: 5em;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+
+      li {
+        text-align: center;
+        font-size: $font-size-med;
+        font-weight: 500;
+
+        i {
+          margin-left: .5em;
+        }
+
+        &:hover {
+          cursor: pointer;
+          transform: scale(1.1, 1.1);
+
+        }
+      }
+    }
+
+  }
+
+
+
+}

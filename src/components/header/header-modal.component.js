@@ -6,6 +6,8 @@ import women_shoes_1 from '../../img/women-shoes-1.jpg';
 import women_shoes_2 from '../../img/women-shoes-2.jpg';
 import new_arrivals_img from '../../img/new-arrivals.jpg';
 import topseller_img from '../../img/topseller.jpg';
+import { Link } from 'react-router-dom';
+
 
 function HeaderModal({ hideModal, gender }) {
   return (
@@ -31,7 +33,7 @@ function HeaderModal({ hideModal, gender }) {
         <Container>
           <div className='modal-list'>
             <ul>
-              <li className='list-title'>SHOES</li>
+              <li className='list-title'><Link to='/collections/mens' onClick={hideModal}>SHOES</Link></li>
               <li>{gender} Sneakers</li>
               <li>Active Shoes</li>
               <li>Boots</li>

@@ -8,10 +8,10 @@ function Footer() {
       <div>
         <p className='hash-tag'>#LETSWEARMODERN</p>
         <ul className='media-list'>
-          <li><i class="fab fa-instagram"></i></li>
-          <li><i class="fab fa-twitter"></i></li>
-          <li><i class="fab fa-facebook-f"></i></li>
-          <li><i class="fab fa-pinterest-p"></i></li>
+          <li><i className="fab fa-instagram"></i></li>
+          <li><i className="fab fa-twitter"></i></li>
+          <li><i className="fab fa-facebook-f"></i></li>
+          <li><i className="fab fa-pinterest-p"></i></li>
         </ul>
       </div>
       <div className='footer-list'>

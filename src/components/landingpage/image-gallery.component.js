@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   Container,
-  Row
 } from 'reactstrap';
 import new_arrivals_img from '../../img/new-arrivals.jpg';
 import sneakers_img from '../../img/sneakers.jpg';

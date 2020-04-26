@@ -32,7 +32,7 @@ header {
             font-size: $font-size-med;
 
             &:not(:last-child) {
-                padding-right: 2em;
+                margin-right: 2em;
             }
 
             &:hover {
@@ -52,21 +52,17 @@ header {
     }
 
     .header-logo {
+        position: absolute;
+        left: 0;
+        right: 0;
+        z-index: -5;
+        height: 100%;
+        width: 100%;
+        text-align: center;
 
         img {
-            height: auto;
+            height: 100%;
             width: 10em;
-        }
-
-        @include laptop {
-
-            position: absolute;
-            left: 0;
-            right: 0;
-            z-index: -5;
-            width: 100%;
-            height: auto;
-            text-align: center;
         }
     }
 
@@ -116,7 +112,8 @@ header {
                 font-size: 30%;
                 padding: .7em;
                 border-radius: 50%;
-                line-height: .8em;
+                // line-height: .8em;
+                line-height: 1.2em;
                 color: white;
                 background: rgba(255, 0, 0, .85);
                 text-align: center;

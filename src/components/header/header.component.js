@@ -1,7 +1,8 @@
 import React from 'react';
 import HeaderModal from './header-modal.component';
-import { CSSTransition } from 'react-transition-group';
+// import { CSSTransition } from 'react-transition-group';
 import logo from '../../img/takaya-logo.png';
+import { Link } from 'react-router-dom';
 
 
 class Header extends React.Component {
@@ -17,15 +18,28 @@ class Header extends React.Component {
 
   displayModal(gender) {
 
+    if (this.state.gender !== gender && this.state.modal) {
+      this.setState({
+        modal: true,
+        gender: gender
+      })
+      return
+    }
+
+    if (this.state.gender === gender && this.state.modal) {
+      this.hideModal()
+      return
+    }
+
     this.setState({
-      modal: true,
+      modal: !this.state.modal,
       gender: gender
     })
   }
 
   hideModal() {
     this.setState({
-      modal: !this.state.modal,
+      modal: false,
       gender: ''
     })
   }
@@ -41,9 +55,9 @@ class Header extends React.Component {
         '')
 
     const modal_icon = (this.state.modal ?
-      <i id='bars' className="fas fa-times" onClick={this.displayModal} ></i>
+      <i id='bars' className="fas fa-times" onClick={() => { this.setState({ modal: !this.state.modal }) }} ></i>
       :
-      <i id='bars' className="fas fa-bars" onClick={this.displayModal}></i>)
+      <i id='bars' className="fas fa-bars" onClick={() => { this.setState({ modal: !this.state.modal }) }}></i>)
 
     return (
       <header className="landing-header">
@@ -54,25 +68,25 @@ class Header extends React.Component {
         </ul>
         <div className='header-logo'>
 
-          <img src={logo} alt='logo' />
+          <Link to='/' onClick={this.hideModal}><img src={logo} alt='logo' /></Link>
         </div>
         <ul className='header-right'>
-          <li>SIGNIN</li>
+          <li>ABOUT</li>
           <li>STORES</li>
           <li><i className="far fa-user"></i></li>
           <li><i className="far fa-question-circle"></i></li>
           <div id="shopping-cart">
-            <span class="fa-stack has-badge" data-count="0">
-              <i class="fa fa-circle fa-stack-2x"></i>
-              <i class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
+            <span className="fa-stack has-badge" data-count="0">
+              <i className="fa fa-circle fa-stack-2x"></i>
+              <i className="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
             </span>
           </div>
         </ul>
 
         <div className='shopping-cart-mobile' id="shopping-cart">
-          <span class="fa-stack has-badge" data-count="0">
-            <i class="fa fa-circle fa-stack-2x"></i>
-            <i class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
+          <span className="fa-stack has-badge" data-count="0">
+            <i className="fa fa-circle fa-stack-2x"></i>
+            <i className="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
           </span>
         </div>
 

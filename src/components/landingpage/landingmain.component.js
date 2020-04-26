@@ -1,7 +1,5 @@
 import React from 'react';
-import Header from '../header/header.component';
-import ImageGallery from '../landingpage/image-gallery.component';
-import Footer from '../footer/footer.component';
+import ImageGallery from './image-gallery.component';
 import logo from '../../img/takaya-logo.png';
 import {
   Container
@@ -10,7 +8,7 @@ import {
 function LandingMain() {
   return (
     <div className='landing-container'>
-      <Header />
+
       <div className='landing-top'>
         <h1>DISCOVER THE WORLD<br />OF MODERN SHOES</h1>
         <div className='shop-btn'>
@@ -18,6 +16,7 @@ function LandingMain() {
           <p>SHOP WOMEN</p>
         </div>
       </div>
+      
       <div className='landing-about'>
         <Container>
           <img src={logo} alt='logo' />
@@ -51,8 +50,6 @@ function LandingMain() {
           </ul>
         </Container>
       </div>
-
-      <Footer />
     </div>
 
   );
