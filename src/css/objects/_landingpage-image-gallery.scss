@@ -1,29 +1,137 @@
-
-.landing-image-gallery-container {
+.image-gallery-container {
   margin-bottom: 10em;
   overflow: hidden;
+  padding: 0 2.4em;
 
-  @include tablet {
-    display: flex;
-    padding-right: 0;
-    padding-left: 0;
-    height: 50em;
+  &.extra-image{
+    display: none;
+
+    @include tablet{
+      display: block;
+
+      &:hover{
+        cursor: pointer;
+      }
+    }
   }
 
-  @include laptop {
-
-    height: 60em;
+  @include tablet {
+    display: grid;
+    margin: 0 auto 10em;
+    grid-template: repeat(3, 33.33337%) / repeat(2, 50%); // height/width
   }
 
   @include desktop {
-
-    height: 70em;
+    max-width: 1200px;
+    box-sizing: border-box;
   }
 
   .image-wrapper {
     position: relative;
     height: 100%;
     width: 100%;
+    overflow: hidden;
+
+    &.grid-sneakers {
+      grid-row: 1 / 3;
+      grid-column: 1 / 2;
+    }
+
+    &.grid-topsellers {
+      grid-row: 2 / 4;
+      grid-column: 2 / 3;
+    }
+
+    &.grid-boots {
+      grid-row: 3 / 4;
+      grid-column: 1 / 2;
+
+      .image-content {
+
+        @include tablet {
+          h1{
+            font-size: 2em;
+          }
+          >p {
+            display: none;
+          }
+
+          .shop-btn{
+            padding-bottom: .5rem;
+          }
+        }
+
+        @include desktop{
+          h1{
+            font-size: 2.5em;
+          }
+
+          .shop-btn {
+            padding-bottom: 1rem;
+          }
+        }
+      }
+    }
+
+    &.grid-running {
+      grid-row: 1 / 2;
+      grid-column: 2 / 3;
+
+      .image-content {
+
+        @include tablet {
+          h1{
+            font-size: 2em;
+          }
+
+          >p {
+            display: none;
+          }
+
+          .shop-btn {
+            padding-bottom: .5rem;
+          }
+        }
+
+        @include desktop{
+          h1{
+            font-size: 2.5em;
+          }
+
+          .shop-btn {
+            padding-bottom: 1rem;
+          }
+        }
+
+      }
+    }
+
+    &.new-arrivals {
+   
+      .image{
+
+        &::before {
+          content: "";
+          display: block;
+          padding-top: 100%;
+  
+          @include tablet {
+            padding-top: 30%;
+            // display: none;
+          }
+        }
+      }
+    }
+
+    &:hover {
+      .image {
+        transform: scale(1);
+
+        &::after {
+          opacity: 1;
+        }
+      }
+    }
 
     .image {
       background-position: center;
@@ -60,21 +168,12 @@
         padding-top: 100%;
 
         @include tablet {
-          padding-top: 60%;
-          display: none;
+          padding-top: 66.6667%;
+          // display: none;
         }
       }
     }
 
-    &:hover {
-      .image {
-        transform: scale(1);
-
-        &::after {
-          opacity: 1;
-        }
-      }
-    }
 
     .image-content {
       position: absolute;
@@ -89,70 +188,22 @@
       right: 0;
       bottom: 0;
       color: #fff;
-    }
 
-  }
-
-  .image-gallery-left {
-    display: none;
-    width: 60%;
-    overflow: hidden;
-
-    .image-wrapper {
-      height: 100%;
-
-      .image-content {
-        h1 {
-          font-size: 3.5em;
-          font-weight: bold;
-          margin-bottom: 2rem;
-          letter-spacing: 1px;
-          color: #fff;
-          margin: 0;
-        }
-
-        >p {
-          font-size: 1.8em;
-          margin: 0;
-          font-weight: bold;
-        }
-      }
-    }
-
-    @include tablet {
-      display: block;
-    }
-  }
-
-  .image-gallery-right {
-    overflow: hidden;
-
-    @include tablet {
-      width: 40%;
-
-      .image-wrapper {
-        height: 33.33337%;
-      }
-    }
-
-    .image-content {
       h1 {
         font-size: 2.5em;
+        // font-weight: 500;
         font-weight: bold;
         margin-bottom: 2rem;
         letter-spacing: 1px;
 
         @include tablet {
           margin: 0;
-          font-size: 2em;
+          // font-size: 3em;
         }
 
-        @include laptop {
-          font-size: 2.2em;
-        }
 
         @include desktop {
-          font-size: 2.5em;
+          font-size: 3em;
         }
       }
 
@@ -161,9 +212,6 @@
         margin: 0;
         font-weight: bold;
 
-        @include tablet {
-          display: none;
-        }
       }
 
       .shop-btn {
@@ -183,13 +231,11 @@
           }
 
         }
-
-        @include tablet {
-          display: none;
-        }
       }
     }
+
   }
+
 
 
 }

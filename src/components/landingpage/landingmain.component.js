@@ -4,6 +4,7 @@ import logo from '../../img/takaya-logo.png';
 import {
   Container
 } from 'reactstrap';
+import new_arrivals_img from '../../img/new-arrivals.jpg';
 
 function LandingMain() {
   return (
@@ -27,6 +28,16 @@ function LandingMain() {
       </div>
 
       <ImageGallery />
+
+      <div className='image-gallery-container extra-image'>
+        <div className='image-wrapper new-arrivals'>
+          <div className='image' style={{ backgroundImage: ` url(${new_arrivals_img})` }}></div>
+          <div className='image-content'>
+            <h1>New Arrivals</h1>
+            <p>Soft & Cozy</p>
+          </div>
+        </div>
+      </div>
 
       <div className='landing-newsletter'>
         <Container>
