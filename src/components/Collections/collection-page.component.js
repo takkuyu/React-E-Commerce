@@ -28,7 +28,7 @@ class CollectionPage extends React.Component {
 
 
   componentDidMount() {
-    console.log(imageLink)
+    // console.log(imageLink)
     // console.log('didmount')
     // const params = queryString.parse(this.props.location.search)
     // console.log(params)

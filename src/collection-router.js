@@ -13,68 +13,91 @@ import women_boots_img from './img/women-boots.jpg';
 let imageLink = '';
 let sum = 0;
 
+function filterItems(items_arr, sum, price, size, color) {
+  if (price.pmin !== undefined && price.pmax !== undefined) {
+    items_arr = items_arr.filter(item => (Number(price.pmin) <= item.price && item.price <= Number(price.pmax)));
+    sum = items_arr.length;
+  }
+
+  if (color !== undefined) {
+    items_arr = items_arr.filter(item => item.color === color);
+    sum = items_arr.length;
+  }
+  if (size !== undefined) {
+    items_arr = items_arr.filter(item => item.size.indexOf(Number(size)) !== -1);
+    sum = items_arr.length;
+  }
+
+  return { items_arr, sum }
+}
+
 const collectionRouter = (this_gender, this_category, price, size, color) => {
-  // console.log(price)
-  // console.log(size)
-  // console.log(color)
+
   if (this_gender === 'mens') {
 
     switch (this_category) {
-      case 'sneakers':
-        let category_items_sneakers = SHOP_DATA[1].items.filter(item => (item.item_gender === 'mens'));
+      case 'sneakers': {
+        const items_arr = SHOP_DATA[1].items.filter(item => (item.item_gender === 'mens'));
+        const items = filterItems(items_arr, items_arr.length, price, size, color);
 
-        sum = category_items_sneakers.length;
+        sum = items.sum
         imageLink = men_sneakers_img;
 
-        if (price.pmin !== undefined) {
-          category_items_sneakers = category_items_sneakers.filter(item => (Number(price.pmin) <= item.price && item.price <= Number(price.pmax)));
-          sum = category_items_sneakers.length;
-        }
         return (
           <div>
-            <Category gender='mens' routeName={SHOP_DATA[1].routeName} categoryTitle={SHOP_DATA[1].title} category_items={category_items_sneakers} />
+            <Category gender='mens' routeName={SHOP_DATA[1].routeName} categoryTitle={SHOP_DATA[1].title} category_items={items.items_arr} />
           </div>
         )
+      }
+      case 'running': {
+        const items_arr = SHOP_DATA[0].items.filter(item => item.item_gender === 'mens');
+        const items = filterItems(items_arr, items_arr.length, price, size, color);
 
-      case 'running':
-        const category_items_running = SHOP_DATA[0].items.filter(item => item.item_gender === 'mens');
-        sum = category_items_running.length;
+        sum = items.sum
         imageLink = men_runnning_img;
 
         return (
           <div>
-            <Category gender='mens' routeName={SHOP_DATA[0].routeName} categoryTitle={SHOP_DATA[0].title} category_items={category_items_running} />
+            <Category gender='mens' routeName={SHOP_DATA[0].routeName} categoryTitle={SHOP_DATA[0].title} category_items={items.items_arr} />
           </div>
         )
+      }
+      case 'boots': {
+        const items_arr = SHOP_DATA[2].items.filter(item => item.item_gender === 'mens');
+        const items = filterItems(items_arr, items_arr.length, price, size, color);
 
-      case 'boots':
-        const category_items_boots = SHOP_DATA[2].items.filter(item => item.item_gender === 'mens');
-        sum = category_items_boots.length;
+        sum = items.sum
         imageLink = men_boots_img;
 
         return (
           <div>
-            <Category gender='mens' routeName={SHOP_DATA[2].routeName} categoryTitle={SHOP_DATA[2].title} category_items={category_items_boots} />
+            <Category gender='mens' routeName={SHOP_DATA[2].routeName} categoryTitle={SHOP_DATA[2].title} category_items={items.items_arr} />
           </div>
         )
+      }
+      case undefined: {
+        const sneakers_arr = SHOP_DATA[1].items.filter(item => item.item_gender === 'mens');
+        const running_arr = SHOP_DATA[0].items.filter(item => item.item_gender === 'mens');
+        const boots_arr = SHOP_DATA[2].items.filter(item => item.item_gender === 'mens');
 
-      case undefined:
-        const category_items_sneakers_all = SHOP_DATA[1].items.filter(item => item.item_gender === 'mens');
-        const category_items_running_all = SHOP_DATA[0].items.filter(item => item.item_gender === 'mens');
-        const category_items_boots_all = SHOP_DATA[2].items.filter(item => item.item_gender === 'mens');
-        sum = category_items_sneakers_all.length + category_items_running_all.length + category_items_boots_all.length;
+        const sneakers_items = filterItems(sneakers_arr, sneakers_arr.length, price, size, color);
+        const running_items = filterItems(running_arr, running_arr.length, price, size, color);
+        const boots_items = filterItems(boots_arr, boots_arr.length, price, size, color);
+
+        sum = sneakers_items.sum + running_items.sum + boots_items.sum;
         imageLink = men_all_img;
 
         return (
           <div>
-            <Category gender='mens' routeName={SHOP_DATA[1].routeName} categoryTitle={SHOP_DATA[1].title} category_items={category_items_sneakers_all} />
-            <Category gender='mens' routeName={SHOP_DATA[0].routeName} categoryTitle={SHOP_DATA[0].title} category_items={category_items_running_all} />
-            <Category gender='mens' routeName={SHOP_DATA[2].routeName} categoryTitle={SHOP_DATA[2].title} category_items={category_items_boots_all} />
+            <Category gender='mens' routeName={SHOP_DATA[1].routeName} categoryTitle={SHOP_DATA[1].title} category_items={sneakers_items.items_arr} />
+            <Category gender='mens' routeName={SHOP_DATA[0].routeName} categoryTitle={SHOP_DATA[0].title} category_items={running_items.items_arr} />
+            <Category gender='mens' routeName={SHOP_DATA[2].routeName} categoryTitle={SHOP_DATA[2].title} category_items={boots_items.items_arr} />
           </div>
         )
+      }
       default:
-      // window.location = '/'
-          alert('Ooops wrong router')
+        // window.location = '/'
+        alert('Ooops wrong router')
     }
 
   } else if (this_gender === 'women') {
