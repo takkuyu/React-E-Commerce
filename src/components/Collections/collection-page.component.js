@@ -28,10 +28,6 @@ class CollectionPage extends React.Component {
 
 
   componentDidMount() {
-    // console.log(imageLink)
-    // console.log('didmount')
-    // const params = queryString.parse(this.props.location.search)
-    // console.log(params)
     this.setState({
       sum: sum,
       imageLink: imageLink
@@ -60,8 +56,6 @@ class CollectionPage extends React.Component {
   }
 
   render() {
-    // console.log('render sum : ' + sum)
-
     const genderText = (this.props.match.params.gender === 'mens' ? "Men's" : "Women's")
     const categoryText = (this.props.match.params.category === undefined ? "Shoes" : this.props.match.params.category)
 

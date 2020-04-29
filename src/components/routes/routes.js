@@ -5,7 +5,6 @@ import ItemPage from "../collections/collecrion-item.component";
 import Header from '../../components/header/header.component';
 import Footer from '../../components/footer/footer.component';
 import LandingMain from '../../components/landingpage/landingmain.component';
-import ScrollToTop from '../scrollToTop.component'
 
 const Routes = (props) => {
   return (
