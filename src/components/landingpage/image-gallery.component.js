@@ -1,11 +1,9 @@
 import React from 'react';
-import {
-  Container,
-} from 'reactstrap';
 import topseller_img from '../../img/topseller.jpg';
 import sneakers_img from '../../img/sneakers.jpg';
 import running_img from '../../img/running.jpg';
 import boots_img from '../../img/boots.jpg';
+
 
 function ImageGallery() {
   return (

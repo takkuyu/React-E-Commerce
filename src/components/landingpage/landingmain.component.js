@@ -54,10 +54,10 @@ function LandingMain() {
         <Container>
           <h2>Trusted Partners</h2>
           <ul>
-            <li><img src='https://colorlib.com/preview/theme/footwear/images/brand-2.jpg' /></li>
-            <li><img src='https://colorlib.com/preview/theme/footwear/images/brand-1.jpg' /></li>
-            <li><img src='https://colorlib.com/preview/theme/footwear/images/brand-5.jpg' /></li>
-            <li><img src='https://colorlib.com/preview/theme/footwear/images/brand-4.jpg' /></li>
+            <li><img src='https://colorlib.com/preview/theme/footwear/images/brand-2.jpg' alt=''/></li>
+            <li><img src='https://colorlib.com/preview/theme/footwear/images/brand-1.jpg' alt=''/></li>
+            <li><img src='https://colorlib.com/preview/theme/footwear/images/brand-5.jpg' alt=''/></li>
+            <li><img src='https://colorlib.com/preview/theme/footwear/images/brand-4.jpg' alt=''/></li>
           </ul>
         </Container>
       </div>

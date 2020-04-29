@@ -2,14 +2,16 @@ import React from 'react';
 import {
   Container
 } from 'reactstrap';
-import women_shoes_1 from '../../img/women-shoes-1.jpg';
-import women_shoes_2 from '../../img/women-shoes-2.jpg';
+import women_shoes_1 from '../../img/women-all.jpg';
+import women_shoes_2 from '../../img/women-running.jpg';
 import new_arrivals_img from '../../img/new-arrivals.jpg';
 import topseller_img from '../../img/topseller.jpg';
 import { Link } from 'react-router-dom';
 
 
 function HeaderModal({ hideModal, gender }) {
+  const genderRoute = (gender === 'Men' ? 'mens' : 'women');
+
   return (
     <div id='modal' className="header-modal-container">
 
@@ -33,11 +35,12 @@ function HeaderModal({ hideModal, gender }) {
         <Container>
           <div className='modal-list'>
             <ul>
-              <li className='list-title'><Link to='/collections/mens' onClick={hideModal}>SHOES</Link></li>
-              <li>{gender} Sneakers</li>
-              <li>Active Shoes</li>
-              <li>Boots</li>
-              <li>New Arrivals</li>
+              <li className='list-title'>SHOES</li>
+              <li><Link to={`/collections/${genderRoute}`} onClick={hideModal}>View All</Link></li>
+              <li><Link to={`/collections/${genderRoute}/sneakers`} onClick={hideModal}>Sneakers</Link></li>
+              <li><Link to={`/collections/${genderRoute}/running`} onClick={hideModal}>Running Shoes</Link></li>
+              <li><Link to={`/collections/${genderRoute}/boots`} onClick={hideModal}>Boots</Link></li>
+              <li><Link to='/collections/new' onClick={hideModal}>New Arrivals</Link></li>
             </ul>
             <ul>
               <li className='list-title'>SOCKS</li>
