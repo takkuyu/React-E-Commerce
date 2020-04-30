@@ -1,5 +1,11 @@
 .collections-items-container {
 
+  min-height: 50em;
+
+  @include laptop {
+    min-height: 70em;
+  }
+
   .search-result {
     font-size: $font-size-med;
     text-align: center;

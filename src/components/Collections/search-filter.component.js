@@ -17,7 +17,7 @@ const SearchFilter = (props) => {
     <div className='search-filter'>
       <Container>
         <div className={`search-filter-size-wrapper ${props.type === 'price' ? "open" : ""}`}>
-          <ul className={`search-filter-size`} >
+          <ul className={`search-filter-price`} >
             <li onClick={() => props.history.push({ pathname: props.location.pathname, search: `?${param}pmin=50&pmax=100`, })} >$50 - $100</li>
             <li onClick={() => props.history.push({ pathname: props.location.pathname, search: `?${param}pmin=100&pmax=150`, })}>$100 - $150</li>
             <li onClick={() => props.history.push({ pathname: props.location.pathname, search: `?${param}pmin=150&pmax=200`, })}>$150 - $200</li>
@@ -38,8 +38,8 @@ const SearchFilter = (props) => {
           </ul>
         </div>
 
-        <div className={`search-filter-style-wrapper ${props.type === 'size' ? "open" : ""}`}>
-          <ul className={`search-filter-style`} >
+        <div className={`search-filter-size-wrapper ${props.type === 'size' ? "open" : ""}`}>
+          <ul className={`search-filter-size`} >
 
             <li onClick={() => props.history.push({ pathname: props.location.pathname, search: `?${param}size=8` })} >8</li>
             <li onClick={() => props.history.push({ pathname: props.location.pathname, search: `?${param}size=9` })} >9</li>

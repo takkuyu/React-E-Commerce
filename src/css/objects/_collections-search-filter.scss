@@ -18,7 +18,7 @@
     }
   }
 
-  .search-filter-style-wrapper {
+  .search-filter-size-wrapper {
     display: none;
 
     &.open {
@@ -70,6 +70,11 @@
       width: 3em;
       border-radius: 50%;
 
+    }
+
+    &.search-filter-size li {
+      width: 3em;
+      padding: 0;
     }
 
   }

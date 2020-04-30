@@ -26,8 +26,8 @@ class CollectionPage extends React.Component {
     // this.updateCollection = this.updateCollection.bind(this);
   }
 
-
   componentDidMount() {
+    // console.log(this.props.location.search)
     this.setState({
       sum: sum,
       imageLink: imageLink
@@ -55,9 +55,36 @@ class CollectionPage extends React.Component {
     })
   }
 
+  clearFilter(type) {
+    const param = queryString.parse(this.props.location.search);
+    // console.log(param)
+    switch (type) {
+      case 'price':
+        delete param.pmin
+        delete param.pmax
+        // console.log(queryString.stringify(param))
+        this.props.history.push({ pathname: this.props.location.pathname, search: queryString.stringify(param) })
+        break;
+      case 'color':
+        delete param.color
+        this.props.history.push({ pathname: this.props.location.pathname, search: queryString.stringify(param) })
+        break;
+      case 'size':
+        delete param.size
+        this.props.history.push({ pathname: this.props.location.pathname, search: queryString.stringify(param) })
+        break;
+      case 'all':
+        this.props.history.push({ pathname: this.props.location.pathname, search: '' })
+        break;
+      default:
+        break;
+    }
+  }
+
   render() {
     const genderText = (this.props.match.params.gender === 'mens' ? "Men's" : "Women's")
     const categoryText = (this.props.match.params.category === undefined ? "Shoes" : this.props.match.params.category)
+    const clearFilterBtn = (this.props.location.search !== '' ? <button onClick={() => { this.clearFilter('all') }} className='clearFilterBtn'>CLEAR FILTERS</button> : <div></div>)
 
     return (
       <div className='collections-container'>
@@ -73,10 +100,26 @@ class CollectionPage extends React.Component {
         <div className='search-bar'>
           <Container>
             <p className='search-result'>All - {this.state.sum} results</p>
+            {clearFilterBtn}
             <ul>
-              <li onClick={() => { this.displaysearchFilter('price') }} >Price<i className="fas fa-angle-down"></i></li>
-              <li onClick={() => { this.displaysearchFilter('color') }} >Color<i className="fas fa-angle-down"></i></li>
-              <li onClick={() => { this.displaysearchFilter('size') }} >Size<i className="fas fa-angle-down"></i></li>
+              {
+                this.state.price.pmin !== undefined && this.state.price.pmax !== undefined ?
+                  <li onClick={() => { this.clearFilter('price') }} >${this.state.price.pmin} - ${this.state.price.pmax}<i className="fas fa-times"></i></li>
+                  :
+                  <li onClick={() => { this.displaysearchFilter('price') }} >Price<i className="fas fa-angle-down"></i></li>
+              }
+              {
+                this.state.color !== undefined ?
+                  <li onClick={() => { this.clearFilter('color') }} >{this.state.color}<i className="fas fa-times"></i></li>
+                  :
+                  <li onClick={() => { this.displaysearchFilter('color') }} >Color<i className="fas fa-angle-down"></i></li>
+              }
+              {
+                this.state.size !== undefined ?
+                  <li onClick={() => { this.clearFilter('size') }} >{this.state.size}<i className="fas fa-times"></i></li>
+                  :
+                  <li onClick={() => { this.displaysearchFilter('size') }} >Size<i className="fas fa-angle-down"></i></li>
+              }
             </ul>
           </Container>
         </div>
