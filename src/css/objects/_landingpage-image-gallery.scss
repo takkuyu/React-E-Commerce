@@ -17,7 +17,7 @@
 
   @include tablet {
     display: grid;
-    margin: 0 auto 10em;
+    margin: 0 auto 7em;
     grid-template: repeat(3, 33.33337%) / repeat(2, 50%); // height/width
   }
 
@@ -116,7 +116,7 @@
           padding-top: 100%;
   
           @include tablet {
-            padding-top: 30%;
+            padding-top: 40%;
             // display: none;
           }
         }
