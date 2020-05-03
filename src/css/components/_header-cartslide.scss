@@ -1,0 +1,241 @@
+.cartslide-container {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 9999;
+    height: 100vh;
+    width: 100vw;
+
+
+    .blanket {
+        height: 100%;
+        width: 100%;
+        background-color: rgba($color: #000000, $alpha: .7);
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        display: none;
+
+        @include laptop {
+            display: block;
+        }
+    }
+
+    .cartslide-content {
+        padding: 3em 0;
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        // right: 0;
+        top: 0;
+        // z-index: 99999999;
+        background-color: $white;
+        text-align: center;
+        animation-name: slideToLeft;
+        animation-duration: .5s;
+        right: -100%;
+        animation-fill-mode: forwards;
+
+        @include laptop {
+            width: 45em;
+            right: -45em;
+        }
+
+        .content-top {
+            position: relative;
+            border-bottom: 8px solid rgb(245, 245, 245);
+            margin: 0 3em;
+
+            i.fa-arrow-right {
+                position: absolute;
+                top: 0;
+                left: 0;
+                font-size: 3.5em;
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+
+            .empty-message {
+
+                #shopping-cart {
+                    &:hover {
+                        cursor: auto;
+                        transform: none;
+                    }
+                }
+
+                p {
+                    margin-top: 1rem;
+                    font-size: 1.2em;
+
+                    .amount {
+                        font-weight: 600;
+                    }
+                }
+            }
+        }
+
+        .empty-wrapper {
+            padding: 2.5rem;
+
+            h2 {
+                letter-spacing: 0.5px;
+                font-weight: 600;
+                font-size: 2em;
+                margin-bottom: 2.5rem;
+            }
+
+            ul {
+
+                li {
+                    height: 3rem;
+                    line-height: 3rem;
+                    border: 3px solid rgb(33, 42, 47);
+                    width: 100%;
+                    font-size: 1.5em;
+                    font-weight: 600;
+
+                    &:not(:last-child) {
+                        margin-bottom: 1rem;
+                    }
+
+                    &:hover {
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+
+        .items-wrapper {
+            height: 100%;
+
+            .items-content {
+                height: 50%;
+                overflow: scroll;
+                padding: 0 3em;
+                // margin-bottom: 10em;
+
+                .items-card {
+                    // height: 15em;
+                    padding: 2em 0;
+                    border-bottom: 1px solid rgb(211, 212, 213);
+                    display: flex;
+                    // justify-content: space-between;
+                    width: 100%;
+                    // align-items: center;
+                    position: relative;
+
+                    img {
+                        height: 10em;
+                        width: 10em;
+                    }
+
+                    i.fa-times {
+                        position: absolute;
+                        right: 0;
+                        top: 1.25rem;
+                        font-size: 1rem;
+
+                        &:hover {
+                            cursor: pointer;
+                        }
+                    }
+
+
+                    p.price {
+                        position: absolute;
+                        bottom: 1.25em;
+                        right: 0;
+                        margin-bottom: 0;
+                        font-size: 1.5em;
+                    }
+
+                    .card-inner-left {
+                        // width: 55%; 
+                        text-align: left;
+                        padding-left: 2em;
+
+                        // height: 100%;
+                        h2 {
+                            font-size: 1.5em;
+                            font-weight: 600;
+                            margin-bottom: .3rem;
+                        }
+
+                        p {
+                            font-size: 1.2em;
+                            font-weight: 500;
+                            margin-bottom: .3rem;
+                        }
+
+                        .item-counter {
+                            border: 2px solid rgb(211, 212, 213);
+                            display: inline-block;
+                            font-size: 1.3em;
+                            padding: .2rem .5rem;
+
+                            span {
+                                font-weight: 400;
+                                padding: 0 1.4rem;
+                                font-size: 1.2em;
+                            }
+
+                            i {
+                                &:hover {
+                                    cursor: pointer;
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+
+            .items-content-bottom {
+                padding: 5em 3em;
+                text-align: left;
+                height: 50%;
+
+                p {
+                    font-size: 1.5em;
+                    font-weight: 600;
+                    position: relative;
+
+                    span {
+                        position: absolute;
+                        right: 0;
+                        display: inline-block;
+                        font-weight: 400;
+                    }
+
+                    &.button {
+                        margin-top: 3rem;
+                        // margin-bottom: 1rem;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@keyframes slideToLeft {
+    0% {
+        opacity: .5;
+        transform: translateX(0);
+
+    }
+
+    100% {
+        transform: translateX(-100%);
+        opacity: 1;
+
+        @include laptop {
+            transform: translateX(-45em);
+        }
+    }
+}

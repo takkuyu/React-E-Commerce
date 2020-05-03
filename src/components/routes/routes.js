@@ -5,6 +5,7 @@ import ItemPage from "../collections/collecrion-item.component";
 import Header from '../../components/header/header.component';
 import Footer from '../../components/footer/footer.component';
 import LandingMain from '../../components/landingpage/landingmain.component';
+import Login from '../../components/login/loginpage.component';
 
 const Routes = (props) => {
   return (
@@ -26,6 +27,7 @@ const Routes = (props) => {
         <Route path="/collections/:gender" exact component={CollectionPage} />
         <Route path="/collections/:gender/:category" exact component={CollectionPage} />
         <Route path="/collections/:gender/:category/:id" exact component={ItemPage} />
+        <Route path="/account/login" exact component={Login} />
       </Switch>
       <Footer />
     </section>

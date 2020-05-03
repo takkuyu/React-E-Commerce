@@ -1,13 +1,16 @@
 import React from 'react';
 import SHOP_DATA from '../../collection-items'
-import { Col, Row, Container } from 'reactstrap';
+import { Container } from 'reactstrap';
+import CartSlide from '../../components/header/header-cartslide.component';
 
 class ItemPage extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      sizeSelect: 0
+      sizeSelect: 0,
+      openCartModal: false
     }
+    this.toggleCartModal = this.toggleCartModal.bind(this);
   }
 
   getItemData({ gender, category, id }) {
@@ -63,15 +66,38 @@ class ItemPage extends React.Component {
     }
   }
 
+  addItemToCart({ ...itemData }) { //@Note: use split to prevent overriding
+    let items_arr = []
+    itemData.size = this.state.sizeSelect;
+
+    if (sessionStorage.getItem('cart') !== null) {
+      items_arr = JSON.parse(sessionStorage.getItem('cart'));
+    }
+
+    items_arr.push(itemData)
+    sessionStorage.setItem('cart', JSON.stringify(items_arr));
+    this.setState({
+      openCartModal: true
+    })
+  }
+
+  toggleCartModal() {
+    this.setState({
+      openCartModal: !this.state.openCartModal
+    })
+  }
+
   render() {
     const { itemData, recommendations } = this.getItemData(this.props.match.params);
     const { id, name, imageUrl, price, item_gender, size, color } = itemData;
-    // console.log(this.props.match)
+    // console.log(JSON.parse(sessionStorage.getItem('cart')))
 
     const sizeList = size.map(size => (
       <li key={size} className={`${this.state.sizeSelect === size ? "selected" : ""}`} onClick={() => { this.setState({ sizeSelect: size }) }}>{size}</li>
-    ))
-    const btn = (this.state.sizeSelect !== 0 ? <p className='button selected' style={{ cursor: 'pointer' }}>ADD TO CART</p> : <p className='button'>SELECT A SIZE</p>)
+    ));
+
+    const btn = (this.state.sizeSelect !== 0 ? <p className='button selected' style={{ cursor: 'pointer' }} onClick={() => this.addItemToCart(itemData)}>ADD TO CART</p> : <p className='button'>SELECT A SIZE</p>)
+    const cartModal = (this.state.openCartModal ? <CartSlide toggleCartModal={this.toggleCartModal} /> : '');
     return (
       <div className='itempage-container' style={{ marginTop: '5rem' }}>
         <Container>
@@ -126,7 +152,7 @@ class ItemPage extends React.Component {
             </div>
           </div>
         </Container>
-
+        {cartModal}
       </div>
     );
   }

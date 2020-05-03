@@ -3,18 +3,22 @@ import HeaderModal from './header-modal.component';
 // import { CSSTransition } from 'react-transition-group';
 import logo from '../../img/takaya-logo.png';
 import { Link } from 'react-router-dom';
+import CartSlide from './header-cartslide.component';
 
 
 class Header extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       modal: false,
-      gender: ''
+      gender: '',
+      cartModal: false
     }
     this.displayModal = this.displayModal.bind(this); // @Note: needed for setState
     this.hideModal = this.hideModal.bind(this); // @Note: needed for setState
+    this.toggleCartModal = this.toggleCartModal.bind(this); // @Note: needed for setState
   }
+
 
   displayModal(gender) {
 
@@ -44,6 +48,12 @@ class Header extends React.Component {
     })
   }
 
+  toggleCartModal() {
+    this.setState({
+      cartModal: !this.state.cartModal
+    })
+  }
+
   render() {
     const modal = (
       this.state.modal ?
@@ -58,6 +68,9 @@ class Header extends React.Component {
       <i id='bars' className="fas fa-times" onClick={() => { this.setState({ modal: !this.state.modal }) }} ></i>
       :
       <i id='bars' className="fas fa-bars" onClick={() => { this.setState({ modal: !this.state.modal }) }}></i>)
+
+
+    const cartSlide = (this.state.cartModal ? <CartSlide toggleCartModal={this.toggleCartModal} /> : '');
 
     return (
       <header className="landing-header">
@@ -75,7 +88,7 @@ class Header extends React.Component {
           <li>STORES</li>
           <li><i className="far fa-user"></i></li>
           <li><i className="far fa-question-circle"></i></li>
-          <div id="shopping-cart">
+          <div id="shopping-cart" onClick={this.toggleCartModal}>
             <span className="fa-stack has-badge" data-count="0">
               <i className="fa fa-circle fa-stack-2x"></i>
               <i className="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
@@ -83,14 +96,14 @@ class Header extends React.Component {
           </div>
         </ul>
 
-        <div className='shopping-cart-mobile' id="shopping-cart">
+        <div className='shopping-cart-mobile' id="shopping-cart" onClick={this.toggleCartModal}>
           <span className="fa-stack has-badge" data-count="0">
             <i className="fa fa-circle fa-stack-2x"></i>
             <i className="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
           </span>
         </div>
-
         {modal}
+        {cartSlide}
       </header>
     );
   }

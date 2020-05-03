@@ -12,22 +12,24 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-size: 62.5%;
   font-weight: 300;
-}
+  color: $Dark-Blue;
 
-h1,
-h2,
-h3,
-h4,
-h5 {
-  font-weight: 300;
-}
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    font-weight: 300;
+  }
 
-a{
-  
-  color: $black;
-  &:hover{
-    text-decoration: none;
-    color: rgb(66, 66, 66);
-    // transform: scale(1.1, 1.1);
+  a {
+
+    color: $black;
+
+    &:hover {
+      text-decoration: none;
+      color: rgb(66, 66, 66);
+      // transform: scale(1.1, 1.1);
+    }
   }
 }

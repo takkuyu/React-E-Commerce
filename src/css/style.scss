@@ -5,23 +5,26 @@ $GLOBAL ELEMENTS
 @import "generic/variables";
 @import "generic/mixins";
 @import "base/body";
+@import "base/buttons";
 
 
 /*------------------------------------*\
     $PAGE STRUCTURE
 \*------------------------------------*/
-@import "objects/header";
-@import "objects/header-modal";
-@import "objects/landingpage";
-@import "objects/footer";
+@import "components/header";
+@import "components/landingpage";
+@import "components/footer";
 
 
 /*------------------------------------*\
 $COMPONENTS
 \*------------------------------------*/
-@import "objects/landingpage-image-gallery";
-@import "objects/collections-page";
-@import "objects/collections-search-filter";
-@import "objects/collections-items";
-@import "objects/collections-itempage";
+@import "components/landingpage-image-gallery";
+@import "components/collections-page";
+@import "components/collections-search-filter";
+@import "components/collections-items";
+@import "components/collections-itempage";
+@import "components/header-cartslide";
+@import "components/loginpage";
+@import "components/header-modal";
 

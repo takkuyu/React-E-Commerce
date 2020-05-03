@@ -1,0 +1,75 @@
+import React from 'react';
+import { Container } from 'reactstrap';
+import { signInWithGoogle } from '../../firebase/firebase.utils';
+
+class Login extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            email: '',
+            password: '',
+            newEmail: '',
+            newPassword: '',
+            confirmPassword: '',
+            newFirstName: '',
+            newLastName: ''
+        }
+    }
+    handleSubmit = event => {
+        event.preventDefault();
+        console.log('submit')
+        this.setState({ email: '', password: '' });
+    };
+
+    handleChange = event => {
+        const { value, name } = event.target;
+        // console.log([name])
+        this.setState({ [name]: value }); // @Note: need [] otehrwise a new state 'name' is created
+    };
+
+    render() {
+        return (
+            <div className='loginpage-container' style={{ marginTop: '5rem' }}>
+                <Container>
+                    <div className='login-wrapper'>
+                        <h1>LOGIN</h1>
+                        <form onSubmit={this.handleSubmit}>
+                            <label htmlFor='email'>EMAIL</label>
+                            <input type='email' id='email' value={this.state.email} name='email' onChange={this.handleChange} />
+                            <label htmlFor='password'>PASSWORD</label>
+                            <input type='password' id='password' value={this.state.password} name='password' onChange={this.handleChange} />
+                            <button className='button' type='button submit'>SIGN IN</button>
+                            <button className='button google-btn' onClick={signInWithGoogle}>SIGN IN WITH GOOGLE</button>
+                        </form>
+                    </div>
+                    <div className='register-wrapper'>
+                        <h1>CREATE AN ACCOUNT</h1>
+                        <p>Registering makes checkout fast and easy and saves your order information in your account.</p>
+                        <form onSubmit={this.handleSubmit}>
+                            <label htmlFor='firstName'>FIRST NAME</label>
+                            <input type='text' id='firstName' value={this.state.newFirstName} name='newFirstName' onChange={this.handleChange} />
+
+                            <label htmlFor='lastName'>LAST NAME</label>
+                            <input type='text' id='lastName' value={this.state.newLastName} name='newLastName' onChange={this.handleChange} />
+
+                            <label htmlFor='email'>EMAIL*</label>
+                            <input type='email' id='email' value={this.state.newEmail} name='newEmail' onChange={this.handleChange} />
+
+                            <label htmlFor='password'>PASSWORD*</label>
+                            <input type='password' id='password' value={this.state.newPassword} name='newPassword' onChange={this.handleChange} />
+
+                            <label htmlFor='confirm_password'>CONFIRM PASSWORD*</label>
+                            <input type='password' id='confirm_password' name='confirmPassword' onChange={this.handleChange} />
+
+                            <button className='button'>REGISTER</button>
+                            <p>By creating an account, you agree to our Terms of Use and Privacy Policy.</p>
+                            <p className="bold">* REQUIRED FIELDS</p>
+                        </form>
+                    </div>
+                </Container>
+            </div>
+        );
+    }
+};
+
+export default Login;

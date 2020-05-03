@@ -51,7 +51,6 @@
     }
 
     .desktop-modal-wrapper {
-
         display: none;
     
         @include laptop {
@@ -129,15 +128,24 @@
 
         }
     }
-
-
+    // animation-name: slideToBottom;
+    // animation-duration: .5s;
+    // animation-fill-mode: forwards;
 }
 
-@keyframes show{
-    from{
+@keyframes slideToBottom {
+    0% {
         opacity: 0;
+        transform: translateY(-7rem);
+
     }
-    to{
+
+    100% {
+        transform: translateY(0);
         opacity: 1;
+
+        // @include laptop {
+        //     transform: translateX(-45em);
+        // }
     }
 }
