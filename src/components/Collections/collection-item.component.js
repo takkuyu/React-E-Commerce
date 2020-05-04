@@ -1,7 +1,7 @@
 import React from 'react';
 import SHOP_DATA from '../../collection-items'
 import { Container } from 'reactstrap';
-import CartSlide from '../../components/header/header-cartslide.component';
+import CartSlide from '../header/header-cartslide.component';
 
 class ItemPage extends React.Component {
   constructor(props) {
@@ -63,6 +63,8 @@ class ItemPage extends React.Component {
         return 'linear-gradient(90deg,#3023ae 0,#53a0fd 47.52%,#b4ec51 100%)';
       case 'green':
         return '#28a745';
+      default:
+        return 'white';
     }
   }
 
@@ -89,7 +91,8 @@ class ItemPage extends React.Component {
 
   render() {
     const { itemData, recommendations } = this.getItemData(this.props.match.params);
-    const { id, name, imageUrl, price, item_gender, size, color } = itemData;
+    // const { id, name, imageUrl, price, item_gender, size, color } = itemData;
+    const {  name, imageUrl, price, size, color } = itemData;
     // console.log(JSON.parse(sessionStorage.getItem('cart')))
 
     const sizeList = size.map(size => (
@@ -103,7 +106,7 @@ class ItemPage extends React.Component {
         <Container>
 
           <div className='itempage-top-wrapper'>
-            <img src={imageUrl} />
+            <img src={imageUrl} alt='item-img'/>
             <div className='top-content'>
               <h1>{name}</h1>
               <p className='big'>${price} CAD</p>

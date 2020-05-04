@@ -4,6 +4,7 @@ import HeaderModal from './header-modal.component';
 import logo from '../../img/takaya-logo.png';
 import { Link } from 'react-router-dom';
 import CartSlide from './header-cartslide.component';
+import { auth } from '../../firebase/firebase.utils';
 
 
 class Header extends React.Component {
@@ -17,6 +18,7 @@ class Header extends React.Component {
     this.displayModal = this.displayModal.bind(this); // @Note: needed for setState
     this.hideModal = this.hideModal.bind(this); // @Note: needed for setState
     this.toggleCartModal = this.toggleCartModal.bind(this); // @Note: needed for setState
+    // console.log(this.props.currentUser)
   }
 
 
@@ -55,6 +57,8 @@ class Header extends React.Component {
   }
 
   render() {
+    // console.log(this.props.currentUser)
+
     const modal = (
       this.state.modal ?
         <HeaderModal
@@ -86,7 +90,14 @@ class Header extends React.Component {
         <ul className='header-right'>
           <li>ABOUT</li>
           <li>STORES</li>
-          <li><i className="far fa-user"></i></li>
+          {/* <li><i className="far fa-user"></i></li> */}
+
+          {this.props.currentUser ?
+            <li className='option' onClick={() => auth.signOut()}>SIGN OUT</li>
+            :
+            <li><Link to='/account/login'>SIGN IN</Link></li>
+          }
+
           <li><i className="far fa-question-circle"></i></li>
           <div id="shopping-cart" onClick={this.toggleCartModal}>
             <span className="fa-stack has-badge" data-count="0">

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container } from 'reactstrap';
-import { signInWithGoogle } from '../../firebase/firebase.utils';
+import { signInWithGoogle, auth, createUserProfileDocument } from '../../firebase/firebase.utils';
 
 class Login extends React.Component {
     constructor(props) {
@@ -15,10 +15,34 @@ class Login extends React.Component {
             newLastName: ''
         }
     }
-    handleSubmit = event => {
+
+    handleSubmit = async event => {
         event.preventDefault();
-        console.log('submit')
-        this.setState({ email: '', password: '' });
+
+        const { displayName, email, password, confirmPassword } = this.state;
+
+        if (password !== confirmPassword) {
+            alert("passwords don't match");
+            return;
+        }
+
+        try {
+            const { user } = await auth.createUserWithEmailAndPassword(
+                email,
+                password
+            );
+
+            await createUserProfileDocument(user, { displayName });
+
+            this.setState({
+                displayName: '',
+                email: '',
+                password: '',
+                confirmPassword: ''
+            });
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     handleChange = event => {
@@ -37,10 +61,10 @@ class Login extends React.Component {
                             <label htmlFor='email'>EMAIL</label>
                             <input type='email' id='email' value={this.state.email} name='email' onChange={this.handleChange} />
                             <label htmlFor='password'>PASSWORD</label>
-                            <input type='password' id='password' value={this.state.password} name='password' onChange={this.handleChange} />
+                            <input autoComplete="off" type='password' id='password' value={this.state.password} name='password' onChange={this.handleChange} />
                             <button className='button' type='button submit'>SIGN IN</button>
-                            <button className='button google-btn' onClick={signInWithGoogle}>SIGN IN WITH GOOGLE</button>
                         </form>
+                        <button className='button google-btn' onClick={signInWithGoogle}>SIGN IN WITH GOOGLE</button>
                     </div>
                     <div className='register-wrapper'>
                         <h1>CREATE AN ACCOUNT</h1>
@@ -52,14 +76,14 @@ class Login extends React.Component {
                             <label htmlFor='lastName'>LAST NAME</label>
                             <input type='text' id='lastName' value={this.state.newLastName} name='newLastName' onChange={this.handleChange} />
 
-                            <label htmlFor='email'>EMAIL*</label>
-                            <input type='email' id='email' value={this.state.newEmail} name='newEmail' onChange={this.handleChange} />
+                            <label htmlFor='newEmail'>EMAIL*</label>
+                            <input type='email' id='newEmail' value={this.state.newEmail} name='newEmail' onChange={this.handleChange} />
 
-                            <label htmlFor='password'>PASSWORD*</label>
-                            <input type='password' id='password' value={this.state.newPassword} name='newPassword' onChange={this.handleChange} />
+                            <label htmlFor='newPassword'>PASSWORD*</label>
+                            <input autoComplete="off" ype='password' id='newPassword' value={this.state.newPassword} name='newPassword' onChange={this.handleChange} />
 
                             <label htmlFor='confirm_password'>CONFIRM PASSWORD*</label>
-                            <input type='password' id='confirm_password' name='confirmPassword' onChange={this.handleChange} />
+                            <input autoComplete="off" type='password' id='confirm_password' name='confirmPassword' onChange={this.handleChange} />
 
                             <button className='button'>REGISTER</button>
                             <p>By creating an account, you agree to our Terms of Use and Privacy Policy.</p>

@@ -18,16 +18,16 @@ function HeaderModal({ hideModal, gender }) {
       <nav className='mobile-modal-wrapper'>
         <ul>
           <li className='men-list'>
-            <a href=''>MEN</a>
+            MEN
             <i className="fas fa-chevron-right"></i>
           </li>
           <li className='women-list'>
-            <a href=''>WOMEN</a>
+            WOMEN
             <i className="fas fa-chevron-right"></i>
           </li>
-          <li><a href=''>STORES</a></li>
-          <li><a href=''>Account</a></li>
-          <li><a href=''>Help</a></li>
+          <li>STORES</li>
+          <li>Account</li>
+          <li>Help</li>
         </ul>
       </nav>
 
