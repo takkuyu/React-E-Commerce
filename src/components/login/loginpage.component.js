@@ -16,30 +16,44 @@ class Login extends React.Component {
         }
     }
 
-    handleSubmit = async event => {
+    handleRegister = async event => {
         event.preventDefault();
 
-        const { displayName, email, password, confirmPassword } = this.state;
+        const { newFirstName, newEmail, newPassword, confirmPassword } = this.state;
 
-        if (password !== confirmPassword) {
+        if (newPassword !== confirmPassword) {
             alert("passwords don't match");
             return;
         }
 
         try {
             const { user } = await auth.createUserWithEmailAndPassword(
-                email,
-                password
+                newEmail,
+                newPassword
             );
 
-            await createUserProfileDocument(user, { displayName });
+            await createUserProfileDocument(user, { newFirstName });
 
             this.setState({
-                displayName: '',
-                email: '',
-                password: '',
+                newFirstName: '',
+                newEmail: '',
+                newPassword: '',
                 confirmPassword: ''
             });
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    handleSignin = async event => {
+        event.preventDefault();
+        const { email, password } = this.state;
+
+        try {
+
+            await auth.signInWithEmailAndPassword(email, password);
+
+            this.setState({ email: '', password: '' });
         } catch (error) {
             console.error(error);
         }
@@ -57,7 +71,7 @@ class Login extends React.Component {
                 <Container>
                     <div className='login-wrapper'>
                         <h1>LOGIN</h1>
-                        <form onSubmit={this.handleSubmit}>
+                        <form onSubmit={this.handleSignin}>
                             <label htmlFor='email'>EMAIL</label>
                             <input type='email' id='email' value={this.state.email} name='email' onChange={this.handleChange} />
                             <label htmlFor='password'>PASSWORD</label>
@@ -69,7 +83,7 @@ class Login extends React.Component {
                     <div className='register-wrapper'>
                         <h1>CREATE AN ACCOUNT</h1>
                         <p>Registering makes checkout fast and easy and saves your order information in your account.</p>
-                        <form onSubmit={this.handleSubmit}>
+                        <form onSubmit={this.handleRegister}>
                             <label htmlFor='firstName'>FIRST NAME</label>
                             <input type='text' id='firstName' value={this.state.newFirstName} name='newFirstName' onChange={this.handleChange} />
 
@@ -80,7 +94,7 @@ class Login extends React.Component {
                             <input type='email' id='newEmail' value={this.state.newEmail} name='newEmail' onChange={this.handleChange} />
 
                             <label htmlFor='newPassword'>PASSWORD*</label>
-                            <input autoComplete="off" ype='password' id='newPassword' value={this.state.newPassword} name='newPassword' onChange={this.handleChange} />
+                            <input autoComplete="off" type='password' id='newPassword' value={this.state.newPassword} name='newPassword' onChange={this.handleChange} />
 
                             <label htmlFor='confirm_password'>CONFIRM PASSWORD*</label>
                             <input autoComplete="off" type='password' id='confirm_password' name='confirmPassword' onChange={this.handleChange} />
