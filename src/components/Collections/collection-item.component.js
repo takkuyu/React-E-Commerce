@@ -68,15 +68,34 @@ class ItemPage extends React.Component {
     }
   }
 
+  checkDuplicates(id, size, items_arr) {
+
+    const duplicate = items_arr.find(item => item.id === id && item.size === size);
+    const index = items_arr.indexOf(duplicate)
+
+    if (index !== -1) return index
+
+    return -1
+  }
+
   addItemToCart({ ...itemData }) { //@Note: use split to prevent overriding
+
     let items_arr = []
+    let index = -1;
     itemData.size = this.state.sizeSelect;
 
-    if (sessionStorage.getItem('cart') !== null) {
+    if (sessionStorage.getItem('cart') !== null) { // When it is not the first time of adding an item.
       items_arr = JSON.parse(sessionStorage.getItem('cart'));
+      index = this.checkDuplicates(itemData.id, itemData.size, items_arr);
     }
 
-    items_arr.push(itemData)
+    if (index !== -1) {
+      items_arr[index].amount = items_arr[index].amount + 1;
+    } else {
+      itemData.amount = 1;
+      items_arr.push(itemData)
+    }
+
     sessionStorage.setItem('cart', JSON.stringify(items_arr));
     this.setState({
       openCartModal: true
@@ -92,7 +111,7 @@ class ItemPage extends React.Component {
   render() {
     const { itemData, recommendations } = this.getItemData(this.props.match.params);
     // const { id, name, imageUrl, price, item_gender, size, color } = itemData;
-    const {  name, imageUrl, price, size, color } = itemData;
+    const { name, imageUrl, price, size, color } = itemData;
     // console.log(JSON.parse(sessionStorage.getItem('cart')))
 
     const sizeList = size.map(size => (
@@ -106,7 +125,7 @@ class ItemPage extends React.Component {
         <Container>
 
           <div className='itempage-top-wrapper'>
-            <img src={imageUrl} alt='item-img'/>
+            <img src={imageUrl} alt='item-img' />
             <div className='top-content'>
               <h1>{name}</h1>
               <p className='big'>${price} CAD</p>

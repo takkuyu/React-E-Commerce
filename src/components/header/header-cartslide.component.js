@@ -8,6 +8,11 @@ function deleteItem(id, size) {
     console.log(cartItems.indexOf(filteredItems[0]))
 }
 
+function handleNumberOfItems(type){
+
+    console.log(type)
+}
+
 const CartSlide = ({ toggleCartModal }) => {
 
     const cartItems = JSON.parse(sessionStorage.getItem('cart'));
@@ -15,8 +20,8 @@ const CartSlide = ({ toggleCartModal }) => {
     let i = 0;
     const addedItems = (cartItems != null ?
         cartItems.map(item => {
-            const duplicatedItem = cartItems.filter(this_item => this_item.id === item.id && this_item.size === item.size)
-            console.log(duplicatedItem)
+            // const duplicatedItem = cartItems.filter(this_item => this_item.id === item.id && this_item.size === item.size)
+            // console.log(duplicatedItem)
             return (
                 <div className='items-card' key={i++}>
                     <img src={item.imageUrl} alt='' />
@@ -25,7 +30,11 @@ const CartSlide = ({ toggleCartModal }) => {
                         <h2>{item.name}</h2>
                         <p>{item.color}</p>
                         <p>Size: {item.size}</p>
-                        <div className='item-counter'><i className="fas fa-minus"></i><span>1</span><i className="fas fa-plus"></i></div>
+                        <div className='item-counter'>
+                            <i className="fas fa-minus" onClick={()=> handleNumberOfItems('minus')}></i>
+                            <span>{item.amount}</span>
+                            <i className="fas fa-plus" onClick={()=> handleNumberOfItems('plus')}></i>
+                            </div>
                     </div>
 
                     <i className="fas fa-times" onClick={() => deleteItem(item.id, item.size)}></i>
@@ -37,7 +46,6 @@ const CartSlide = ({ toggleCartModal }) => {
         :
         ''
     );
-
 
     return (
         <div className='cartslide-container'>
