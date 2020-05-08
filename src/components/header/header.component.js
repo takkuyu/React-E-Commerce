@@ -59,6 +59,9 @@ class Header extends React.Component {
   render() {
     // console.log(this.props.currentUser)
 
+    const itemCount = JSON.parse(sessionStorage.getItem('cart')).length;
+    console.log(itemCount)
+
     const modal = (
       this.state.modal ?
         <HeaderModal
@@ -100,7 +103,7 @@ class Header extends React.Component {
 
           <li><i className="far fa-question-circle"></i></li>
           <div id="shopping-cart" onClick={this.toggleCartModal}>
-            <span className="fa-stack has-badge" data-count="0">
+            <span className="fa-stack has-badge" data-count={itemCount}>
               <i className="fa fa-circle fa-stack-2x"></i>
               <i className="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
             </span>
@@ -108,7 +111,7 @@ class Header extends React.Component {
         </ul>
 
         <div className='shopping-cart-mobile' id="shopping-cart" onClick={this.toggleCartModal}>
-          <span className="fa-stack has-badge" data-count="0">
+          <span className="fa-stack has-badge" data-count={itemCount}>
             <i className="fa fa-circle fa-stack-2x"></i>
             <i className="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
           </span>

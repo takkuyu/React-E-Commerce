@@ -1,29 +1,54 @@
 import React from 'react';
 
-function deleteItem(id, size) {
-    const cartItems = JSON.parse(sessionStorage.getItem('cart'));
-    // const filteredItems = cartItems.filter(item => item.id !== id && item.size !== size);
-    const filteredItems = cartItems.filter(item => item.id === id && item.size === size);
-    console.log(filteredItems)
-    console.log(cartItems.indexOf(filteredItems[0]))
-}
 
-function handleNumberOfItems(type){
+class CartSlide extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            cartItems: []
+        }
+        console.log('constructor')
+    }
 
-    console.log(type)
-}
+    componentDidMount() {
+        this.setState({ cartItems: JSON.parse(sessionStorage.getItem('cart')) })
 
-const CartSlide = ({ toggleCartModal }) => {
+        console.log('DidMount')
+    }
 
-    const cartItems = JSON.parse(sessionStorage.getItem('cart'));
-    // console.log(cartItems)
-    let i = 0;
-    const addedItems = (cartItems != null ?
-        cartItems.map(item => {
-            // const duplicatedItem = cartItems.filter(this_item => this_item.id === item.id && this_item.size === item.size)
-            // console.log(duplicatedItem)
+    deleteItem(this_index) {
+        const cartItems = this.state.cartItems.filter((item, index) => index !== this_index);
+
+        this.setState({
+            cartItems: cartItems
+        }, () => sessionStorage.setItem('cart', JSON.stringify(this.state.cartItems)))
+    }
+
+    handleNumberOfItems(type, index) {
+
+        const cartItems = this.state.cartItems.slice();
+
+        if (type === 'minus') {
+            if (cartItems[index].amount <= 1) {
+                this.deleteItem(index)
+                return
+            }
+            cartItems[index].amount--;
+        } else if (type === 'plus') {
+            cartItems[index].amount++;
+        }
+
+        this.setState({
+            cartItems: cartItems
+        }, () => sessionStorage.setItem('cart', JSON.stringify(this.state.cartItems)))
+
+    }
+
+    generateCartItems(cartItems) {
+        return cartItems.map((item, index) => {
+
             return (
-                <div className='items-card' key={i++}>
+                <div className='items-card' key={index}>
                     <img src={item.imageUrl} alt='' />
 
                     <div className='card-inner-left'>
@@ -31,65 +56,79 @@ const CartSlide = ({ toggleCartModal }) => {
                         <p>{item.color}</p>
                         <p>Size: {item.size}</p>
                         <div className='item-counter'>
-                            <i className="fas fa-minus" onClick={()=> handleNumberOfItems('minus')}></i>
+                            <i className="fas fa-minus" onClick={() => this.handleNumberOfItems('minus', index)}></i>
                             <span>{item.amount}</span>
-                            <i className="fas fa-plus" onClick={()=> handleNumberOfItems('plus')}></i>
-                            </div>
+                            <i className="fas fa-plus" onClick={() => this.handleNumberOfItems('plus', index)}></i>
+                        </div>
                     </div>
 
-                    <i className="fas fa-times" onClick={() => deleteItem(item.id, item.size)}></i>
+                    <i className="fas fa-times" onClick={() => this.deleteItem(index)}></i>
                     <p className='price'>$ {item.price}</p>
-
                 </div>
             );
         })
-        :
-        ''
-    );
+    }
 
-    return (
-        <div className='cartslide-container'>
-            <div className='blanket' onClick={toggleCartModal}></div>
-            <div className='cartslide-content'>
-                <div className='content-top'>
-                    <i className="fas fa-arrow-right" onClick={toggleCartModal}></i>
-                    <div className='empty-message'>
-                        <div id="shopping-cart">
-                            <span className="fa-stack has-badge" data-count="0">
-                                <i className="fa fa-circle fa-stack-2x"></i>
-                                <i className="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
-                            </span>
+    calculateSubTotal(arr) {
+        let sum = 0;
+        arr.forEach(item => {
+            sum = sum + item.price * item.amount;
+        })
+        return sum;
+    }
+
+    render() {
+        const subTotal = this.calculateSubTotal(this.state.cartItems)
+
+        const toggleCartModal = this.props.toggleCartModal;
+        const shippingMsg = (subTotal < 50 ? <p>You're <span className="amount">$ {50 - subTotal} CAD</span> away from free shipping!</p> : <p>Congrats! You get free standard shipping.</p>);
+        const shippingFee = (subTotal < 50 ? 'Standard Fees' : 'FREE');
+
+        return (
+            <div className='cartslide-container'>
+                <div className='blanket' onClick={toggleCartModal}></div>
+                <div className='cartslide-content'>
+                    <div className='content-top'>
+                        <i className="fas fa-arrow-right" onClick={toggleCartModal}></i>
+                        <div className='shipping-message'>
+                            <div id="shopping-cart">
+                                <span className="fa-stack has-badge" data-count="0">
+                                    <i className="fa fa-circle fa-stack-2x"></i>
+                                    <i className="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </div>
+                            {shippingMsg}
                         </div>
-                        <p>You're <span className="amount">$50 CAD</span> away from free shipping!</p>
                     </div>
+                    {
+                        this.state.cartItems.length === 0 ?
+                            <div className='empty-wrapper'>
+                                <h2>Your Cart is Empty</h2>
+                                <ul>
+                                    <li>SHOP MEN'S</li>
+                                    <li>SHOP WOMENS'S</li>
+                                    <li>SHOP SOCKS</li>
+                                    <li>SHOP NEW ARRIVALS</li>
+                                    <li>SHOP WOMENS'S</li>
+                                </ul>
+                            </div>
+                            :
+                            <div className='items-wrapper'>
+                                <div className='items-content'>
+                                    {this.generateCartItems(this.state.cartItems)}
+                                </div>
+                                <div className='items-content-bottom'>
+                                    <p>Subtotal <span>$ {subTotal} CAD</span></p>
+                                    <p>Shipping <span>{shippingFee}</span></p>
+                                    <p className='button'>CHECKOUT</p>
+                                </div>
+                            </div>
+                    }
                 </div>
-                {
-                    cartItems === null ?
-                        <div className='empty-wrapper'>
-                            <h2>Your Cart is Empty</h2>
-                            <ul>
-                                <li>SHOP MEN'S</li>
-                                <li>SHOP WOMENS'S</li>
-                                <li>SHOP SOCKS</li>
-                                <li>SHOP NEW ARRIVALS</li>
-                                <li>SHOP WOMENS'S</li>
-                            </ul>
-                        </div>
-                        :
-                        <div className='items-wrapper'>
-                            <div className='items-content'>
-                                {addedItems}
-                            </div>
-                            <div className='items-content-bottom'>
-                                <p>Subtotal <span>$270CAD</span></p>
-                                <p>Shipping <span>FREE</span></p>
-                                <p className='button'>CHECKOUT</p>
-                            </div>
-                        </div>
-                }
             </div>
-        </div>
-    );
+        );
+    }
+
 };
 
 export default CartSlide;

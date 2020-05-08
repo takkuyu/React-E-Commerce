@@ -84,6 +84,7 @@ header {
 
             i {
                 font-size: 1.3rem;
+                display: table-cell;
             }
         }
 
@@ -96,36 +97,6 @@ header {
 
 
     #shopping-cart {
-
-        .fa-stack[data-count] {
-            font-size: 1.2rem;
-
-            .fa-circle {
-                color: rgba(0, 0, 0, .7);
-            }
-
-            &::after {
-                position: absolute;
-                right: 0%;
-                top: 1%;
-                content: attr(data-count);
-                font-size: 30%;
-                padding: .7em;
-                border-radius: 50%;
-                // line-height: .8em;
-                line-height: 1.2em;
-                color: white;
-                background: rgba(255, 0, 0, .85);
-                text-align: center;
-                min-width: 1em;
-                font-weight: bold;
-            }
-        }
-
-        &:hover {
-            cursor: pointer;
-            transform: scale(1.1, 1.1);
-        }
 
         @include laptop {
 

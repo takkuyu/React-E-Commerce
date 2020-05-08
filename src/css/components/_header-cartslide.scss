@@ -60,7 +60,7 @@
                 }
             }
 
-            .empty-message {
+            .shipping-message {
 
                 #shopping-cart {
                     &:hover {
@@ -72,6 +72,7 @@
                 p {
                     margin-top: 1rem;
                     font-size: 1.2em;
+                    font-weight: 500;
 
                     .amount {
                         font-weight: 600;
@@ -177,7 +178,11 @@
                             border: 2px solid rgb(211, 212, 213);
                             display: inline-block;
                             font-size: 1.3em;
+                            min-width: 7rem;
                             padding: .2rem .5rem;
+                            display: flex;
+                            justify-content: space-around;
+                            align-items: center;
 
                             span {
                                 font-weight: 400;
@@ -215,7 +220,6 @@
 
                     &.button {
                         margin-top: 3rem;
-                        // margin-bottom: 1rem;
                     }
                 }
             }
