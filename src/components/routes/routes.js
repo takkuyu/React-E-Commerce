@@ -6,6 +6,8 @@ import Header from '../../components/header/header.component';
 import Footer from '../../components/footer/footer.component';
 import LandingMain from '../../components/landingpage/landingmain.component';
 import Login from '../../components/login/loginpage.component';
+import CheckoutPage from '../../components/checkout/checkoutpage.component';
+import AccountPage from '../../components/login/accountpage.component';
 import { auth, createUserProfileDocument } from '../../firebase/firebase.utils';
 
 class Routes extends React.Component {
@@ -13,8 +15,13 @@ class Routes extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentUser: null
+      currentUser: null,
+      itemCounter: 0,
+      cartModal: false
     }
+    this.updateCartCounter = this.updateCartCounter.bind(this);
+    this.toggleCartModal = this.toggleCartModal.bind(this);
+
   }
 
   unsubscribeFromAuth = null; //@note a variable can be defined outside a method like a global var
@@ -35,32 +42,49 @@ class Routes extends React.Component {
         });
       }
       else {
-        this.setState({ currentUser: userAuth }, () => { console.log(this.state) });
+        this.setState({ currentUser: userAuth }, () => { console.log(this.state.currentUser) });
       }
     });
 
-    // this.unsubscribeFromAuth = auth.onAuthStateChanged(user => {
-    //   this.setState({ currentUser: user });
-
-    //   console.log(user);
-    // });
+    const itemCount = (JSON.parse(sessionStorage.getItem('cart')) !== null ? JSON.parse(sessionStorage.getItem('cart')).length : 0);
+    this.setState({ itemCounter: itemCount })
   }
 
   componentWillUnmount() {
     this.unsubscribeFromAuth(); // close the subscription when unmount.
   }
 
+  updateCartCounter(len) {
+    this.setState({
+      itemCounter: len
+    })
+  }
+
+  toggleCartModal() {
+    this.setState({
+      cartModal: !this.state.cartModal
+    })
+  }
+
   render() {
 
     return (
       <section>
-        <Header currentUser={this.state.currentUser} />
+        <Header
+          // currentUser={this.state.currentUser}
+          itemCounter={this.state.itemCounter}
+          cartModal={this.state.cartModal}
+          toggleCartModal={this.toggleCartModal}
+          updateCartCounter={this.updateCartCounter}
+        />
         <Switch key={this.props.location.key}>
           <Route path='/' exact component={LandingMain} />
           <Route path="/collections/:gender" exact component={CollectionPage} />
           <Route path="/collections/:gender/:category" exact component={CollectionPage} />
-          <Route path="/collections/:gender/:category/:id" exact component={ItemPage} />
+          <Route path="/collections/:gender/:category/:id" exact render={props => <ItemPage {...props} updateCartCounter={this.updateCartCounter} toggleCartModal={this.toggleCartModal} />} />
           <Route path="/account/login" exact component={Login} />
+          <Route path="/account" exact  render={props => <AccountPage {...props} currentUser={this.state.currentUser} />} />
+          <Route path="/checkout" exact render={props => <CheckoutPage {...props} updateCartCounter={this.updateCartCounter} />} />
         </Switch>
         <Footer />
       </section >

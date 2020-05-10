@@ -1,6 +1,6 @@
 import React from 'react';
 import HeaderModal from './header-modal.component';
-// import { CSSTransition } from 'react-transition-group';
+import { withRouter } from 'react-router-dom'
 import logo from '../../img/takaya-logo.png';
 import { Link } from 'react-router-dom';
 import CartSlide from './header-cartslide.component';
@@ -13,12 +13,11 @@ class Header extends React.Component {
     this.state = {
       modal: false,
       gender: '',
-      cartModal: false
     }
     this.displayModal = this.displayModal.bind(this); // @Note: needed for setState
     this.hideModal = this.hideModal.bind(this); // @Note: needed for setState
-    this.toggleCartModal = this.toggleCartModal.bind(this); // @Note: needed for setState
     // console.log(this.props.currentUser)
+    // console.log(this.props)
   }
 
 
@@ -50,18 +49,7 @@ class Header extends React.Component {
     })
   }
 
-  toggleCartModal() {
-    this.setState({
-      cartModal: !this.state.cartModal
-    })
-  }
-
   render() {
-    // console.log(this.props.currentUser)
-
-    const itemCount = JSON.parse(sessionStorage.getItem('cart')).length;
-    console.log(itemCount)
-
     const modal = (
       this.state.modal ?
         <HeaderModal
@@ -77,7 +65,14 @@ class Header extends React.Component {
       <i id='bars' className="fas fa-bars" onClick={() => { this.setState({ modal: !this.state.modal }) }}></i>)
 
 
-    const cartSlide = (this.state.cartModal ? <CartSlide toggleCartModal={this.toggleCartModal} /> : '');
+    const cartSlide = (this.props.cartModal ?
+      <CartSlide
+        toggleCartModal={this.props.toggleCartModal}
+        itemCounter={this.props.itemCounter}
+        updateCartCounter={this.props.updateCartCounter}
+      /> : '');
+
+    // const shoppingCart = (this.props.location.pathname !== '/checkout' ? :'')
 
     return (
       <header className="landing-header">
@@ -93,29 +88,36 @@ class Header extends React.Component {
         <ul className='header-right'>
           <li>ABOUT</li>
           <li>STORES</li>
-          {/* <li><i className="far fa-user"></i></li> */}
-
-          {this.props.currentUser ?
+          <li><i className="far fa-user"></i></li>
+          {/* {this.props.currentUser ?
             <li className='option' onClick={() => auth.signOut()}>SIGN OUT</li>
             :
             <li><Link to='/account/login'>SIGN IN</Link></li>
-          }
-
+          } */}
           <li><i className="far fa-question-circle"></i></li>
-          <div id="shopping-cart" onClick={this.toggleCartModal}>
-            <span className="fa-stack has-badge" data-count={itemCount}>
-              <i className="fa fa-circle fa-stack-2x"></i>
-              <i className="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
-            </span>
-          </div>
+          {
+            this.props.location.pathname !== '/checkout' ?
+              <div id="shopping-cart" onClick={this.props.toggleCartModal}>
+                <span className="fa-stack has-badge" data-count={this.props.itemCounter}>
+                  <i className="fa fa-circle fa-stack-2x"></i>
+                  <i className="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
+                </span>
+              </div>
+              :
+              ''
+          }
         </ul>
-
-        <div className='shopping-cart-mobile' id="shopping-cart" onClick={this.toggleCartModal}>
-          <span className="fa-stack has-badge" data-count={itemCount}>
-            <i className="fa fa-circle fa-stack-2x"></i>
-            <i className="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
-          </span>
-        </div>
+        {
+          this.props.location.pathname !== '/checkout' ?
+            <div className='shopping-cart-mobile' id="shopping-cart" onClick={this.toggleCartModal}>
+              <span className="fa-stack has-badge" data-count={this.props.itemCounter}>
+                <i className="fa fa-circle fa-stack-2x"></i>
+                <i className="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
+              </span>
+            </div>
+            :
+            ''
+        }
         {modal}
         {cartSlide}
       </header>
@@ -123,4 +125,4 @@ class Header extends React.Component {
   }
 }
 
-export default Header;
+export default withRouter(Header);

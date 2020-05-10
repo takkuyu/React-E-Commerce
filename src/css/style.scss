@@ -10,11 +10,12 @@ $GLOBAL ELEMENTS
 
 
 /*------------------------------------*\
-    $PAGE STRUCTURE
+    $PAGES
 \*------------------------------------*/
 @import "components/header";
 @import "components/landingpage";
 @import "components/footer";
+@import "page/accountpage";
 
 
 /*------------------------------------*\
@@ -28,4 +29,6 @@ $COMPONENTS
 @import "components/header-cartslide";
 @import "components/loginpage";
 @import "components/header-modal";
+@import "components/checkoutpage";
+@import "components/item-counter";
 

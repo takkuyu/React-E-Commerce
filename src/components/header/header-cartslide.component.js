@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { withRouter } from 'react-router-dom'
 
 class CartSlide extends React.Component {
     constructor(props) {
@@ -8,17 +8,20 @@ class CartSlide extends React.Component {
             cartItems: []
         }
         console.log('constructor')
+        console.log(this.props)
     }
 
     componentDidMount() {
-        this.setState({ cartItems: JSON.parse(sessionStorage.getItem('cart')) })
+        const cartItems = (JSON.parse(sessionStorage.getItem('cart')) !== null ? JSON.parse(sessionStorage.getItem('cart')) : []);
+
+        this.setState({ cartItems: cartItems })
 
         console.log('DidMount')
     }
 
     deleteItem(this_index) {
         const cartItems = this.state.cartItems.filter((item, index) => index !== this_index);
-
+        this.props.updateCartCounter(cartItems.length) // update cart-items counter with the length
         this.setState({
             cartItems: cartItems
         }, () => sessionStorage.setItem('cart', JSON.stringify(this.state.cartItems)))
@@ -79,7 +82,6 @@ class CartSlide extends React.Component {
 
     render() {
         const subTotal = this.calculateSubTotal(this.state.cartItems)
-
         const toggleCartModal = this.props.toggleCartModal;
         const shippingMsg = (subTotal < 50 ? <p>You're <span className="amount">$ {50 - subTotal} CAD</span> away from free shipping!</p> : <p>Congrats! You get free standard shipping.</p>);
         const shippingFee = (subTotal < 50 ? 'Standard Fees' : 'FREE');
@@ -92,7 +94,7 @@ class CartSlide extends React.Component {
                         <i className="fas fa-arrow-right" onClick={toggleCartModal}></i>
                         <div className='shipping-message'>
                             <div id="shopping-cart">
-                                <span className="fa-stack has-badge" data-count="0">
+                                <span className="fa-stack has-badge" data-count={this.props.itemCounter}>
                                     <i className="fa fa-circle fa-stack-2x"></i>
                                     <i className="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
                                 </span>
@@ -120,7 +122,10 @@ class CartSlide extends React.Component {
                                 <div className='items-content-bottom'>
                                     <p>Subtotal <span>$ {subTotal} CAD</span></p>
                                     <p>Shipping <span>{shippingFee}</span></p>
-                                    <p className='button'>CHECKOUT</p>
+                                    <p className='button' onClick={() => {
+                                        toggleCartModal();
+                                        this.props.history.push('/checkout');
+                                    }}>CHECKOUT</p>
                                 </div>
                             </div>
                     }
@@ -131,4 +136,4 @@ class CartSlide extends React.Component {
 
 };
 
-export default CartSlide;
+export default withRouter(CartSlide);
