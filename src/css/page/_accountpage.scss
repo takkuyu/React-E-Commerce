@@ -1,13 +1,50 @@
-.account-container{
+.account-container {
     background-color: #f1ebe7;
     padding: 10em 2em;
 
-    h2{
+    h2 {
         text-align: center;
         margin-bottom: 2rem;
     }
-    p.button{
-        width:10em;
+
+    p.button {
+        width: 10em;
         margin: 0 auto;
+    }
+
+    .main-wrapper {
+        padding: 7em 0;
+
+        .user-content {
+            background-color: #fff;
+            padding: 3em;
+            width: 100%;
+            margin: 0 auto 3rem;
+            text-align: center;
+            
+            @include tablet{
+                width: 70%;
+                text-align: unset;
+            }
+
+            p {
+                font-size: 1.8em;
+                font-weight: 600;
+
+                &:not(:last-child) {
+                    margin-bottom: 3rem;
+                }
+
+                span {
+                    font-weight: 400;
+                    display: block;
+                    @include tablet{
+                        float: right;
+                        display: inline;
+                    }
+                }
+            }
+        }
+
     }
 }

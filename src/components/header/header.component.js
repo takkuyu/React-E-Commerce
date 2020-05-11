@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom'
 import logo from '../../img/takaya-logo.png';
 import { Link } from 'react-router-dom';
 import CartSlide from './header-cartslide.component';
-import { auth } from '../../firebase/firebase.utils';
+// import { auth } from '../../firebase/firebase.utils';
 
 
 class Header extends React.Component {
@@ -88,12 +88,11 @@ class Header extends React.Component {
         <ul className='header-right'>
           <li>ABOUT</li>
           <li>STORES</li>
-          <li><i className="far fa-user"></i></li>
-          {/* {this.props.currentUser ?
-            <li className='option' onClick={() => auth.signOut()}>SIGN OUT</li>
+          {this.props.currentUser ?
+            <li><Link to='/account'><i className="far fa-user"></i></Link></li>
             :
-            <li><Link to='/account/login'>SIGN IN</Link></li>
-          } */}
+            <li><Link to='/account/login'><i className="far fa-user"></i></Link></li>
+          }
           <li><i className="far fa-question-circle"></i></li>
           {
             this.props.location.pathname !== '/checkout' ?

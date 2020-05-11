@@ -1,13 +1,24 @@
 import React from 'react';
 import StripeCheckout from 'react-stripe-checkout';
+import { withRouter } from 'react-router-dom'
+import { addPurchasedItemsToUser } from '../../firebase/firebase.utils'
 
-const StripeCheckoutButton = ({ price }) => {
+async function addItemsToCart(currentUserId, cartItems) {
+  try {
+    await addPurchasedItemsToUser(currentUserId, cartItems);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+const StripeCheckoutButton = (props) => {
+  const price = props.price
   const priceForStripe = price * 100;
   const publishableKey = 'pk_test_zoMr2SQCFRB2uFBlrvMSJTlI00USf01kUF';
 
-  const onToken = token => {
-    console.log(token);
-    alert('Payment Succesful!');
+  const onToken = token => { // submit callback
+    addItemsToCart(props.currentUserId, props.cartItems)
+    props.history.push('/account');
   };
 
   return (
@@ -26,4 +37,4 @@ const StripeCheckoutButton = ({ price }) => {
   );
 };
 
-export default StripeCheckoutButton;
+export default withRouter(StripeCheckoutButton);

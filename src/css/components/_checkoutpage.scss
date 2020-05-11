@@ -9,54 +9,6 @@
         margin-bottom: 2.5rem;
     }
 
-    .table {
-
-        thead {
-
-            th {
-                border-top: none;
-                border-bottom-width: 1px;
-                font-size: 1.8em;
-                font-weight: 500;
-
-                &.lg-cell {
-                    min-width: 11rem;
-                    width: 30%;
-                }
-
-                &.md-cell {
-                    min-width: 6rem;
-                    width: 12.5%;
-                }
-            }
-        }
-
-        tbody {
-
-            td {
-                vertical-align: middle;
-                font-size: 1.6em;
-                font-weight: 400;
-
-                img {
-                    width: 7rem;
-                    height: 7rem;
-                    object-fit: cover;
-                }
-
-                i {
-                    &:hover {
-                        cursor: pointer;
-                    }
-                }
-
-                .item-counter {
-                    font-size: .8rem;
-                    width: 5.5rem;
-                }
-            }
-        }
-    }
 
     .summary-wrapper {
         // width: 50%;

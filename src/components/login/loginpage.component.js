@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container } from 'reactstrap';
 import { signInWithGoogle, auth, createUserProfileDocument } from '../../firebase/firebase.utils';
+import { withRouter, Redirect } from 'react-router-dom'
 
 class Login extends React.Component {
     constructor(props) {
@@ -19,7 +20,7 @@ class Login extends React.Component {
     handleRegister = async event => {
         event.preventDefault();
 
-        const { newFirstName, newEmail, newPassword, confirmPassword } = this.state;
+        const { newFirstName, newLastName, newEmail, newPassword, confirmPassword } = this.state;
 
         if (newPassword !== confirmPassword) {
             alert("passwords don't match");
@@ -32,14 +33,21 @@ class Login extends React.Component {
                 newPassword
             );
 
-            await createUserProfileDocument(user, { newFirstName });
+            const displayName = newFirstName + ' ' + newLastName;
+
+            await createUserProfileDocument(user, displayName);
 
             this.setState({
                 newFirstName: '',
+                newLastName: '',
                 newEmail: '',
                 newPassword: '',
                 confirmPassword: ''
             });
+            
+            // this.props.history.push('/account'); // jump to the account page
+            return <Redirect to='/account' />
+
         } catch (error) {
             console.error(error);
         }
@@ -54,6 +62,8 @@ class Login extends React.Component {
             await auth.signInWithEmailAndPassword(email, password);
 
             this.setState({ email: '', password: '' });
+            this.props.history.push('/account'); // jump to the account page
+
         } catch (error) {
             console.error(error);
         }
@@ -61,7 +71,6 @@ class Login extends React.Component {
 
     handleChange = event => {
         const { value, name } = event.target;
-        // console.log([name])
         this.setState({ [name]: value }); // @Note: need [] otehrwise a new state 'name' is created
     };
 
@@ -110,4 +119,4 @@ class Login extends React.Component {
     }
 };
 
-export default Login;
+export default withRouter(Login);

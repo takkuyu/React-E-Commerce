@@ -15,18 +15,27 @@ class Routes extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentUser: null,
+      currentUser: {
+        id:'',
+        displayName:'',
+        email:'',
+        createdAt: 0,
+        purchasedItems:[]
+      },
       itemCounter: 0,
       cartModal: false
     }
     this.updateCartCounter = this.updateCartCounter.bind(this);
     this.toggleCartModal = this.toggleCartModal.bind(this);
+    // console.log('parent constructor')
 
   }
 
   unsubscribeFromAuth = null; //@note a variable can be defined outside a method like a global var
 
   componentDidMount() {
+    // console.log('parent didmount')
+
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {  // remain open until this component does unmount.
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
@@ -35,9 +44,9 @@ class Routes extends React.Component {
           this.setState({
             currentUser: {
               id: snapShot.id,
-              ...snapShot.data()
+              ...snapShot.data() // snapShot.data() doesn't include user's id 
             }
-          }, () => { console.log(this.state) });
+          }, () => { console.log(this.state.currentUser) });
 
         });
       }
@@ -67,11 +76,12 @@ class Routes extends React.Component {
   }
 
   render() {
+    // console.log('parent render')
 
     return (
       <section>
         <Header
-          // currentUser={this.state.currentUser}
+          currentUser={this.state.currentUser}
           itemCounter={this.state.itemCounter}
           cartModal={this.state.cartModal}
           toggleCartModal={this.toggleCartModal}
@@ -84,7 +94,7 @@ class Routes extends React.Component {
           <Route path="/collections/:gender/:category/:id" exact render={props => <ItemPage {...props} updateCartCounter={this.updateCartCounter} toggleCartModal={this.toggleCartModal} />} />
           <Route path="/account/login" exact component={Login} />
           <Route path="/account" exact  render={props => <AccountPage {...props} currentUser={this.state.currentUser} />} />
-          <Route path="/checkout" exact render={props => <CheckoutPage {...props} updateCartCounter={this.updateCartCounter} />} />
+          <Route path="/checkout" exact render={props => <CheckoutPage {...props} updateCartCounter={this.updateCartCounter} currentUserId={this.state.currentUser.id} />} />
         </Switch>
         <Footer />
       </section >
