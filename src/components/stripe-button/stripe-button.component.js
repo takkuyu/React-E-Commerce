@@ -17,7 +17,16 @@ const StripeCheckoutButton = (props) => {
   const publishableKey = 'pk_test_zoMr2SQCFRB2uFBlrvMSJTlI00USf01kUF';
 
   const onToken = token => { // submit callback
+    if(props.currentUserId === ""){
+      props.updateCartCounter(0) // update cart counter
+      sessionStorage.clear() // refresh session storage 
+      alert("Payment Successful")
+      props.history.push('/');
+      return
+    }
     addItemsToCart(props.currentUserId, props.cartItems)
+    props.updateCartCounter(0) // update cart counter
+    sessionStorage.clear() // refresh session storage 
     props.history.push('/account');
   };
 

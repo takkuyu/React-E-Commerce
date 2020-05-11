@@ -55,8 +55,8 @@ class CheckoutPage extends React.Component {
     render() {
         const subTotal = this.calculateSubTotal(this.state.cartItems)
         const shippingFee = (subTotal < 50 ? 'Standard Fees' : 'FREE');
-        const taxes = (subTotal * 0.12).toFixed(1);
-        const total = (subTotal + subTotal * 0.12).toFixed(1);
+        const taxes = (subTotal * 0.12).toFixed(2);
+        const total = (subTotal + subTotal * 0.12).toFixed(2);
 
         return (
             <div style={{ marginTop: '5rem' }} className="checkout-container">
@@ -109,7 +109,7 @@ class CheckoutPage extends React.Component {
                                     <p>Shipping <span>{shippingFee}</span></p>
                                     <p className='total'>Total <span>$ {total} CAD</span></p>
                                     {/* <p className='button'>PAY NOW</p> */}
-                                    <StripeCheckoutButton className='button' price={total} cartItems={this.state.cartItems} currentUserId={this.props.currentUserId}/>
+                                    <StripeCheckoutButton className='button' price={total} cartItems={this.state.cartItems} currentUserId={this.props.currentUserId} updateCartCounter={this.props.updateCartCounter}/>
                                     <p style={{ textAlign: 'center', marginTop: '1.5rem', color: '#ff0000' }}>*Please use the following test credit card for payments*</p>
                                     <p style={{ textAlign: 'center' }}>4242 4242 4242 4242 - Exp: 01/24 - CVV: 123</p>
                                 </div>

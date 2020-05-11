@@ -20,20 +20,17 @@ export const addPurchasedItemsToUser = async (uid, purchasedItems) => {
 
   const userRef = firestore.doc(`users/${uid}`);
   const snapShot = await userRef.get();
-  // console.log(snapShot.data())
 
   if (snapShot.exists) {
     try {
-      const pastItems = snapShot.data().purchasedItems
+      const updatedItems = snapShot.data().purchasedItems;
 
-      if (pastItems.length !== 0) { // Add past items when it is not the first purchase.
-        for (let i = 0; i < pastItems.length; i++) {
-          purchasedItems.unshift(pastItems[i])
-        }
+      for (let i = 0; i < purchasedItems.length; i++) {
+        updatedItems.push(purchasedItems[i])
       }
 
       await userRef.update({
-        purchasedItems: purchasedItems,
+        purchasedItems: updatedItems,
       });
     } catch (error) {
       console.log('error creating user', error.message);

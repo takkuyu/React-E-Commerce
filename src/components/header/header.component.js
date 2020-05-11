@@ -88,7 +88,7 @@ class Header extends React.Component {
         <ul className='header-right'>
           <li>ABOUT</li>
           <li>STORES</li>
-          {this.props.currentUser ?
+          {this.props.currentUser.id !== '' ?
             <li><Link to='/account'><i className="far fa-user"></i></Link></li>
             :
             <li><Link to='/account/login'><i className="far fa-user"></i></Link></li>

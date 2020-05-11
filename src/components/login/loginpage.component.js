@@ -56,7 +56,7 @@ class Login extends React.Component {
     handleSignin = async event => {
         event.preventDefault();
         const { email, password } = this.state;
-
+        
         try {
 
             await auth.signInWithEmailAndPassword(email, password);
