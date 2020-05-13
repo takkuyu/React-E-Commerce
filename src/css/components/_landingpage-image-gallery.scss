@@ -1,15 +1,16 @@
 .image-gallery-container {
-  margin-bottom: 10em;
   overflow: hidden;
   padding: 0 2.4em;
+  margin-bottom: 10em;
 
-  &.extra-image{
+  &.extra-image {
     display: none;
+    margin-bottom: 0;
 
-    @include tablet{
+    @include tablet {
       display: block;
 
-      &:hover{
+      &:hover {
         cursor: pointer;
       }
     }
@@ -49,20 +50,21 @@
       .image-content {
 
         @include tablet {
-          h1{
+          h1 {
             font-size: 2em;
           }
+
           >p {
             display: none;
           }
 
-          .shop-btn{
+          .shop-btn {
             padding-bottom: .5rem;
           }
         }
 
-        @include desktop{
-          h1{
+        @include desktop {
+          h1 {
             font-size: 2.5em;
           }
 
@@ -80,7 +82,7 @@
       .image-content {
 
         @include tablet {
-          h1{
+          h1 {
             font-size: 2em;
           }
 
@@ -93,8 +95,8 @@
           }
         }
 
-        @include desktop{
-          h1{
+        @include desktop {
+          h1 {
             font-size: 2.5em;
           }
 
@@ -107,14 +109,14 @@
     }
 
     &.new-arrivals {
-   
-      .image{
+
+      .image {
 
         &::before {
           content: "";
           display: block;
           padding-top: 100%;
-  
+
           @include tablet {
             padding-top: 40%;
             // display: none;

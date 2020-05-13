@@ -17,10 +17,10 @@ function Footer() {
       <div className='footer-list'>
         <ul>
           <li className='list-title'>HELP</li>
-          <li>test text test</li>
-          <li>test text test</li>
-          <li>test text test</li>
-          <li>test text test</li>
+          <li>1-778-123-4567</li>
+          <li>help@takaya.ca</li>
+          <li>Returns/Exchanges</li>
+          <li>FAQ/Contact Us</li>
         </ul>
         <ul>
           <li className='list-title'>SHOP</li>
@@ -37,7 +37,7 @@ function Footer() {
           <li>Partnerships</li>
         </ul>
       </div>
-      <p className='typography'>© 2020 Allbirds, Inc. All Rights Reserved. Terms, Privacy & Accessibility</p>
+      <p className='typography'>© 2020 takaya clothing Inc. All Rights Reserved. Terms, Privacy & Accessibility</p>
     </footer>
   );
 }

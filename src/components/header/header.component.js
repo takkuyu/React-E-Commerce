@@ -11,11 +11,13 @@ class Header extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      modal: false,
+      modal: true,
       gender: '',
+      slideModal: false
     }
     this.displayModal = this.displayModal.bind(this); // @Note: needed for setState
     this.hideModal = this.hideModal.bind(this); // @Note: needed for setState
+    this.handleSlideList = this.handleSlideList.bind(this); // @Note: needed for setState
     // console.log(this.props.currentUser)
     // console.log(this.props)
   }
@@ -45,7 +47,15 @@ class Header extends React.Component {
   hideModal() {
     this.setState({
       modal: false,
-      gender: ''
+      gender: '',
+      slideModal: false
+    })
+  }
+
+  handleSlideList(gender){
+    this.setState({
+      slideModal: !this.state.slideModal,
+      gender: gender
     })
   }
 
@@ -54,7 +64,9 @@ class Header extends React.Component {
       this.state.modal ?
         <HeaderModal
           hideModal={this.hideModal}
+          handleSlideList={this.handleSlideList}
           gender={this.state.gender}
+          slideModal={this.state.slideModal}
         />
         :
         '')
@@ -108,7 +120,7 @@ class Header extends React.Component {
         </ul>
         {
           this.props.location.pathname !== '/checkout' ?
-            <div className='shopping-cart-mobile' id="shopping-cart" onClick={this.toggleCartModal}>
+            <div className='shopping-cart-mobile' id="shopping-cart" onClick={this.props.toggleCartModal}>
               <span className="fa-stack has-badge" data-count={this.props.itemCounter}>
                 <i className="fa fa-circle fa-stack-2x"></i>
                 <i className="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
