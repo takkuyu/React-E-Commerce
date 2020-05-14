@@ -37,7 +37,7 @@ function Footer() {
           <li>Partnerships</li>
         </ul>
       </div>
-      <p className='typography'>© 2020 takaya clothing Inc. All Rights Reserved. Terms, Privacy & Accessibility</p>
+      <p className='typography'>© 2020 takaya clothing Inc. | Developed by Takaya Hirose</p>
     </footer>
   );
 }

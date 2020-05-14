@@ -1,4 +1,3 @@
-
 /*------------------------------------*\
 $GLOBAL ELEMENTS
 \*------------------------------------*/
@@ -12,24 +11,24 @@ $GLOBAL ELEMENTS
 /*------------------------------------*\
     $PAGES
 \*------------------------------------*/
-@import "components/header";
-@import "components/landingpage";
-@import "components/footer";
+@import "page/homepage";
 @import "page/accountpage";
+@import "page/loginpage";
+@import "page/checkoutpage";
+@import "page/itempage";
+@import "page/collectionpage";
 
 
 /*------------------------------------*\
 $COMPONENTS
 \*------------------------------------*/
-@import "components/landingpage-image-gallery";
-@import "components/collections-page";
-@import "components/collections-search-filter";
-@import "components/collections-items";
-@import "components/collections-itempage";
-@import "components/header-cartslide";
-@import "components/loginpage";
-@import "components/header-modal";
-@import "components/checkoutpage";
+@import "components/header/header";
+@import "components/header/header-shoppingcart-slider";
+@import "components/header/header-dropdown-menu";
+@import "components/collection/collection-search-filter";
+@import "components/collection/collection-category";
+@import "components/collection/collection-card";
+@import "components/footer";
+@import "components/image-gallery";
 @import "components/item-counter";
 @import "components/table";
-

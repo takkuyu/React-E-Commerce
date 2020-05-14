@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-      <ScrollToTop />
+        <ScrollToTop />
         <Route component={Routes} />
       </BrowserRouter>
     </div>

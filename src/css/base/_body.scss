@@ -32,4 +32,10 @@ body {
       // transform: scale(1.1, 1.1);
     }
   }
+
+  button{
+    &:focus{
+      outline: none;
+    }
+  }
 }

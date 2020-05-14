@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container } from 'reactstrap';
 import { collectionRouter, sum, imageLink } from '../../collection-router';
-import SearchFilter from './search-filter.component';
+import SearchFilter from '../../components/collections/search-filter.component';
 import queryString from 'query-string';
 
 

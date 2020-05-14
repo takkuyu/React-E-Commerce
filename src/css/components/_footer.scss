@@ -4,7 +4,7 @@ footer {
     text-align: center;
     padding: $pad-double;
 
-    img{
+    img {
         width: 10em;
     }
 
@@ -29,30 +29,39 @@ footer {
 
     .footer-list {
 
-        ul {
-            li {
-                &:not(:last-child) {
-                    padding-bottom: $pad-half;
-                }
-            }
-
-            li.list-title {
-                font-weight: bold;
-                font-size: 1.3em;
-                padding-bottom: $pad;
-            }
-        }
-
-        @include tablet{
+        @include tablet {
             display: flex;
             justify-content: space-between;
             padding: 0 20%;
             margin-bottom: 2rem;
         }
+
+        ul {
+
+            @include tablet {
+                width: 33.33337%;
+            }
+
+            li {
+                font-size: 1.2em;
+
+                &:not(:last-child) {
+                    padding-bottom: $pad-half;
+                }
+
+                &.list-title {
+                    font-weight: bold;
+                    font-size: 1.6em;
+                    padding-bottom: $pad;
+                }
+            }
+        }
+
+
     }
 
 
     .typography {
-        font-size: 1em;
+        font-size: 1.2em;
     }
 }

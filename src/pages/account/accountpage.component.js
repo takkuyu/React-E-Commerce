@@ -13,7 +13,7 @@ const AccountPage = (props) => {
     return (
         <div className='account-container' style={{ marginTop: '5rem' }}>
             <Container>
-                <h2>MY ACCOUNT</h2>
+                <h2>YOUR ACCOUNT</h2>
                 <p className='button' onClick={() => {
                     auth.signOut();
                     props.history.push('/');

@@ -9,7 +9,7 @@ import topseller_img from '../../img/topseller.jpg';
 import { Link } from 'react-router-dom';
 
 
-function HeaderModal({ hideModal, handleSlideList, gender, slideModal }) {
+function HeaderDropDownMenu({ hideModal, handleSlideList, gender, slideModal }) {
 
   const genderRoute = (gender === 'Men' ? 'mens' : 'women');
 
@@ -77,4 +77,4 @@ function HeaderModal({ hideModal, handleSlideList, gender, slideModal }) {
   );
 }
 
-export default HeaderModal;
+export default HeaderDropDownMenu;

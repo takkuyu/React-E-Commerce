@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom'
 
-class CartSlide extends React.Component {
+class ShoppingCartSlider extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -136,4 +136,4 @@ class CartSlide extends React.Component {
 
 };
 
-export default withRouter(CartSlide);
+export default withRouter(ShoppingCartSlider);

@@ -3,7 +3,7 @@ import { Container } from 'reactstrap';
 import { signInWithGoogle, auth, createUserProfileDocument } from '../../firebase/firebase.utils';
 import { withRouter, Redirect } from 'react-router-dom'
 
-class Login extends React.Component {
+class LoginPage extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -119,4 +119,4 @@ class Login extends React.Component {
     }
 };
 
-export default withRouter(Login);
+export default withRouter(LoginPage);

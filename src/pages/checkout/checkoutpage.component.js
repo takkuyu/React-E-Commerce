@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Table } from 'reactstrap';
-import StripeCheckoutButton from '../stripe-button/stripe-button.component'
+import StripeCheckoutButton from '../../components/stripe-button/stripe-button.component'
 
 class CheckoutPage extends React.Component {
     constructor(props) {

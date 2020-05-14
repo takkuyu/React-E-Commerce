@@ -1,17 +1,15 @@
 import React from 'react';
-import HeaderModal from './header-modal.component';
+import HeaderDropDownMenu from './header-dropdown.component';
 import { withRouter } from 'react-router-dom'
 import logo from '../../img/takaya-logo.png';
 import { Link } from 'react-router-dom';
-import CartSlide from './header-cartslide.component';
-// import { auth } from '../../firebase/firebase.utils';
-
+import ShoppingCartSlider from './header-shoppingcart-slider.component';
 
 class Header extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      modal: true,
+      modal: false,
       gender: '',
       slideModal: false
     }
@@ -62,7 +60,7 @@ class Header extends React.Component {
   render() {
     const modal = (
       this.state.modal ?
-        <HeaderModal
+        <HeaderDropDownMenu
           hideModal={this.hideModal}
           handleSlideList={this.handleSlideList}
           gender={this.state.gender}
@@ -78,7 +76,7 @@ class Header extends React.Component {
 
 
     const cartSlide = (this.props.cartModal ?
-      <CartSlide
+      <ShoppingCartSlider
         toggleCartModal={this.props.toggleCartModal}
         itemCounter={this.props.itemCounter}
         updateCartCounter={this.props.updateCartCounter}
@@ -98,12 +96,10 @@ class Header extends React.Component {
           <Link to='/' onClick={this.hideModal}><img src={logo} alt='logo' /></Link>
         </div>
         <ul className='header-right'>
-          <li>ABOUT</li>
-          <li>STORES</li>
           {this.props.currentUser.id !== '' ?
-            <li><Link to='/account'><i className="far fa-user"></i></Link></li>
+            <li><Link to='/account'>ACCOUNT</Link></li>
             :
-            <li><Link to='/account/login'><i className="far fa-user"></i></Link></li>
+            <li><Link to='/account/login'>LOGIN</Link></li>
           }
           <li><i className="far fa-question-circle"></i></li>
           {

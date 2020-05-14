@@ -6,18 +6,18 @@ const SHOP_DATA = [
     items: [
       {
         id: 1,
-        name: 'Brown Brim',
-        imageUrl: 'https://i.ibb.co/ZYW3VTp/brown-brim.png',
-        price: 25,
+        name: 'Nike React Infinity Run Flyknit',
+        imageUrl: 'https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/0c95d5ba-3ed3-4000-b073-537472bda3d3/react-infinity-run-flyknit-running-shoe-4jHr6L.jpg',
+        price: 215,
         item_gender: 'mens',
         size: [8,9,10,11,12,13,14],
-        color: 'black'
+        color: 'white'
       },
       {
         id: 2,
-        name: 'Blue Beanie',
-        imageUrl: 'https://i.ibb.co/ypkgK0X/blue-beanie.png',
-        price: 18,
+        name: 'Nike React Miler',
+        imageUrl: 'https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/i1-5cc7de3b-2afc-49c2-a1e4-0508997d09e6/react-miler-running-shoe-DnVKQm.jpg',
+        price: 170,
         item_gender: 'mens',
         size: [9,10,11,12,13,14],
         color: 'white'
@@ -42,48 +42,48 @@ const SHOP_DATA = [
       },
       {
         id: 5,
-        name: 'Green Beanie',
-        imageUrl: 'https://i.ibb.co/YTjW3vF/green-beanie.png',
-        price: 18,
+        name: 'adidas UltraBOOST 19',
+        imageUrl: 'https://i.ibb.co/tCHW00k/running-women-01.jpg',
+        price: 110,
         item_gender: 'women',
         size: [8,9,10,11,12],
         color: 'red'
       },
       {
         id: 6,
-        name: 'Palm Tree Cap',
-        imageUrl: 'https://i.ibb.co/rKBDvJX/palm-tree-cap.png',
-        price: 14,
+        name: 'Gold SE Floral Running',
+        imageUrl: 'https://i.ibb.co/hFWjXtj/running-women-02.jpg',
+        price: 180,
         item_gender: 'women',
         size: [8,9,10,11,12,13,14],
         color: 'yellow'
       },
       {
         id: 7,
-        name: 'Red Beanie',
-        imageUrl: 'https://i.ibb.co/bLB646Z/red-beanie.png',
-        price: 18,
+        name: 'Ultra Boosts Zapatillas',
+        imageUrl: 'https://i.ibb.co/fvSxS8x/running-women-04.jpg',
+        price: 90,
         item_gender: 'women',
         size: [8,9,10,11,12],
         color: 'multi'
       },
       {
         id: 8,
-        name: 'Wolf Cap',
-        imageUrl: 'https://i.ibb.co/1f2nWMM/wolf-cap.png',
-        price: 14,
+        name: 'New Balance EST-19',
+        imageUrl: 'https://i.ibb.co/G5nDM2K/running-women-03.jpg',
+        price: 180,
         item_gender: 'women',
         size: [9,10,11,12,13,14],
         color: 'green'
       },
       {
         id: 9,
-        name: 'Blue Snapback',
-        imageUrl: 'https://i.ibb.co/X2VJP2W/blue-snapback.png',
-        price: 16,
+        name: 'adidas Swift White & Rose Gold Shoes',
+        imageUrl: 'https://i.ibb.co/HLvdB4W/running-women-05.jpg',
+        price: 120,
         item_gender: 'women',
         size: [8,9,10,11,12],
-        color: 'black'
+        color: 'white'
       }
     ]
   },
