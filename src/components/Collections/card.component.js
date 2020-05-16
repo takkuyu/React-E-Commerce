@@ -4,12 +4,14 @@ import { Col } from 'reactstrap';
 
 const Card = ({ id, name, imageUrl, price, routeName, history, match }) => {
 
-  // console.log(match.params.category)
-  const path = (match.params.category === undefined ? `${match.url}/${routeName}/${id}` : `${match.url}/${id}`)
-  // console.log(id)
+  const path = (match.params.category === undefined ? `${match.url}/${routeName}/${id}` : `${match.url}/${id}`);
+
   return (
     <Col md='6' lg='4'>
-      <div className='collections-card' onClick={() => history.push(path)}>
+      <div className='collections-card' onClick={() => history.push({
+        pathname: path,
+        state: { itemData: name }
+      })}>
         <div className='collections-card-outer'>
           <img src={imageUrl} alt='' />
           <div className='card-content'>

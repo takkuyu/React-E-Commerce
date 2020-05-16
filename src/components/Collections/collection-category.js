@@ -4,13 +4,13 @@ import {
 } from 'reactstrap';
 import Card from './card.component';
 
-const Category = ({ routeName, categoryTitle, gender, category_items }) => {
+const Category = ({gender, routeName, categoryTitle,  categoryItems }) => {
 
   const genderTitle = (gender === 'mens' ? "Men's" : "Women's")
   return (
     <div className='collections-items-wrapper'>
       {
-        category_items.length === 0 ?
+        categoryItems.length === 0 ?
           <div></div>
           :
           <div className='collections-title'>
@@ -20,7 +20,7 @@ const Category = ({ routeName, categoryTitle, gender, category_items }) => {
       }
       <div className='collections-items-content'>
         <Row>
-          {category_items.map(({ id, ...otherSectionProps }) => (
+          {categoryItems.map(({ id, ...otherSectionProps }) => (
             <Card
               key={id}
               id={id}

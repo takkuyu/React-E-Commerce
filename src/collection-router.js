@@ -32,11 +32,11 @@ function filterItems(items_arr, sum, price, size, color) {
 }
 
 const collectionRouter = (this_gender, this_category, price, size, color) => {
-  // console.log(this_gender)
-  if (this_gender !== 'mens' && this_gender !== 'women') {
-    window.location = '/';
-    return;
-  }
+  console.log(this_category)
+  // if (this_gender !== 'mens' && this_gender !== 'women') {
+  //   window.location = '/';
+  //   return;
+  // }
 
   switch (this_category) {
     case 'sneakers': {
@@ -48,7 +48,7 @@ const collectionRouter = (this_gender, this_category, price, size, color) => {
 
       return (
         <div>
-          <Category gender={this_gender} routeName={SHOP_DATA[1].routeName} categoryTitle={SHOP_DATA[1].title} category_items={items.items_arr} />
+          <Category gender={this_gender} routeName={SHOP_DATA[1].routeName} categoryTitle={SHOP_DATA[1].title} categoryItems={items.items_arr} />
         </div>
       )
     }
@@ -61,7 +61,7 @@ const collectionRouter = (this_gender, this_category, price, size, color) => {
 
       return (
         <div>
-          <Category gender={this_gender} routeName={SHOP_DATA[0].routeName} categoryTitle={SHOP_DATA[0].title} category_items={items.items_arr} />
+          <Category gender={this_gender} routeName={SHOP_DATA[0].routeName} categoryTitle={SHOP_DATA[0].title} categoryItems={items.items_arr} />
         </div>
       )
     }
@@ -74,7 +74,70 @@ const collectionRouter = (this_gender, this_category, price, size, color) => {
 
       return (
         <div>
-          <Category gender={this_gender} routeName={SHOP_DATA[2].routeName} categoryTitle={SHOP_DATA[2].title} category_items={items.items_arr} />
+          <Category gender={this_gender} routeName={SHOP_DATA[2].routeName} categoryTitle={SHOP_DATA[2].title} categoryItems={items.items_arr} />
+        </div>
+      )
+    }
+    case 'topsellers': {
+      const items_arr = SHOP_DATA[3].items.filter(item => item.item_gender === this_gender);
+      const items = filterItems(items_arr, items_arr.length, price, size, color);
+      sum = items.sum
+      imageLink = (this_gender === 'mens' ? men_boots_img : women_boots_img);
+
+      return (
+        <div>
+          <Category gender={this_gender} routeName={SHOP_DATA[3].routeName} categoryTitle={SHOP_DATA[4].title} categoryItems={items.items_arr} />
+        </div>
+      )
+    }
+    case 'new': {
+      const items_arr = SHOP_DATA[4].items.filter(item => item.item_gender === this_gender);
+      const items = filterItems(items_arr, items_arr.length, price, size, color);
+      sum = items.sum
+      imageLink = (this_gender === 'mens' ? men_boots_img : women_boots_img);
+
+      return (
+        <div>
+          <Category gender={this_gender} routeName={SHOP_DATA[4].routeName} categoryTitle={SHOP_DATA[4].title} categoryItems={items.items_arr} />
+        </div>
+      )
+    }
+    case 'topsellers': {
+      const items_arr = SHOP_DATA[3].items.filter(item => item.item_gender === this_gender);
+      const items = filterItems(items_arr, items_arr.length, price, size, color);
+      // console.log('new')
+      sum = items.sum
+      imageLink = (this_gender === 'mens' ? men_boots_img : women_boots_img);
+
+      return (
+        <div>
+          <Category gender={this_gender} routeName={SHOP_DATA[3].routeName} categoryTitle={SHOP_DATA[4].title} categoryItems={items.items_arr} />
+        </div>
+      )
+    }
+    case 'topsellers': {
+      const items_arr = SHOP_DATA[3].items.filter(item => item.item_gender === this_gender);
+      const items = filterItems(items_arr, items_arr.length, price, size, color);
+      // console.log('new')
+      sum = items.sum
+      imageLink = (this_gender === 'mens' ? men_boots_img : women_boots_img);
+
+      return (
+        <div>
+          <Category gender={this_gender} routeName={SHOP_DATA[3].routeName} categoryTitle={SHOP_DATA[4].title} categoryItems={items.items_arr} />
+        </div>
+      )
+    }
+    case 'topsellers': {
+      const items_arr = SHOP_DATA[3].items.filter(item => item.item_gender === this_gender);
+      const items = filterItems(items_arr, items_arr.length, price, size, color);
+      // console.log('new')
+      sum = items.sum
+      imageLink = (this_gender === 'mens' ? men_boots_img : women_boots_img);
+
+      return (
+        <div>
+          <Category gender={this_gender} routeName={SHOP_DATA[3].routeName} categoryTitle={SHOP_DATA[4].title} categoryItems={items.items_arr} />
         </div>
       )
     }
@@ -92,14 +155,14 @@ const collectionRouter = (this_gender, this_category, price, size, color) => {
 
       return (
         <div>
-          <Category gender={this_gender} routeName={SHOP_DATA[1].routeName} categoryTitle={SHOP_DATA[1].title} category_items={sneakers_items.items_arr} />
-          <Category gender={this_gender} routeName={SHOP_DATA[0].routeName} categoryTitle={SHOP_DATA[0].title} category_items={running_items.items_arr} />
-          <Category gender={this_gender} routeName={SHOP_DATA[2].routeName} categoryTitle={SHOP_DATA[2].title} category_items={boots_items.items_arr} />
+          <Category gender={this_gender} routeName={SHOP_DATA[1].routeName} categoryTitle={SHOP_DATA[1].title} categoryItems={sneakers_items.items_arr} />
+          <Category gender={this_gender} routeName={SHOP_DATA[0].routeName} categoryTitle={SHOP_DATA[0].title} categoryItems={running_items.items_arr} />
+          <Category gender={this_gender} routeName={SHOP_DATA[2].routeName} categoryTitle={SHOP_DATA[2].title} categoryItems={boots_items.items_arr} />
         </div>
       )
     }
     default:
-      window.location = '/';
+      // window.location = '/';
       break;
   }
 }

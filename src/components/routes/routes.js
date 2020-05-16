@@ -6,6 +6,7 @@ import CheckoutPage from '../../pages/checkout/checkoutpage.component';
 import AccountPage from '../../pages/account/accountpage.component';
 import ItemPage from "../../pages/itempage/itempage.component";
 import LoginPage from '../../pages/login/loginpage.component';
+import NoMatchPage from '../../pages/404page/404page.component';
 import Header from '../../components/header/header.component';
 import Footer from '../../components/footer/footer.component';
 import { auth, createUserProfileDocument, addCollectionAndDocuments } from '../../firebase/firebase.utils';
@@ -30,9 +31,10 @@ class Routes extends React.Component {
     this.toggleCartModal = this.toggleCartModal.bind(this);
   }
 
-  unsubscribeFromAuth = null; //@note a variable can be defined outside a method like a global var
+  unsubscribeFromAuth = null;
 
   componentDidMount() {
+    console.log('routes')
 
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {  // remain open until this component does unmount.
 
@@ -48,7 +50,7 @@ class Routes extends React.Component {
           }, () => { console.log(this.state.currentUser) });
         });
         console.log(SHOP_DATA[0].items)
-        // addCollectionAndDocuments('collections', SHOP_DATA.map(({ title, items }) => ({ title, items })))
+        // addCollectionAndDocuments('collections', SHOP_DATA)
       }
       else {
 
@@ -87,7 +89,8 @@ class Routes extends React.Component {
   }
 
   render() {
-    // console.log('parent render')
+    const categoryOptions = "sneakers|running|boots|topsellers|new";
+    const genderOptions = "mens|women";
 
     return (
       <section>
@@ -100,12 +103,14 @@ class Routes extends React.Component {
         />
         <Switch key={this.props.location.key}>
           <Route path='/' exact component={HomePage} />
-          <Route path="/collections/:gender" exact component={CollectionPage} />
-          <Route path="/collections/:gender/:category" exact component={CollectionPage} />
-          <Route path="/collections/:gender/:category/:id" exact render={props => <ItemPage {...props} updateCartCounter={this.updateCartCounter} toggleCartModal={this.toggleCartModal} />} />
+          <Route path={`/collections/:gender(${genderOptions})/:category(${categoryOptions})?`} exact component={CollectionPage} />
+          <Route path={`/collections/:gender(${genderOptions})/:category(${categoryOptions})/:id(\\d+)`} exact render={
+            props => <ItemPage {...props} updateCartCounter={this.updateCartCounter} toggleCartModal={this.toggleCartModal} />
+          } />
           <Route path="/account/login" exact component={LoginPage} />
           <Route path="/account" exact render={props => <AccountPage {...props} currentUser={this.state.currentUser} />} />
           <Route path="/checkout" exact render={props => <CheckoutPage {...props} updateCartCounter={this.updateCartCounter} currentUserId={this.state.currentUser.id} />} />
+          <Route component={NoMatchPage} />{/* fall back page  */}
         </Switch>
         <Footer />
       </section >

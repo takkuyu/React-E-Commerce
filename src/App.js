@@ -4,6 +4,7 @@ import Routes from './components/routes/routes';
 import ScrollToTop from './components/scrollToTop.component'
 
 function App() {
+  console.log('App')
   return (
     <div className="App">
       <BrowserRouter>

@@ -23,6 +23,7 @@ class CollectionPage extends React.Component {
       sum: 0,
       imageLink: ''
     }
+    console.log(this.props.match)
     // this.updateCollection = this.updateCollection.bind(this);
   }
 
@@ -62,7 +63,6 @@ class CollectionPage extends React.Component {
       case 'price':
         delete param.pmin
         delete param.pmax
-        // console.log(queryString.stringify(param))
         this.props.history.push({ pathname: this.props.location.pathname, search: queryString.stringify(param) })
         break;
       case 'color':
@@ -81,9 +81,27 @@ class CollectionPage extends React.Component {
     }
   }
 
+  capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
+  getCategoryTitle(category) {
+    switch (category) {
+      case "topsellers":
+        return "Top Sellers"
+      case "new":
+        return "New Arrivals"
+      case undefined:
+        return "Shoes"
+      default:
+        return this.capitalizeFirstLetter(category)
+    }
+  }
+
   render() {
     const genderText = (this.props.match.params.gender === 'mens' ? "Men's" : "Women's")
-    const categoryText = (this.props.match.params.category === undefined ? "Shoes" : this.props.match.params.category)
+    const categoryText = this.getCategoryTitle(this.props.match.params.category);
+    const categorySummary = "The world's most comfortable shoes for life’s everyday adventures.";
     const clearFilterBtn = (this.props.location.search !== '' ? <button onClick={() => { this.clearFilter('all') }} className='clearFilterBtn'>CLEAR FILTERS</button> : <div></div>)
 
     return (
@@ -93,7 +111,7 @@ class CollectionPage extends React.Component {
           <img src={this.state.imageLink} alt='img' />
           <div className='collections-top-content'>
             <h1>{genderText} {categoryText}</h1>
-            <p>The world's most comfortable shoes for life’s everyday adventures.</p>
+            <p>{categorySummary}</p>
           </div>
         </div>
 

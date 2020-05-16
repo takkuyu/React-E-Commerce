@@ -9,6 +9,8 @@ class ItemPage extends React.Component {
       sizeSelect: 0,
       openCartModal: false
     }
+    console.log(this.props.location.state)
+
   }
 
   getItemData({ gender, category, id }) {
@@ -35,6 +37,22 @@ class ItemPage extends React.Component {
         const pmin = itemData.price - 50;
         const pmax = itemData.price + 50;
         const recommendations = SHOP_DATA[2].items.filter(item => item.item_gender === gender && item.id !== Number(id) && item.price <= pmax && item.price >= pmin)
+
+        return { itemData, recommendations };
+      }
+      case 'topsellers': {
+        const itemData = SHOP_DATA[3].items.filter(item => item.id === Number(id))[0]
+        const pmin = itemData.price - 50;
+        const pmax = itemData.price + 50;
+        const recommendations = SHOP_DATA[3].items.filter(item => item.item_gender === gender && item.id !== Number(id) && item.price <= pmax && item.price >= pmin)
+
+        return { itemData, recommendations };
+      }
+      case 'new': {
+        const itemData = SHOP_DATA[4].items.filter(item => item.id === Number(id))[0]
+        const pmin = itemData.price - 50;
+        const pmax = itemData.price + 50;
+        const recommendations = SHOP_DATA[4].items.filter(item => item.item_gender === gender && item.id !== Number(id) && item.price <= pmax && item.price >= pmin)
 
         return { itemData, recommendations };
       }
@@ -139,13 +157,13 @@ class ItemPage extends React.Component {
           <div className='itempage-center-wrapper'>
             <div className='center-content'>
               <h1>PRODUCT DETAILS</h1>
-              <p>On-trend, simple Scandinavian sneaker range on a buffed up cupsole - contemporary styling in exquisite materials.</p>
+              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.</p>
               <ul>
-                <li>Long-lace sneaker boot showcasing edgy, forward-thinking ECCO materials for a modern look</li>
-                <li>Full leather-lining for a rich, elegant look and feel, ensuring perfect inner climate</li>
-                <li>LRemovable, foot- sculptured leather-covered inlay sole with ECFS™ increased air circulation for a perfect inner climate</li>
-                <li>Long-lace sneaker boot showcasing edgy, forward-thinking ECCO materials for a modern look</li>
-                <li>Direct-injected PU/TPU outsole - light and flexible with a unique, youthful design trending a heavier cupsole</li>
+                <li>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. </li>
+                <li>The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here'.</li>
+                <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur laoreet purus sed orci tincidunt tincidunt. Maecenas vestibulum, ex ac dictum.</li>
+                <li>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested.</li>
+                <li>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.</li>
               </ul>
             </div>
           </div>

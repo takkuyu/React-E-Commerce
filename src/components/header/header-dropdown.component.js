@@ -2,17 +2,18 @@ import React from 'react';
 import {
   Container
 } from 'reactstrap';
-import women_shoes_1 from '../../img/women-all.jpg';
-import women_shoes_2 from '../../img/women-running.jpg';
-import new_arrivals_img from '../../img/new-arrivals.jpg';
-import topseller_img from '../../img/topseller.jpg';
+import women_topsellers_img from '../../img/women-all.jpg';
+import women_newarrivals_img from '../../img/women-running.jpg';
+import men_topsellers_img from '../../img/topseller.jpg';
+import men_newarrivals_img from '../../img/new-arrivals.jpg';
 import { Link } from 'react-router-dom';
 
 
 function HeaderDropDownMenu({ hideModal, handleSlideList, gender, slideModal }) {
 
   const genderRoute = (gender === 'Men' ? 'mens' : 'women');
-
+  const topsellersImage = (gender === 'Men' ? men_topsellers_img : women_topsellers_img)
+  const newArrivalsImage = (gender === 'Men' ? men_newarrivals_img : women_newarrivals_img)
   const slideList = (slideModal ?
     <ul className="slide-list">
       <li className='title' onClick={() => handleSlideList('')}><i className="fas fa-chevron-left"></i>{gender}</li>
@@ -21,6 +22,7 @@ function HeaderDropDownMenu({ hideModal, handleSlideList, gender, slideModal }) 
       <li className="link-list"><Link to={`/collections/${genderRoute}/running`} onClick={hideModal}>Running Shoes</Link></li>
       <li className="link-list"><Link to={`/collections/${genderRoute}/boots`} onClick={hideModal}>Boots</Link></li>
       <li className="link-list"><Link to='/collections/new' onClick={hideModal}>New Arrivals</Link></li>
+      <li className="link-list"><Link to='/collections/new' onClick={hideModal}>Top Sellers</Link></li>
     </ul>
     :
     ''
@@ -33,7 +35,6 @@ function HeaderDropDownMenu({ hideModal, handleSlideList, gender, slideModal }) 
         <ul>
           <li className='gender' onClick={() => handleSlideList('Men')}>Men<i className="fas fa-chevron-right"></i></li>
           <li className='gender' onClick={() => handleSlideList('Women')}>Women<i className="fas fa-chevron-right"></i></li>
-          <li className="link-list"><Link to='/collections/mens' onClick={hideModal}>Top Sellers</Link></li>
           <li className="link-list"><Link to='/account/login' onClick={hideModal}>Account<i className="far fa-user"></i></Link></li>
           <li>Help<i className="far fa-question-circle"></i></li>
         </ul>
@@ -50,24 +51,15 @@ function HeaderDropDownMenu({ hideModal, handleSlideList, gender, slideModal }) 
                 <li><Link to={`/collections/${genderRoute}/sneakers`} onClick={hideModal}>Sneakers</Link></li>
                 <li><Link to={`/collections/${genderRoute}/running`} onClick={hideModal}>Running Shoes</Link></li>
                 <li><Link to={`/collections/${genderRoute}/boots`} onClick={hideModal}>Boots</Link></li>
-                <li><Link to='/collections/new' onClick={hideModal}>New Arrivals</Link></li>
+                <li><Link to={`/collections/${genderRoute}/new`} onClick={hideModal}>New Arrivals</Link></li>
               </ul>
             </div>
             <div className="header_dropdown-collections">
               <p>COLLECTIONS</p>
-              {
-                gender === 'Men' ?
-                  <ul>
-                    <li className='collection-item' style={{ backgroundImage: `url(${topseller_img})` }}>TOP SELLERS</li>
-                    <li className='collection-item' style={{ backgroundImage: `url(${new_arrivals_img})` }}>NEW ARRIVALS</li>
-                  </ul>
-                  :
-                  <ul>
-                    <li className='collection-item' style={{ backgroundImage: `url(${women_shoes_1})` }}>TOP SELLERS</li>
-                    <li className='collection-item' style={{ backgroundImage: `url(${women_shoes_2})` }}>NEW ARRIVALS</li>
-                  </ul>
-
-              }
+              <ul>
+                <li className='collection-item' style={{ backgroundImage: `url(${topsellersImage})` }} ><Link to={`/collections/${genderRoute}/topsellers`} onClick={hideModal}>TOP SELLERS</Link></li>
+                <li className='collection-item' style={{ backgroundImage: `url(${newArrivalsImage})` }}><Link to={`/collections/${genderRoute}/new`} onClick={hideModal}>NEW ARRIVALS</Link></li>
+              </ul>
             </div>
           </div>
         </Container>
