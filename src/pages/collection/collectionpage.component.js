@@ -23,7 +23,7 @@ class CollectionPage extends React.Component {
       sum: 0,
       imageLink: ''
     }
-    console.log(this.props.match)
+    // console.log(this.props.match)
     // this.updateCollection = this.updateCollection.bind(this);
   }
 

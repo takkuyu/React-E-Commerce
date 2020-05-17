@@ -32,7 +32,7 @@ function filterItems(items_arr, sum, price, size, color) {
 }
 
 const collectionRouter = (this_gender, this_category, price, size, color) => {
-  console.log(this_category)
+  // console.log(this_category)
   // if (this_gender !== 'mens' && this_gender !== 'women') {
   //   window.location = '/';
   //   return;

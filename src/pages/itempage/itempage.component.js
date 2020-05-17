@@ -9,7 +9,7 @@ class ItemPage extends React.Component {
       sizeSelect: 0,
       openCartModal: false
     }
-    console.log(this.props.location.state)
+    // console.log(this.props.location.state)
 
   }
 

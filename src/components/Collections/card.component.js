@@ -10,7 +10,7 @@ const Card = ({ id, name, imageUrl, price, routeName, history, match }) => {
     <Col md='6' lg='4'>
       <div className='collections-card' onClick={() => history.push({
         pathname: path,
-        state: { itemData: name }
+        // state: { itemData: name }
       })}>
         <div className='collections-card-outer'>
           <img src={imageUrl} alt='' />
