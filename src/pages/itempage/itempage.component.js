@@ -1,16 +1,13 @@
 import React from 'react';
 import SHOP_DATA from '../../collection-items'
 import { Container } from 'reactstrap';
+import { connect } from 'react-redux';
+import { toggleCartHidden, addItem } from '../../redux/cart/cart.actions';
+
 
 class ItemPage extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      sizeSelect: 0,
-      openCartModal: false
-    }
-    // console.log(this.props.location.state)
-
+  state = {
+    itemSize: 0,
   }
 
   getItemData({ gender, category, id }) {
@@ -84,53 +81,22 @@ class ItemPage extends React.Component {
     }
   }
 
-  checkDuplicates(id, size, items_arr) {
 
-    const duplicate = items_arr.find(item => item.id === id && item.size === size);
-    const index = items_arr.indexOf(duplicate)
-
-    if (index !== -1) return index
-
-    return -1
-  }
-
-  addItemToCart({ ...itemData }) { //@Note: use split to prevent overriding
-
-    let items_arr = []
-    let index = -1;
-    itemData.size = this.state.sizeSelect;
-
-    if (JSON.parse(sessionStorage.getItem('cart')) !== null) { // When it is not the first time of adding an item.
-      items_arr = JSON.parse(sessionStorage.getItem('cart'));
-      index = this.checkDuplicates(itemData.id, itemData.size, items_arr);
-    }
-
-    if (index !== -1) {
-      items_arr[index].amount = items_arr[index].amount + 1;
-    } else {
-      itemData.amount = 1;
-      items_arr.push(itemData)
-    }
-
-    sessionStorage.setItem('cart', JSON.stringify(items_arr));
-    this.props.updateCartCounter(items_arr.length) // update the cart-items counter with the length of the array.
-    this.props.toggleCartModal(); // toggle cartModal state in route.js to display a cartSlide component.
-
-    this.setState({
-      openCartModal: true
-    })
-  }
 
   render() {
     const { itemData, recommendations } = this.getItemData(this.props.match.params);
     const { name, imageUrl, price, size, color } = itemData;
+    const { toggleCartHidden, addItem, addItemSize, itemSize } = this.props;
 
     const sizeList = size.map(size => (
-      <li key={size} className={`${this.state.sizeSelect === size ? "selected" : ""}`} onClick={() => { this.setState({ sizeSelect: size }) }}>{size}</li>
+      <li key={size} className={`${this.state.itemSize === size ? "selected" : ""}`} onClick={() => { this.setState({ itemSize: size }) }}>{size}</li>
     ));
 
-    const btn = (this.state.sizeSelect !== 0 ?
-      <p className='button selected' style={{ cursor: 'pointer' }} onClick={() => this.addItemToCart(itemData)}>ADD TO CART</p>
+    const btn = (this.state.itemSize ?
+      <p className='button selected' style={{ cursor: 'pointer' }} onClick={() => {
+        addItem(itemData, this.state.itemSize)
+        toggleCartHidden()
+      }} >ADD TO CART</p>
       :
       <p className='button'>SELECT A SIZE</p>);
 
@@ -174,7 +140,7 @@ class ItemPage extends React.Component {
               {
                 recommendations.map(item => {
                   return (
-                    <div className='item-card' key={item.id} onClick={() => { this.props.history.push(`/collections/${this.props.match.params.gender}/${this.props.match.params.category}/${item.id}`) }}>
+                    <div className='item-card' key={item.id} onClick={() => { this.props.history.push(`/shop/${this.props.match.params.gender}/${this.props.match.params.category}/${item.id}`) }}>
                       <img src={item.imageUrl} alt='' />
                       <div className='card-content'>
                         <h2>{item.name}</h2>
@@ -194,4 +160,13 @@ class ItemPage extends React.Component {
 
 };
 
-export default ItemPage;
+
+const mapDispatchToProps = dispatch => ({
+  addItem: (item, size) => dispatch(addItem(item, size)),
+  toggleCartHidden: () => dispatch(toggleCartHidden()),
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(ItemPage);

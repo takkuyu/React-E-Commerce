@@ -3,7 +3,9 @@ import { Container } from 'reactstrap';
 import { collectionRouter, sum, imageLink } from '../../collection-router';
 import SearchFilter from '../../components/collections/search-filter.component';
 import queryString from 'query-string';
-
+// import { createStructuredSelector } from 'reselect';
+import { connect } from 'react-redux';
+import { selectCollection } from '../../redux/shop/shop.selectors'
 
 class CollectionPage extends React.Component {
 
@@ -23,19 +25,20 @@ class CollectionPage extends React.Component {
       sum: 0,
       imageLink: ''
     }
-    // console.log(this.props.match)
-    // this.updateCollection = this.updateCollection.bind(this);
+    console.log('child constructor')
   }
 
   componentDidMount() {
     // console.log(this.props.location.search)
+    console.log('child didMount')
+
     this.setState({
       sum: sum,
       imageLink: imageLink
     })
   }
 
-  displaysearchFilter(type) {
+  displaySearchFilter(type) {
     if (this.state.searchFilter !== type && this.state.isModalOpen) {
       this.setState({
         searchFilter: type
@@ -99,6 +102,10 @@ class CollectionPage extends React.Component {
   }
 
   render() {
+    const { collection } = this.props;
+    const { title, items } = collection;
+    console.log(items)
+
     const genderText = (this.props.match.params.gender === 'mens' ? "Men's" : "Women's")
     const categoryText = this.getCategoryTitle(this.props.match.params.category);
     const categorySummary = "The world's most comfortable shoes for life’s everyday adventures.";
@@ -124,19 +131,19 @@ class CollectionPage extends React.Component {
                 this.state.price.pmin !== undefined && this.state.price.pmax !== undefined ?
                   <li onClick={() => { this.clearFilter('price') }} >${this.state.price.pmin} - ${this.state.price.pmax}<i className="fas fa-times"></i></li>
                   :
-                  <li onClick={() => { this.displaysearchFilter('price') }} >Price<i className="fas fa-angle-down"></i></li>
+                  <li onClick={() => { this.displaySearchFilter('price') }} >Price<i className="fas fa-angle-down"></i></li>
               }
               {
                 this.state.color !== undefined ?
                   <li onClick={() => { this.clearFilter('color') }} >{this.state.color}<i className="fas fa-times"></i></li>
                   :
-                  <li onClick={() => { this.displaysearchFilter('color') }} >Color<i className="fas fa-angle-down"></i></li>
+                  <li onClick={() => { this.displaySearchFilter('color') }} >Color<i className="fas fa-angle-down"></i></li>
               }
               {
                 this.state.size !== undefined ?
                   <li onClick={() => { this.clearFilter('size') }} >{this.state.size}<i className="fas fa-times"></i></li>
                   :
-                  <li onClick={() => { this.displaysearchFilter('size') }} >Size<i className="fas fa-angle-down"></i></li>
+                  <li onClick={() => { this.displaySearchFilter('size') }} >Size<i className="fas fa-angle-down"></i></li>
               }
             </ul>
           </Container>
@@ -156,4 +163,8 @@ class CollectionPage extends React.Component {
   }
 };
 
-export default CollectionPage;
+const mapStateToProps = (state, ownProps) => ({
+  collection: selectCollection(ownProps.match.params.category)(state) //@Q : why two params ?
+});
+
+export default connect(mapStateToProps)(CollectionPage);

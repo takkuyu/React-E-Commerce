@@ -1,0 +1,55 @@
+.items-card {
+    // height: 15em;
+    padding: 2em 0;
+    border-bottom: 1px solid rgb(211, 212, 213);
+    display: flex;
+    // justify-content: space-between;
+    width: 100%;
+    // align-items: center;
+    position: relative;
+
+    img {
+        height: 10em;
+        width: 10em;
+    }
+
+    i.fa-times {
+        position: absolute;
+        right: 0;
+        top: 1.25rem;
+        font-size: 1rem;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+
+    p.price {
+        position: absolute;
+        bottom: 1.25em;
+        right: 0;
+        margin-bottom: 0;
+        font-size: 1.5em;
+    }
+
+    .card-inner-left {
+        // width: 55%; 
+        text-align: left;
+        padding-left: 2em;
+
+        // height: 100%;
+        h2 {
+            font-size: 1.5em;
+            font-weight: 600;
+            margin-bottom: .3rem;
+        }
+
+        p {
+            font-size: 1.2em;
+            font-weight: 500;
+            margin-bottom: .3rem;
+        }
+    }
+
+}

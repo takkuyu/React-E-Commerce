@@ -1,4 +1,4 @@
-header {
+.header {
     position: fixed;
     top: 0;
     height: 5rem;
@@ -10,6 +10,7 @@ header {
     padding: 0 1rem;
     z-index: 999;
     box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 24px 0px;
+
     #bars {
         font-size: 1.5rem;
         width: 1.3rem;
@@ -23,9 +24,17 @@ header {
         }
     }
 
+    .desktop_menu {
+        display: none;
+
+        @include laptop {
+            display: block;
+        }
+    }
+
     .header-left {
         margin: 0;
-        display: none;
+        // display: none;
 
         li {
             float: left;
@@ -66,12 +75,16 @@ header {
         }
     }
 
+
     .header-right {
         margin: 0;
-        display: none;
+        display: flex;
+        align-items: center;
+        height: 100%;
         font-size: $font-size-med;
 
-        li {
+        p {
+            margin-bottom: 0;
 
             &:not(:last-child) {
                 margin-right: 2em;
@@ -88,11 +101,7 @@ header {
             }
         }
 
-        @include laptop {
-            display: flex;
-            align-items: center;
-            height: 100%;
-        }
+        // }
     }
 
 

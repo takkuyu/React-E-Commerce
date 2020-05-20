@@ -11,23 +11,21 @@ async function addItemsToCart(currentUserId, cartItems) {
   }
 }
 
-const StripeCheckoutButton = (props) => {
-  const price = props.price
+const StripeCheckoutButton = ({ price, cartItems, clearAllItemsFromCart, currentUser, history }) => {
   const priceForStripe = price * 100;
   const publishableKey = 'pk_test_zoMr2SQCFRB2uFBlrvMSJTlI00USf01kUF';
 
   const onToken = token => { // submit callback
-    if(props.currentUserId === ""){
-      props.updateCartCounter(0) // update cart counter
-      sessionStorage.clear() // refresh session storage 
-      alert("Payment Successful")
-      props.history.push('/');
+    if (currentUser) {
+      addItemsToCart(currentUser.id, cartItems)
+      clearAllItemsFromCart()
+      alert("Payment Successful!")
+      history.push('/account');
       return
     }
-    addItemsToCart(props.currentUserId, props.cartItems)
-    props.updateCartCounter(0) // update cart counter
-    sessionStorage.clear() // refresh session storage 
-    props.history.push('/account');
+
+    clearAllItemsFromCart()
+    history.push('/');
   };
 
   return (

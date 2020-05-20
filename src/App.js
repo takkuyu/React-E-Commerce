@@ -5,100 +5,69 @@ import ScrollToTop from './components/scrollToTop.component'
 import { auth, createUserProfileDocument, addCollectionAndDocuments } from './firebase/firebase.utils';
 import Header from './components/header/header.component';
 import Footer from './components/footer/footer.component';
+import { connect } from 'react-redux';
+import { setCurrentUser } from './redux/user/user.actions';
+import { selectCurrentUser } from './redux/user/user.selectors';
+import { createStructuredSelector } from 'reselect';
 
 class App extends React.Component {
-
-  constructor() {
-    super();
-    this.state = {
-      currentUser: {
-        id: '',
-        displayName: '',
-        email: '',
-        createdAt: 0,
-        purchasedItems: []
-      },
-      itemCounter: 0,
-      cartModal: false
-    }
+  state = {
+    isLoading: true
   }
 
   unsubscribeFromAuth = null;
 
   componentDidMount() {
-    // console.log('routes')
+    const { setCurrentUser } = this.props;
 
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {  // remain open until this component does unmount.
 
       if (userAuth) {// if user is signined already.
         const userRef = await createUserProfileDocument(userAuth);
-
         userRef.onSnapshot(snapShot => {
-          this.setState({
-            currentUser: {
-              id: snapShot.id,
-              ...snapShot.data() // snapShot.data() doesn't include user's id 
-            }
-          }, () => { console.log(this.state.currentUser) });
+          setCurrentUser({
+            id: snapShot.id, // snapShot.data() doesn't include user's id so declare it here
+            ...snapShot.data() // then takes everything else in the returned data
+          })
+          this.setState({ isLoading: false });
         });
         // addCollectionAndDocuments('collections', SHOP_DATA.map(({ title, items }) => ({ title, items })))
       }
       else {
-
-        const initialUserState = {
-          id: '',
-          displayName: '',
-          email: '',
-          createdAt: 0,
-          purchasedItems: []
-        }
-
-        this.setState({
-          currentUser: initialUserState
-        }, () => { console.log(this.state.currentUser) });
+        setCurrentUser(userAuth);
       }
     });
-
-    const itemCount = (JSON.parse(sessionStorage.getItem('cart')) !== null ? JSON.parse(sessionStorage.getItem('cart')).length : 0);
-    this.setState({ itemCounter: itemCount })
   }
 
   componentWillUnmount() {
     this.unsubscribeFromAuth(); // close the subscription when unmount.
   }
 
-  updateCartCounter(len) {
-    this.setState({
-      itemCounter: len
-    })
-  }
-
-  toggleCartModal() {
-    this.setState({
-      cartModal: !this.state.cartModal
-    })
-  }
-
   render() {
-    console.log(this.props)
+    const isLoggedin = (this.props.currentUser ? true : false)
+
     return (
       <div className="App">
         <BrowserRouter>
           <ScrollToTop />
-          <Header
-            currentUser={this.state.currentUser}
-            itemCounter={this.state.itemCounter}
-            cartModal={this.state.cartModal}
-            toggleCartModal={this.toggleCartModal}
-            updateCartCounter={this.updateCartCounter}
-          />
-          <Route component={Routes} />
+          <Header isLoggedin={isLoggedin} />
+          <Route render={props => <Routes {...props} currentUser={this.props.currentUser} isLoading={this.state.isLoading} />} />
           <Footer />
-
         </BrowserRouter>
       </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser
+});
+
+const mapDispatchToProps = dispatch => ({
+  setCurrentUser: user => dispatch(setCurrentUser(user)),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);

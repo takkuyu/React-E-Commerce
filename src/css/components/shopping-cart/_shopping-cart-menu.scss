@@ -1,4 +1,4 @@
-.cartslide-container {
+.shopping_cart_menu {
     position: fixed;
     left: 0;
     right: 0;
@@ -24,7 +24,7 @@
         }
     }
 
-    .cartslide-content {
+    .shopping_cart_menu-main {
         padding: 3em 0;
         height: 100%;
         width: 100%;
@@ -44,7 +44,7 @@
             right: -45em;
         }
 
-        .content-top {
+        .shopping_cart_menu-top {
             position: relative;
             border-bottom: 8px solid rgb(245, 245, 245);
             margin: 0 3em;
@@ -81,7 +81,7 @@
             }
         }
 
-        .empty-wrapper {
+        .shopping_cart_menu-empty {
             padding: 2.5rem;
 
             h2 {
@@ -112,7 +112,7 @@
             }
         }
 
-        .items-wrapper {
+        .shopping_cart_menu-bottom {
             height: 100%;
 
             .items-content {
@@ -120,65 +120,9 @@
                 overflow: scroll;
                 padding: 0 3em;
                 // margin-bottom: 10em;
-
-                .items-card {
-                    // height: 15em;
-                    padding: 2em 0;
-                    border-bottom: 1px solid rgb(211, 212, 213);
-                    display: flex;
-                    // justify-content: space-between;
-                    width: 100%;
-                    // align-items: center;
-                    position: relative;
-
-                    img {
-                        height: 10em;
-                        width: 10em;
-                    }
-
-                    i.fa-times {
-                        position: absolute;
-                        right: 0;
-                        top: 1.25rem;
-                        font-size: 1rem;
-
-                        &:hover {
-                            cursor: pointer;
-                        }
-                    }
-
-
-                    p.price {
-                        position: absolute;
-                        bottom: 1.25em;
-                        right: 0;
-                        margin-bottom: 0;
-                        font-size: 1.5em;
-                    }
-
-                    .card-inner-left {
-                        // width: 55%; 
-                        text-align: left;
-                        padding-left: 2em;
-
-                        // height: 100%;
-                        h2 {
-                            font-size: 1.5em;
-                            font-weight: 600;
-                            margin-bottom: .3rem;
-                        }
-
-                        p {
-                            font-size: 1.2em;
-                            font-weight: 500;
-                            margin-bottom: .3rem;
-                        }
-                    }
-
-                }
             }
 
-            .items-content-bottom {
+            .summary {
                 padding: 5em 3em;
                 text-align: left;
                 height: 50%;
@@ -194,10 +138,11 @@
                         display: inline-block;
                         font-weight: 400;
                     }
+                }
 
-                    &.button {
-                        margin-top: 3rem;
-                    }
+                .button {
+                    display: block;
+                    margin-top: 3rem;
                 }
             }
         }

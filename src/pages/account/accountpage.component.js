@@ -2,13 +2,10 @@ import React from 'react';
 import { Container, Table } from 'reactstrap';
 import { auth } from '../../firebase/firebase.utils';
 
-const AccountPage = (props) => {
-    // if (props.currentUser.id === '') return <Redirect to='/account/login' />;
-
-    const { displayName, email, createdAt, purchasedItems } = props.currentUser;
+const AccountPage = ({currentUser, history}) => {
+    const { displayName, email, createdAt, purchasedItems } = currentUser;
     const unix_timestamp = createdAt.seconds;
     const date = String(new Date(unix_timestamp * 1000)).slice(0, 16);
-    console.log(props.currentUser)
 
     return (
         <div className='account-container' style={{ marginTop: '5rem' }}>
@@ -16,7 +13,7 @@ const AccountPage = (props) => {
                 <h2>YOUR ACCOUNT</h2>
                 <p className='button' onClick={() => {
                     auth.signOut();
-                    props.history.push('/');
+                    history.push('/');
                 }}>LOGOUT</p>
                 <div className='main-wrapper'>
                     <div className='user-content'>

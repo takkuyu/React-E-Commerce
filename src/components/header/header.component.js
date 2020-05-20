@@ -1,135 +1,120 @@
 import React from 'react';
+import { withRouter, Link } from 'react-router-dom'
 import HeaderDropDownMenu from './header-dropdown.component';
-import { withRouter } from 'react-router-dom'
 import logo from '../../img/takaya-logo.png';
-import { Link } from 'react-router-dom';
-import ShoppingCartSlider from './header-shoppingcart-slider.component';
+import ShoppingCartMenu from '../shopping-cart/shoppingcart-menu.component';
+import ShoppingCartIcon from '../shopping-cart/shoppingcart-icon.component';
+
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { createStructuredSelector } from 'reselect';
+import { toggleCartHidden } from '../../redux/cart/cart.actions';
+import { selectCartHidden, selectCartItemsCount } from '../../redux/cart/cart.selectors';
+
 
 class Header extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      modal: false,
-      gender: '',
-      slideModal: false
+      isDropDownMenuOpen: false,
+      isExtraMenuOpen: false,
+      gender: ''
     }
-    this.displayModal = this.displayModal.bind(this); // @Note: needed for setState
-    this.hideModal = this.hideModal.bind(this); // @Note: needed for setState
-    this.handleSlideList = this.handleSlideList.bind(this); // @Note: needed for setState
-    // console.log(this.props.currentUser)
-    // console.log(this.props)
+    this.toggleExtraMenu = this.toggleExtraMenu.bind(this); // @Note: needed for setState
+    this.openDropDownMenu = this.openDropDownMenu.bind(this); // @Note: needed for setState
+    this.closeDropDownMenu = this.closeDropDownMenu.bind(this); // @Note: needed for setState
   }
 
 
-  displayModal(gender) {
-
-    if (this.state.gender !== gender && this.state.modal) {
-      this.setState({
-        modal: true,
-        gender: gender
-      })
-      return
+  openDropDownMenu(gender) {
+    if (this.state.isDropDownMenuOpen) {
+      if (this.state.gender === gender) {
+        this.closeDropDownMenu()
+        return
+      } else {
+        this.setState({
+          isDropDownMenuOpen: true,
+          gender: gender
+        })
+        return
+      }
     }
-
-    if (this.state.gender === gender && this.state.modal) {
-      this.hideModal()
-      return
-    }
-
     this.setState({
-      modal: !this.state.modal,
+      isDropDownMenuOpen: !this.state.isDropDownMenuOpen,
       gender: gender
     })
   }
 
-  hideModal() {
+
+  closeDropDownMenu() {
     this.setState({
-      modal: false,
+      isDropDownMenuOpen: false,
+      isExtraMenuOpen: false,
       gender: '',
-      slideModal: false
     })
   }
 
-  handleSlideList(gender){
+  toggleExtraMenu(gender) {
     this.setState({
-      slideModal: !this.state.slideModal,
+      isExtraMenuOpen: !this.state.isExtraMenuOpen,
       gender: gender
     })
   }
 
   render() {
-    const modal = (
-      this.state.modal ?
-        <HeaderDropDownMenu
-          hideModal={this.hideModal}
-          handleSlideList={this.handleSlideList}
-          gender={this.state.gender}
-          slideModal={this.state.slideModal}
-        />
-        :
-        '')
 
-    const modal_icon = (this.state.modal ?
-      <i id='bars' className="fas fa-times" onClick={() => { this.setState({ modal: !this.state.modal }) }} ></i>
-      :
-      <i id='bars' className="fas fa-bars" onClick={() => { this.setState({ modal: !this.state.modal }) }}></i>)
+    const { toggleCartHidden, hidden, itemsCount, isLoggedin } = this.props;
 
-
-    const cartSlide = (this.props.cartModal ?
-      <ShoppingCartSlider
-        toggleCartModal={this.props.toggleCartModal}
-        itemCounter={this.props.itemCounter}
-        updateCartCounter={this.props.updateCartCounter}
+    const dropDowmMenu = (this.state.isDropDownMenuOpen ?
+      <HeaderDropDownMenu
+        closeDropDownMenu={this.closeDropDownMenu}
+        toggleExtraMenu={this.toggleExtraMenu}
+        gender={this.state.gender}
+        isExtraMenuOpen={this.state.isExtraMenuOpen}
       /> : '');
 
-    // const shoppingCart = (this.props.location.pathname !== '/checkout' ? :'')
+    const shoppingCartMenu = (hidden ? '' : <ShoppingCartMenu toggleCartHidden={toggleCartHidden} itemsCount={itemsCount} />);
 
     return (
-      <header className="landing-header">
-        {modal_icon}
-        <ul className='header-left'>
-          <li className={`${this.state.gender === 'Men' ? "is-active" : "inactive"}`} onClick={() => { this.displayModal('Men') }}>MEN</li>
-          <li className={`${this.state.gender === 'Women' ? "is-active" : "inactive"}`} onClick={() => { this.displayModal('Women') }}>WOMEN</li>
-        </ul>
-        <div className='header-logo'>
-
-          <Link to='/' onClick={this.hideModal}><img src={logo} alt='logo' /></Link>
-        </div>
-        <ul className='header-right'>
-          {this.props.currentUser.id !== '' ?
-            <li><Link to='/account'>ACCOUNT</Link></li>
-            :
-            <li><Link to='/account/login'>LOGIN</Link></li>
-          }
-          <li><i className="far fa-question-circle"></i></li>
-          {
-            this.props.location.pathname !== '/checkout' ?
-              <div id="shopping-cart" onClick={this.props.toggleCartModal}>
-                <span className="fa-stack has-badge" data-count={this.props.itemCounter}>
-                  <i className="fa fa-circle fa-stack-2x"></i>
-                  <i className="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
-                </span>
-              </div>
-              :
-              ''
-          }
-        </ul>
-        {
-          this.props.location.pathname !== '/checkout' ?
-            <div className='shopping-cart-mobile' id="shopping-cart" onClick={this.props.toggleCartModal}>
-              <span className="fa-stack has-badge" data-count={this.props.itemCounter}>
-                <i className="fa fa-circle fa-stack-2x"></i>
-                <i className="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
-              </span>
+      <div className='header_container'>
+        <header className="header">
+          <ul className='header-left'>
+            <li>
+              <i id='bars' className={`${this.state.isDropDownMenuOpen ? "fas fa-times" : "fas fa-bars"}`} onClick={() => { this.setState({ isDropDownMenuOpen: !this.state.isDropDownMenuOpen }) }} ></i>
+            </li>
+            <li className={`desktop_menu ${this.state.gender === 'Men' ? "is-active" : "inactive"}`} onClick={() => { this.openDropDownMenu('Men') }}>MEN</li>
+            <li className={`desktop_menu ${this.state.gender === 'Women' ? "is-active" : "inactive"}`} onClick={() => { this.openDropDownMenu('Women') }}>WOMEN</li>
+          </ul>
+          <div className='header-logo'>
+            <Link to='/' onClick={this.closeDropDownMenu}><img src={logo} alt='logo' /></Link>
+          </div>
+          <div className='header-right'>
+            <p className="desktop_menu">
+              {isLoggedin ? <Link to='/account'>ACCOUNT</Link> : <Link to='/account/login'>LOGIN</Link>}
+            </p>
+            <p className="desktop_menu">CONTACT</p>
+            <div onClick={toggleCartHidden}>
+              <ShoppingCartIcon itemsCount={itemsCount} />
             </div>
-            :
-            ''
-        }
-        {modal}
-        {cartSlide}
-      </header>
+          </div>
+        </header>
+        {dropDowmMenu}
+        {shoppingCartMenu}
+      </div>
     );
   }
 }
 
-export default withRouter(Header);
+const mapDispatchToProps = dispatch => ({
+  toggleCartHidden: () => dispatch(toggleCartHidden()),
+});
+
+const mapStateToProps = createStructuredSelector({
+  hidden: selectCartHidden,
+  itemsCount: selectCartItemsCount,
+});
+
+export default compose(
+  withRouter,
+  connect(mapStateToProps, mapDispatchToProps)
+)(Header);

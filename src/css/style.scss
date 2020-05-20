@@ -5,7 +5,7 @@ $GLOBAL ELEMENTS
 @import "generic/mixins";
 @import "base/body";
 @import "base/buttons";
-@import "base/shopping-cart";
+// @import "base/shopping-cart";
 
 
 /*------------------------------------*\
@@ -23,8 +23,10 @@ $GLOBAL ELEMENTS
 $COMPONENTS
 \*------------------------------------*/
 @import "components/header/header";
-@import "components/header/header-shoppingcart-slider";
 @import "components/header/header-dropdown-menu";
+@import "components/shopping-cart/shopping-cart-menu";
+@import "components/shopping-cart/shopping-cart-item";
+@import "components/shopping-cart/shopping-cart-icon";
 @import "components/collection/collection-search-filter";
 @import "components/collection/collection-category";
 @import "components/collection/collection-card";
