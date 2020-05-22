@@ -5,11 +5,11 @@ import SearchFilter from '../../components/collections/search-filter.component';
 import Category from '../../components/collections/collection-category';
 
 import queryString from 'query-string';
-// import { createStructuredSelector } from 'reselect';
+import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
-import { selectCollection } from '../../redux/shop/shop.selectors'
-import { setCreatedFor } from '../../redux/filter/filter.actions'
-import { selectFilteredCollection } from '../../redux/filter/filter.selectors'
+import { selectFilteredCollection } from '../../redux/shop/shop.selectors'
+import { setCollectionFilter, setColorFilter } from '../../redux/shop/shop.actions'
+
 
 class CollectionPage extends React.Component {
 
@@ -29,14 +29,10 @@ class CollectionPage extends React.Component {
       sum: 0,
       imageLink: ''
     }
-    console.log('child constructor')
   }
 
   componentDidMount() {
     // console.log(this.props.location.search)
-    console.log('child didMount')
-    this.props.setCreatedFor(this.props.match.params.gender)
-
     this.setState({
       sum: sum,
       imageLink: imageLink
@@ -109,7 +105,7 @@ class CollectionPage extends React.Component {
   render() {
     const { collection } = this.props;
     const { title, items, routeName } = collection;
-    console.log(collection)
+    // console.log(collection)
 
     const genderText = (this.props.match.params.gender === 'mens' ? "Men's" : "Women's")
     const categoryText = this.getCategoryTitle(this.props.match.params.category);
@@ -136,13 +132,19 @@ class CollectionPage extends React.Component {
                 this.state.price.pmin !== undefined && this.state.price.pmax !== undefined ?
                   <li onClick={() => { this.clearFilter('price') }} >${this.state.price.pmin} - ${this.state.price.pmax}<i className="fas fa-times"></i></li>
                   :
-                  <li onClick={() => { this.displaySearchFilter('price') }} >Price<i className="fas fa-angle-down"></i></li>
+                  <li onClick={() => {
+                    this.displaySearchFilter('price')
+                    // this.props.setCollectionFilter('price')
+                  }} >Price<i className="fas fa-angle-down"></i></li>
               }
               {
                 this.state.color !== undefined ?
                   <li onClick={() => { this.clearFilter('color') }} >{this.state.color}<i className="fas fa-times"></i></li>
                   :
-                  <li onClick={() => { this.displaySearchFilter('color') }} >Color<i className="fas fa-angle-down"></i></li>
+                  <li onClick={() => {
+                    this.displaySearchFilter('color')
+
+                  }} >Color<i className="fas fa-angle-down"></i></li>
               }
               {
                 this.state.size !== undefined ?
@@ -154,7 +156,7 @@ class CollectionPage extends React.Component {
           </Container>
         </div>
 
-        <SearchFilter type={this.state.searchFilter} updateCollection={this.updateCollection} />
+        <SearchFilter type={this.state.searchFilter} updateCollection={this.updateCollection} setCollectionFilter={this.props.setCollectionFilter} />
 
         <div className='collections-items-container'>
           <Container>
@@ -170,14 +172,14 @@ class CollectionPage extends React.Component {
   }
 };
 
-const mapDispatchToProps = dispatch => ({
-  setCreatedFor: (gender) => dispatch(setCreatedFor(gender)),
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  setCollectionFilter: (filter) => dispatch(setCollectionFilter(filter)),
+  // setColorFilter: (color) => dispatch(setColorFilter(color)),
 });
 
-const mapStateToProps = (state, ownProps) => ({
-  collection: selectCollection(ownProps.match.params.category)(state), //@Q : why two params ?,
-  filteredCollection: selectFilteredCollection(state.collection)(state) 
-  // filteredCollection: selectFilteredCollection(ownProps.match.params.category)(state) 
+const mapStateToProps = (state, ownProps) => createStructuredSelector({
+  collection: selectFilteredCollection(ownProps.match.params.category, ownProps.match.params.gender), //@Q : why two params ?,
+
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CollectionPage);

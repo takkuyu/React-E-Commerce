@@ -33,3 +33,13 @@ export const fetchCollectionsStartAsync = () => {
       .catch(error => dispatch(fetchCollectionsFailure(error.message)));
   };
 };
+
+export const setCollectionFilter = filter => ({
+  type: ShopActionTypes.SET_COLLECTION_FILTER,
+  payload: filter
+});
+
+export const setColorFilter = color => ({
+  type: ShopActionTypes.SET_COLOR_FILTER,
+  payload: color
+});

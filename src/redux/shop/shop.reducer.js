@@ -3,7 +3,11 @@ import ShopActionTypes from './shop.types';
 const INITIAL_STATE = {
   collections: null,
   isFetching: false,
-  errorMessage: undefined
+  errorMessage: undefined,
+  filter: {
+    type: '',
+    data: 0,
+  },
 };
 
 const shopReducer = (state = INITIAL_STATE, action) => {
@@ -24,6 +28,16 @@ const shopReducer = (state = INITIAL_STATE, action) => {
         ...state,
         isFetching: false,
         errorMessage: action.payload
+      };
+    case ShopActionTypes.SET_COLLECTION_FILTER:
+      return {
+        ...state,
+        filter: action.payload
+      };
+    case ShopActionTypes.SET_COLOR_FILTER:
+      return {
+        ...state,
+        color: action.payload
       };
     default:
       return state;

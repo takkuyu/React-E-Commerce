@@ -4,6 +4,7 @@ import {
 } from 'reactstrap';
 // import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
+import FilerTypes from '../../redux/shop/filter.types';
 
 const SearchFilter = (props) => {
 
@@ -18,7 +19,7 @@ const SearchFilter = (props) => {
       <Container>
         <div className={`search-filter-size-wrapper ${props.type === 'price' ? "open" : ""}`}>
           <ul className={`search-filter-price`} >
-            <li onClick={() => props.history.push({ pathname: props.location.pathname, search: `?${param}pmin=50&pmax=100`, })} >$50 - $100</li>
+            <li onClick={() => props.setCollectionFilter({ type: FilerTypes.FILTER_PRICE, data: {pmin: 50, pmax: 100} })} >$50 - $100</li>
             <li onClick={() => props.history.push({ pathname: props.location.pathname, search: `?${param}pmin=100&pmax=150`, })}>$100 - $150</li>
             <li onClick={() => props.history.push({ pathname: props.location.pathname, search: `?${param}pmin=150&pmax=200`, })}>$150 - $200</li>
             <li onClick={() => props.history.push({ pathname: props.location.pathname, search: `?${param}pmin=200&pmax=300`, })}>$200 - $300</li>
@@ -27,7 +28,7 @@ const SearchFilter = (props) => {
 
         <div className={`search-filter-color-wrapper ${props.type === 'color' ? "open" : ""}`}>
           <ul className={`search-filter-color`} >
-            <li onClick={() => props.history.push({ pathname: props.location.pathname, search: `?${param}color=black`, })} style={{ backgroundColor: 'rgba(0,0,0,.8)' }}></li>
+            <li onClick={() => props.setCollectionFilter({ type: FilerTypes.FILTER_COLOR, data: 'black' })} style={{ backgroundColor: 'rgba(0,0,0,.8)' }}></li>
             <li onClick={() => props.history.push({ pathname: props.location.pathname, search: `?${param}color=white`, })} style={{ backgroundColor: 'white', border: '1px solid rgb(211, 212, 213)' }}></li>
             <li onClick={() => props.history.push({ pathname: props.location.pathname, search: `?${param}color=brown`, })} style={{ backgroundColor: '#802b00' }}></li>
             <li onClick={() => props.history.push({ pathname: props.location.pathname, search: `?${param}color=blue`, })} style={{ backgroundColor: '#4d79ff' }}></li>
@@ -41,7 +42,7 @@ const SearchFilter = (props) => {
         <div className={`search-filter-size-wrapper ${props.type === 'size' ? "open" : ""}`}>
           <ul className={`search-filter-size`} >
 
-            <li onClick={() => props.history.push({ pathname: props.location.pathname, search: `?${param}size=8` })} >8</li>
+            <li onClick={() => props.setCollectionFilter({ type: FilerTypes.FILTER_SIZE, data: 8 })} >8</li>
             <li onClick={() => props.history.push({ pathname: props.location.pathname, search: `?${param}size=9` })} >9</li>
             <li onClick={() => props.history.push({ pathname: props.location.pathname, search: `?${param}size=10` })} >10</li>
             <li onClick={() => props.history.push({ pathname: props.location.pathname, search: `?${param}size=11` })} >11</li>
