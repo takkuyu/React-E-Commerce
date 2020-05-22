@@ -2,10 +2,14 @@ import React from 'react';
 import { Container } from 'reactstrap';
 import { collectionRouter, sum, imageLink } from '../../collection-router';
 import SearchFilter from '../../components/collections/search-filter.component';
+import Category from '../../components/collections/collection-category';
+
 import queryString from 'query-string';
 // import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { selectCollection } from '../../redux/shop/shop.selectors'
+import { setCreatedFor } from '../../redux/filter/filter.actions'
+import { selectFilteredCollection } from '../../redux/filter/filter.selectors'
 
 class CollectionPage extends React.Component {
 
@@ -31,6 +35,7 @@ class CollectionPage extends React.Component {
   componentDidMount() {
     // console.log(this.props.location.search)
     console.log('child didMount')
+    this.props.setCreatedFor(this.props.match.params.gender)
 
     this.setState({
       sum: sum,
@@ -103,8 +108,8 @@ class CollectionPage extends React.Component {
 
   render() {
     const { collection } = this.props;
-    const { title, items } = collection;
-    console.log(items)
+    const { title, items, routeName } = collection;
+    console.log(collection)
 
     const genderText = (this.props.match.params.gender === 'mens' ? "Men's" : "Women's")
     const categoryText = this.getCategoryTitle(this.props.match.params.category);
@@ -154,7 +159,9 @@ class CollectionPage extends React.Component {
         <div className='collections-items-container'>
           <Container>
             <p className='search-result'>All - {this.state.sum} results</p>
-            {collectionRouter(this.state.gender, this.state.category, this.state.price, this.state.size, this.state.color)}
+            <Category gender={this.props.match.params.gender} routeName={routeName} categoryTitle={title} categoryItems={items} />
+
+            {/* {collectionRouter(this.state.gender, this.state.category, this.state.price, this.state.size, this.state.color)} */}
           </Container>
         </div>
       </div>
@@ -163,8 +170,14 @@ class CollectionPage extends React.Component {
   }
 };
 
-const mapStateToProps = (state, ownProps) => ({
-  collection: selectCollection(ownProps.match.params.category)(state) //@Q : why two params ?
+const mapDispatchToProps = dispatch => ({
+  setCreatedFor: (gender) => dispatch(setCreatedFor(gender)),
 });
 
-export default connect(mapStateToProps)(CollectionPage);
+const mapStateToProps = (state, ownProps) => ({
+  collection: selectCollection(ownProps.match.params.category)(state), //@Q : why two params ?,
+  filteredCollection: selectFilteredCollection(state.collection)(state) 
+  // filteredCollection: selectFilteredCollection(ownProps.match.params.category)(state) 
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CollectionPage);

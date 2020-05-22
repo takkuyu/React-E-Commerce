@@ -23,6 +23,24 @@ const headerReducer = (state = INITIAL_STATE, action) => {
         ...state,
         gender: action.payload
       };
+    case HeaderActionTypes.OPEN_DROP_DOWN_MENU:
+      return {
+        ...state,
+        gender: action.payload,
+        isDropDownMenuOpen: (state.gender !== action.payload ? true : !state.isDropDownMenuOpen)
+      }
+    case HeaderActionTypes.TOGGLE_EXTRA_DROP_DOWN_MENU:
+      return {
+        ...state,
+        gender: action.payload,
+        isExtraMenuOpen: !state.isExtraMenuOpen
+      }
+    case HeaderActionTypes.CLOSE_ALL_DROP_DOWN_MENU:
+      return {
+        ...state,
+        isExtraMenuOpen: false,
+        isDropDownMenuOpen: false
+      }
     default:
       return state;
   }

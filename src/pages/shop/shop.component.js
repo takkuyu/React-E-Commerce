@@ -30,7 +30,7 @@ class ShopPage extends React.Component {
                     path={`${match.url}/:gender(${genderOptions})/:category(${categoryOptions})/:id(\\d+)`}
                     exact
                     render={props => (
-                        <ItemPageContainer {...props}  /> //@Note: props have to be passed on the component to use params.
+                        <ItemPageContainer {...props} /> //@Note: props have to be passed on the component to use params.
                     )} />
             </div>
         );

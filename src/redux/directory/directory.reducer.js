@@ -1,13 +1,13 @@
 const INITIAL_STATE = {
   sections: [
     {
-      title: 'hats',
+      title: 'Sneakers',
       imageUrl: 'https://i.ibb.co/cvpntL1/hats.png',
       id: 1,
       linkUrl: 'shop/hats'
     },
     {
-      title: 'jackets',
+      title: 'Running Shoes',
       imageUrl: 'https://i.ibb.co/px2tCc3/jackets.png',
       id: 2,
       linkUrl: 'shop/jackets'
