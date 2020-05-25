@@ -13,12 +13,14 @@ const AccountPageWithSpinner = WithSpinner(AccountPage);
 const Routes = (props) => {
 
   const { currentUser, isLoading } = props;
-
+  const categoryOptions = "sneakers|running|boots|topsellers|new|all";
+  const genderOptions = "mens|women";
+  console.log('routes')
   return (
     <section>
       <Switch key={props.location.key}>
         <Route path='/' exact component={HomePage} />
-        <Route path="/shop" component={ShopPage} />
+        <Route path={`/shop/:gender(${genderOptions})/:category(${categoryOptions})`} exact component={ShopPage} />
         <Route path="/account/login" exact render={(props) => currentUser ? <AccountPage {...props} currentUser={currentUser} /> : <LoginPage />} />
         <Route path="/account" exact render={props => currentUser ? <AccountPageWithSpinner {...props} isLoading={isLoading} currentUser={currentUser} /> : <LoginPage />} />
         <Route path="/checkout" exact render={props => <CheckoutPage {...props} />} />

@@ -39,9 +39,20 @@ const shopReducer = (state = INITIAL_STATE, action) => {
         ...state,
         color: action.payload
       };
+    case ShopActionTypes.SET_COLLECTION:
+      return {
+        ...state,
+        collections: setCollection(state.collections, action.payload),
+        // errorMessage: 'hello'
+      };
     default:
       return state;
   }
 };
+
+function setCollection(collections, payload){
+  // console.log(payload)
+  return collections[payload.category]
+}
 
 export default shopReducer;

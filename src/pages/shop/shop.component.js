@@ -7,39 +7,40 @@ import ItemPageContainer from '../itempage/itempage.container';
 
 class ShopPage extends React.Component {
     componentDidMount() {
-        const { fetchCollectionsStartAsync } = this.props;
+        const { fetchCollectionsStartAsync, match } = this.props;
 
-        fetchCollectionsStartAsync();
+        fetchCollectionsStartAsync(match.params.category, match.params.gender);
     }
 
     render() {
         const { match } = this.props;
-        const categoryOptions = "sneakers|running|boots|topsellers|new";
-        const genderOptions = "mens|women";
+        // const categoryOptions = "sneakers|running|boots|topsellers|new";
+        // const genderOptions = "mens|women";
 
         return (
-            <div className='shop-page'>
+            <>
                 <Route
-                    path={`${match.url}/:gender(${genderOptions})/:category(${categoryOptions})?`}
+                    path={`${match.url}`}
                     exact
+                    // key={this.props.location.key}
                     render={props => (
                         <CollectionPageContainer  {...props} />
                     )}
                 />
                 <Route
-                    path={`${match.url}/:gender(${genderOptions})/:category(${categoryOptions})/:id(\\d+)`}
+                    path={`${match.url}/:id(\\d+)`}
                     exact
                     render={props => (
-                        <ItemPageContainer {...props} /> //@Note: props have to be passed on the component to use params.
+                        <ItemPageContainer {...props} /> // props have to be passed on the component to use match.params.
                     )} />
-            </div>
+            </>
         );
     }
 }
 
 
 const mapDispatchToProps = dispatch => ({
-    fetchCollectionsStartAsync: () => dispatch(fetchCollectionsStartAsync())
+    fetchCollectionsStartAsync: (category, gender) => dispatch(fetchCollectionsStartAsync(category, gender))
 });
 
 export default connect(

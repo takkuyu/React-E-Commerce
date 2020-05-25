@@ -4,9 +4,10 @@ import {
 } from 'reactstrap';
 import Card from './card.component';
 
-const Category = ({gender, routeName, categoryTitle,  categoryItems }) => {
+const Category = ({ gender, routeName, categoryTitle, categoryItems }) => {
 
   const genderTitle = (gender === 'mens' ? "Men's" : "Women's")
+
   return (
     <div className='collections-items-wrapper'>
       {

@@ -7,8 +7,8 @@ import Category from '../../components/collections/collection-category';
 import queryString from 'query-string';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
-import { selectFilteredCollection } from '../../redux/shop/shop.selectors'
-import { setCollectionFilter, setColorFilter } from '../../redux/shop/shop.actions'
+import { selectFilteredCollection, selectCollections } from '../../redux/shop/shop.selectors'
+import { Redirect } from 'react-router-dom';
 
 
 class CollectionPage extends React.Component {
@@ -29,14 +29,8 @@ class CollectionPage extends React.Component {
       sum: 0,
       imageLink: ''
     }
-  }
+    console.log('const')
 
-  componentDidMount() {
-    // console.log(this.props.location.search)
-    this.setState({
-      sum: sum,
-      imageLink: imageLink
-    })
   }
 
   displaySearchFilter(type) {
@@ -104,8 +98,12 @@ class CollectionPage extends React.Component {
 
   render() {
     const { collection } = this.props;
+
+    // if(!this.props.collection) return <Redirect to='/' />
+
     const { title, items, routeName } = collection;
-    // console.log(collection)
+    console.log('render')
+    // console.log(this.props.collection)
 
     const genderText = (this.props.match.params.gender === 'mens' ? "Men's" : "Women's")
     const categoryText = this.getCategoryTitle(this.props.match.params.category);
@@ -134,7 +132,6 @@ class CollectionPage extends React.Component {
                   :
                   <li onClick={() => {
                     this.displaySearchFilter('price')
-                    // this.props.setCollectionFilter('price')
                   }} >Price<i className="fas fa-angle-down"></i></li>
               }
               {
@@ -161,9 +158,8 @@ class CollectionPage extends React.Component {
         <div className='collections-items-container'>
           <Container>
             <p className='search-result'>All - {this.state.sum} results</p>
-            <Category gender={this.props.match.params.gender} routeName={routeName} categoryTitle={title} categoryItems={items} />
+            <Category gender={this.props.match.params.gender} routeName={routeName} categoryTitle={title} categoryItems={items} search={this.props.location.search}/>
 
-            {/* {collectionRouter(this.state.gender, this.state.category, this.state.price, this.state.size, this.state.color)} */}
           </Container>
         </div>
       </div>
@@ -172,14 +168,9 @@ class CollectionPage extends React.Component {
   }
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  setCollectionFilter: (filter) => dispatch(setCollectionFilter(filter)),
-  // setColorFilter: (color) => dispatch(setColorFilter(color)),
-});
-
 const mapStateToProps = (state, ownProps) => createStructuredSelector({
-  collection: selectFilteredCollection(ownProps.match.params.category, ownProps.match.params.gender), //@Q : why two params ?,
-
+  collection: selectFilteredCollection(ownProps.location.search), //@Q : why two params ?,
+  collections: selectCollections
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(CollectionPage);
+export default connect(mapStateToProps)(CollectionPage);

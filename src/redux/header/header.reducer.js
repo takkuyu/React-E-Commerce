@@ -36,11 +36,7 @@ const headerReducer = (state = INITIAL_STATE, action) => {
         isExtraMenuOpen: !state.isExtraMenuOpen
       }
     case HeaderActionTypes.CLOSE_ALL_DROP_DOWN_MENU:
-      return {
-        ...state,
-        isExtraMenuOpen: false,
-        isDropDownMenuOpen: false
-      }
+      return INITIAL_STATE
     default:
       return state;
   }
