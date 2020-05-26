@@ -4,9 +4,7 @@ import {
 } from 'reactstrap';
 import Card from './card.component';
 
-const Category = ({ gender, routeName, categoryTitle, categoryItems }) => {
-
-  const genderTitle = (gender === 'mens' ? "Men's" : "Women's")
+const Category = ({ genderText, routeName, categoryTitle, categoryItems }) => {
 
   return (
     <div className='collections-items-wrapper'>
@@ -15,7 +13,7 @@ const Category = ({ gender, routeName, categoryTitle, categoryItems }) => {
           <div></div>
           :
           <div className='collections-title'>
-            <h1>{genderTitle} {categoryTitle}</h1>
+            <h1>{genderText} {categoryTitle}</h1>
             <p>Our original everyday sneaker made with cozy wool.</p>
           </div>
       }

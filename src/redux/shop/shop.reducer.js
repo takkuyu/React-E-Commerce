@@ -1,12 +1,15 @@
 import ShopActionTypes from './shop.types';
+import FilerTypes from './filter.types'
 
 const INITIAL_STATE = {
   collections: null,
   isFetching: false,
   errorMessage: undefined,
+  currentFilter: '',
   filter: {
-    type: '',
-    data: 0,
+    color: '',
+    price: 0,
+    size: 0
   },
 };
 
@@ -29,30 +32,38 @@ const shopReducer = (state = INITIAL_STATE, action) => {
         isFetching: false,
         errorMessage: action.payload
       };
-    case ShopActionTypes.SET_COLLECTION_FILTER:
-      return {
-        ...state,
-        filter: action.payload
-      };
     case ShopActionTypes.SET_COLOR_FILTER:
       return {
         ...state,
-        color: action.payload
+        currentFilter: action.payload ? '' : state.currentFilter,
+        filter: { ...state.filter, color: action.payload },
       };
-    case ShopActionTypes.SET_COLLECTION:
+    case ShopActionTypes.SET_PRICE_FILTER:
       return {
         ...state,
-        collections: setCollection(state.collections, action.payload),
-        // errorMessage: 'hello'
+        currentFilter: action.payload ? '' : state.currentFilter,
+        filter: { ...state.filter, price: action.payload },
+      };
+    case ShopActionTypes.SET_SIZE_FILTER:
+      return {
+        ...state,
+        currentFilter: action.payload ? '' : state.currentFilter,
+        filter: { ...state.filter, size: action.payload },
+      };
+    case ShopActionTypes.CLEAR_ALL_FILTERS:
+      return {
+        ...state,
+        currentFilter: '',
+        filter: INITIAL_STATE.filter,
+      };
+    case ShopActionTypes.TOGGLE_FILTER_MENU:
+      return {
+        ...state,
+        currentFilter: (action.payload === state.currentFilter ? '' : action.payload)
       };
     default:
       return state;
   }
 };
-
-function setCollection(collections, payload){
-  // console.log(payload)
-  return collections[payload.category]
-}
 
 export default shopReducer;

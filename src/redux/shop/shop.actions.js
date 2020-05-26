@@ -39,39 +39,24 @@ export const fetchCollectionsStartAsync = (category, gender) => {
   };
 };
 
-// export const fetchCollectionsStartAsync = () => {
-//   return dispatch => {
-//     const collectionRef = firestore.collection('collections');
-//     dispatch(fetchCollectionsStart());
-
-//     collectionRef
-//       .get()
-//       .then(snapshot => {
-//         const collectionsMap = convertCollectionsSnapshotToMap(snapshot);
-//         console.log(collectionsMap)
-//         dispatch(fetchCollectionsSuccess(collectionsMap));
-//       })
-//       .catch(error => dispatch(fetchCollectionsFailure(error.message)));
-//   };
-// };
-
-export const setCollectionFilter = filter => ({
-  type: ShopActionTypes.SET_COLLECTION_FILTER,
-  payload: filter
-});
-
 export const setColorFilter = color => ({
   type: ShopActionTypes.SET_COLOR_FILTER,
   payload: color
 });
 
-export const setCollection = (category, gender) => ({
-  type: ShopActionTypes.SET_COLLECTION,
-  payload: { category, gender }
+export const setPriceFilter = price => ({
+  type: ShopActionTypes.SET_PRICE_FILTER,
+  payload: price
 });
 
-function filterItemsByGender(collection, gender) {
-  const itemsFilteredByGender = collection.items.filter(item => item.item_gender === gender)
-
-  return { ...collection, items: itemsFilteredByGender }
-}
+export const setSizeFilter = size => ({
+  type: ShopActionTypes.SET_SIZE_FILTER,
+  payload: size
+});
+export const clearAllFilters = () => ({
+  type: ShopActionTypes.CLEAR_ALL_FILTERS,
+});
+export const toggleFilterMenu = (filter) => ({
+  type: ShopActionTypes.TOGGLE_FILTER_MENU,
+  payload: filter
+});

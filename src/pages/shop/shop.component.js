@@ -16,7 +16,7 @@ class ShopPage extends React.Component {
         const { match } = this.props;
         // const categoryOptions = "sneakers|running|boots|topsellers|new";
         // const genderOptions = "mens|women";
-
+        console.log('shop.js')
         return (
             <>
                 <Route
