@@ -4,39 +4,23 @@ import SearchFilter from '../../components/collections/search-filter.component';
 import Category from '../../components/collections/collection-category';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
-import { selectFilteredCollection, selectCollectionFilter, selectCollectionCount, selectCurrentFilter } from '../../redux/shop/shop.selectors'
+import { selectFilteredCollection, selectCollectionFilter, selectCollectionCount, selectCurrentFilter, selectGender } from '../../redux/shop/shop.selectors'
 import { setColorFilter, setPriceFilter, setSizeFilter, clearAllFilters, toggleFilterMenu } from '../../redux/shop/shop.actions'
 
 
-// function capitalizeFirstLetter(string) {
-//   return string.charAt(0).toUpperCase() + string.slice(1);
-// }
-
-// function getCategoryTitle(category) {
-//   switch (category) {
-//     case "topsellers":
-//       return "Top Sellers"
-//     case "new":
-//       return "New Arrivals"
-//     case undefined:
-//       return "Shoes"
-//     default:
-//       return this.capitalizeFirstLetter(category)
-//   }
-// }
-
 const CollectionPage = ({ filter, setSizeFilter, setColorFilter, setPriceFilter, clearAllFilters, results, toggleFilterMenu, currentFilter, gender, collection }) => {
 
-  const { title, routeName, items, summary, imageUrl } = collection;
-  const { price, color, size } = filter
-  const genderText = (gender === 'mens' ? "Men's" : "Women's")
-  const collectionImage = (gender === 'mens' ? imageUrl.men : imageUrl.women)
-  // const categoryText = this.getCategoryTitle(this.props.match.params.category);
+  const title = (collection.length > 1 ? "Shoes" : collection[0].title);
+  const summary = (collection.length > 1 ? "Get the latest assortment of shoes online today." : collection[0].summary);
+  const collectionImage = (collection.length > 1 ? "https://i.ibb.co/4tnd427/sneakers-02.jpg" : (gender === 'mens' ? collection[0].imageUrl.men : collection[0].imageUrl.women));
+  const genderText = (gender === 'mens' ? "Men's" : "Women's");
+  const { price, color, size } = filter;
+
   return (
     <div className='collections-container'>
 
       <div className='collections-top'>
-        <img src={collectionImage} alt='img' />
+        <img src={collectionImage} alt='collection image' />
         <div className='collections-top-content'>
           <h1>{genderText} {title}</h1>
           <p>{summary}</p>
@@ -76,20 +60,7 @@ const CollectionPage = ({ filter, setSizeFilter, setColorFilter, setPriceFilter,
         <Container>
           <p className='search-result'>All - {results} results</p>
           {
-            routeName === undefined ?
-              <>
-                <Category
-                  categoryTitle={"Sneakers"}
-                  categoryItems={items.sneakers} />
-                <Category
-                  categoryTitle={"Running Shoes"}
-                  categoryItems={items.runningshoes} />
-                <Category
-                  categoryTitle={"Boots"}
-                  categoryItems={items.boots} />
-              </>
-              :
-              <Category categoryItems={items} />
+            collection.map((collection, index) => <Category key={index} collection={collection}/>)
           }
         </Container>
       </div>
@@ -103,6 +74,7 @@ const mapStateToProps = createStructuredSelector({
   filter: selectCollectionFilter,
   results: selectCollectionCount,
   currentFilter: selectCurrentFilter,
+  gender: selectGender,
 });
 
 const mapDispatchToProps = dispatch => ({

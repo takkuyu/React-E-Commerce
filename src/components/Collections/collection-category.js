@@ -4,28 +4,26 @@ import {
 } from 'reactstrap';
 import Card from './card.component';
 
-function convertTitleToRoute(title) {
-  return title.replace(/\s+/g, "").toLowerCase();
-}
+const Category = ({ collection }) => {
+  const { title, items, routeName } = collection;
 
-const Category = ({ categoryTitle, categoryItems }) => {
   return (
     <div className='collections-items-wrapper'>
       {
-        categoryItems.length === 0 || !categoryTitle ?
+        items.length === 0 ?
           <></>
           :
           <div className='collections-title'>
-            <h1>{categoryTitle}</h1>
+            <h1>{title}</h1>
           </div>
       }
       <div className='collections-items-content'>
         <Row>
-          {categoryItems.map(({ id, ...otherSectionProps }) => (
+          {items.map(({ id, ...otherSectionProps }) => (
             <Card
               key={id}
               id={id}
-              routeName={categoryTitle ? convertTitleToRoute(categoryTitle) : undefined}
+              routeName={routeName}
               {...otherSectionProps}
             />
           )

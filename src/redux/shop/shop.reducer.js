@@ -1,5 +1,4 @@
 import ShopActionTypes from './shop.types';
-import FilerTypes from './filter.types'
 
 const INITIAL_STATE = {
   collections: null,
@@ -11,6 +10,8 @@ const INITIAL_STATE = {
     price: 0,
     size: 0
   },
+  gender: undefined,
+  category: undefined
 };
 
 const shopReducer = (state = INITIAL_STATE, action) => {
@@ -60,6 +61,16 @@ const shopReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         currentFilter: (action.payload === state.currentFilter ? '' : action.payload)
+      };
+    case ShopActionTypes.SET_GENDER:
+      return {
+        ...state,
+        gender: action.payload
+      };
+    case ShopActionTypes.SET_CATEGORY:
+      return {
+        ...state,
+        category: action.payload
       };
     default:
       return state;

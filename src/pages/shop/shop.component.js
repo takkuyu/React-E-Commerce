@@ -1,15 +1,17 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchCollectionsStartAsync } from '../../redux/shop/shop.actions';
+import { fetchCollectionsStartAsync, setGender, setCategory } from '../../redux/shop/shop.actions';
 import CollectionPageContainer from '../collection/collectionpage.container';
 import ItemPageContainer from '../itempage/itempage.container';
 
 class ShopPage extends React.Component {
     componentDidMount() {
-        const { fetchCollectionsStartAsync, match } = this.props;
+        const { fetchCollectionsStartAsync, match, setGender, setCategory } = this.props;
 
         fetchCollectionsStartAsync(match.params.category, match.params.gender);
+        setGender(match.params.gender);
+        setCategory(match.params.category);
     }
 
     render() {
@@ -20,12 +22,12 @@ class ShopPage extends React.Component {
                 <Route
                     path={`${match.url}`}
                     exact
-                    render={() => <CollectionPageContainer gender={match.params.gender} />}
+                    component={CollectionPageContainer}
                 />
                 <Route
                     path={`${match.url}/:id(\\d+)`}
-                    // exact
-                    render={props => <ItemPageContainer {...props} />} // props have to be passed on the component to use match.params.
+                    exact
+                    render={props => <ItemPageContainer {...props} />} // props have to be passed on the component to get match.params.id.
                 />
             </>
         );
@@ -34,7 +36,9 @@ class ShopPage extends React.Component {
 
 
 const mapDispatchToProps = dispatch => ({
-    fetchCollectionsStartAsync: (category, gender) => dispatch(fetchCollectionsStartAsync(category, gender))
+    fetchCollectionsStartAsync: (category, gender) => dispatch(fetchCollectionsStartAsync(category, gender)),
+    setGender: (gender) => dispatch(setGender(gender)),
+    setCategory: (category) => dispatch(setCategory(category))
 });
 
 export default connect(

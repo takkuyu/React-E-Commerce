@@ -3,14 +3,14 @@ import { Container } from 'reactstrap';
 import { connect } from 'react-redux';
 import { toggleCartHidden, addItem } from '../../redux/cart/cart.actions';
 import { createStructuredSelector } from 'reselect';
-import { selectItemAndRecommendations } from '../../redux/shop/shop.selectors'
+import { selectItemAndRecommendations, selectGender, selectCategory } from '../../redux/shop/shop.selectors'
 
 class ItemPage extends React.Component {
   state = {
-    itemSize: 0,
+    itemSize: undefined,
   }
 
-  getColor(name) {
+  getColorCodeByName(name) {
     switch (name) {
       case 'black':
         return 'rgba(0,0,0,.8)';
@@ -34,19 +34,11 @@ class ItemPage extends React.Component {
   }
 
   render() {
-    const { collectionItem, toggleCartHidden, addItem } = this.props
+    const { collectionItem, toggleCartHidden, addItem, category, gender, history } = this.props
     const { item, recommendations } = collectionItem;
     const { name, imageUrl, price, size, color } = item;
 
-    console.log(collectionItem)
-
-    const btn = (this.state.itemSize ?
-      <p className='button selected' style={{ cursor: 'pointer' }} onClick={() => {
-        addItem(item, this.state.itemSize)
-        toggleCartHidden()
-      }} >ADD TO CART</p>
-      :
-      <p className='button'>SELECT A SIZE</p>);
+    console.log(this.props)
 
     return (
       <div className='itempage-container' style={{ marginTop: '5rem' }}>
@@ -58,7 +50,7 @@ class ItemPage extends React.Component {
               <h1>{name}</h1>
               <p className='big'>${price} CAD</p>
               <p className='bold'>COLOR: {color.charAt(0).toUpperCase() + color.slice(1)}</p>
-              <p className='color' style={{ background: this.getColor(color) }}></p>
+              <p className='color' style={{ background: this.getColorCodeByName(color) }}></p>
               <p className='bold' style={{ margin: 0 }}>SELECT SIZE:</p>
               <ul className='size-list'>
                 {
@@ -66,7 +58,15 @@ class ItemPage extends React.Component {
                     <li key={size} className={`${this.state.itemSize === size ? "selected" : ""}`} onClick={() => { this.setState({ itemSize: size }) }}>{size}</li>)
                 }
               </ul>
-              {btn}
+              {
+                this.state.itemSize ?
+                  <p className='button selected' style={{ cursor: 'pointer' }} onClick={() => {
+                    addItem(item, this.state.itemSize)
+                    toggleCartHidden()
+                  }} >ADD TO CART</p>
+                  :
+                  <p className='button'>SELECT A SIZE</p>
+              }
               <p>Free shipping &amp; 30-day returns, no questions asked</p>
             </div>
           </div>
@@ -89,18 +89,16 @@ class ItemPage extends React.Component {
             <h1>YOU MAY ALSO LIKE</h1>
             <div className='bottom-content'>
               {
-                recommendations.map(item => {
-                  return (
-                    <div className='item-card' key={item.id} onClick={() => { this.props.history.push(`/shop/${this.props.match.params.gender}/${this.props.match.params.category}/${item.id}`) }}>
-                      <img src={item.imageUrl} alt='' />
-                      <div className='card-content'>
-                        <h2>{item.name}</h2>
-                        <p>Lorem plus</p>
-                        <p style={{ margin: 0 }}>$ {item.price} CAD</p>
-                      </div>
+                recommendations.map(item => (
+                  <div className='item-card' key={item.id} onClick={() => { history.push(`/shop/${gender}/${category}/${item.id}`) }}>
+                    <img src={item.imageUrl} alt='card image' />
+                    <div className='card-content'>
+                      <h2>{item.name}</h2>
+                      <p>Lorem plus</p>
+                      <p style={{ margin: 0 }}>$ {item.price} CAD</p>
                     </div>
-                  )
-                })
+                  </div>
+                ))
               }
             </div>
           </div>
@@ -113,6 +111,8 @@ class ItemPage extends React.Component {
 
 const mapStateToProps = (state, ownProps) => createStructuredSelector({
   collectionItem: selectItemAndRecommendations(ownProps.match.params.id),
+  category: selectCategory,
+  gender: selectGender,
 });
 
 const mapDispatchToProps = dispatch => ({

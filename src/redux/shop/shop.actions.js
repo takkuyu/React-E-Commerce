@@ -26,27 +26,22 @@ export const fetchCollectionsStartAsync = (category, gender) => {
       .get()
       .then(snapshot => {
         const collectionsMap = convertCollectionsSnapshotToMap(snapshot);
-        // console.log("fetchCollectionsStartAsync")
 
-        // filter collection by category passed from match.params.
+        // filter collections by category passed from match.params.category.
         if (category === undefined) {
-          const collectionByCategory = collectionsMap['shoes'];
-
-          dispatch(fetchCollectionsSuccess({
-            ...collectionByCategory,
-            items: {
-              sneakers: collectionsMap['sneakers'].items.filter(item => item.item_gender === gender),
-              runningshoes: collectionsMap['runningshoes'].items.filter(item => item.item_gender === gender),
-              boots: collectionsMap['boots'].items.filter(item => item.item_gender === gender)
-            }
-          }));
+          const collectionsFilteredByGender = collectionsMap.map(collection => ({
+            ...collection,
+            items: collection.items.filter(item => item.item_gender === gender)
+          }))
+          dispatch(fetchCollectionsSuccess(collectionsFilteredByGender));
         } else {
-          const collectionByCategory = collectionsMap[category];
-
-          dispatch(fetchCollectionsSuccess({
-            ...collectionByCategory,
-            items: collectionByCategory.items.filter(item => item.item_gender === gender) // filter collection by gender passed from match.params.
-          }));
+          const collectionFilteredByCategory = collectionsMap.filter(collection => collection.routeName === category)[0];
+          dispatch(fetchCollectionsSuccess(
+            [{
+              ...collectionFilteredByCategory,
+              items: collectionFilteredByCategory.items.filter(item => item.item_gender === gender) // filter collection by gender passed from match.params.gedner.
+            }]
+          ));
         }
       })
       .catch(error => dispatch(fetchCollectionsFailure(error.message)));
@@ -67,10 +62,22 @@ export const setSizeFilter = size => ({
   type: ShopActionTypes.SET_SIZE_FILTER,
   payload: size
 });
+
 export const clearAllFilters = () => ({
   type: ShopActionTypes.CLEAR_ALL_FILTERS,
 });
+
 export const toggleFilterMenu = (filter) => ({
   type: ShopActionTypes.TOGGLE_FILTER_MENU,
   payload: filter
+});
+
+export const setGender = gender => ({
+  type: ShopActionTypes.SET_GENDER,
+  payload: gender
+});
+
+export const setCategory = category => ({
+  type: ShopActionTypes.SET_CATEGORY,
+  payload: category
 });

@@ -75,30 +75,24 @@ export const addCollectionAndDocuments = async (collectionKey, objectToAdd) => {
   return await batch.commit();
 }
 
-function convertTitleToRoute(title){
-  return  title.replace(/\s+/g, "").toLowerCase();
+function convertTitleToRoute(title) {
+  return title.replace(/\s+/g, "").toLowerCase();
 }
 
-export const convertCollectionsSnapshotToMap = collections => {
-  const transformedCollection = collections.docs.map(doc => {
+export const convertCollectionsSnapshotToMap = collections => (
+  collections.docs.map(doc => {
     const { title, items, summary, imageUrl } = doc.data();
-    const routeName = convertTitleToRoute(title)
 
     return {
       id: doc.id,
-      routeName: title === 'Shoes' ? undefined : routeName,
+      routeName: convertTitleToRoute(title),
       title,
       items,
       summary,
       imageUrl
-    };
-  });
-
-  return transformedCollection.reduce((accumulator, collection) => {
-    accumulator[convertTitleToRoute(collection.title)] = collection;
-    return accumulator;
-  }, {});
-};
+    }
+  })
+);
 
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
