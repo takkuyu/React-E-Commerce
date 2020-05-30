@@ -26,14 +26,28 @@ export const fetchCollectionsStartAsync = (category, gender) => {
       .get()
       .then(snapshot => {
         const collectionsMap = convertCollectionsSnapshotToMap(snapshot);
-        console.log("fetchCollectionsStartAsync")
-        // filter collection by category passed from match.params.
-        const collectionByCategory = collectionsMap[category];
+        // console.log("fetchCollectionsStartAsync")
 
-        dispatch(fetchCollectionsSuccess({
-          ...collectionByCategory,
-          items: collectionByCategory.items.filter(item => item.item_gender === gender) // filter collection by gender passed from match.params.
-        }));
+        // filter collection by category passed from match.params.
+        if (category === undefined) {
+          const collectionByCategory = collectionsMap['shoes'];
+
+          dispatch(fetchCollectionsSuccess({
+            ...collectionByCategory,
+            items: {
+              sneakers: collectionsMap['sneakers'].items.filter(item => item.item_gender === gender),
+              runningshoes: collectionsMap['runningshoes'].items.filter(item => item.item_gender === gender),
+              boots: collectionsMap['boots'].items.filter(item => item.item_gender === gender)
+            }
+          }));
+        } else {
+          const collectionByCategory = collectionsMap[category];
+
+          dispatch(fetchCollectionsSuccess({
+            ...collectionByCategory,
+            items: collectionByCategory.items.filter(item => item.item_gender === gender) // filter collection by gender passed from match.params.
+          }));
+        }
       })
       .catch(error => dispatch(fetchCollectionsFailure(error.message)));
   };

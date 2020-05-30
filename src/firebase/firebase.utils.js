@@ -75,20 +75,27 @@ export const addCollectionAndDocuments = async (collectionKey, objectToAdd) => {
   return await batch.commit();
 }
 
+function convertTitleToRoute(title){
+  return  title.replace(/\s+/g, "").toLowerCase();
+}
+
 export const convertCollectionsSnapshotToMap = collections => {
   const transformedCollection = collections.docs.map(doc => {
-    const { title, items } = doc.data();
+    const { title, items, summary, imageUrl } = doc.data();
+    const routeName = convertTitleToRoute(title)
 
     return {
-      routeName: encodeURI(title.toLowerCase()),
       id: doc.id,
+      routeName: title === 'Shoes' ? undefined : routeName,
       title,
-      items
+      items,
+      summary,
+      imageUrl
     };
   });
 
   return transformedCollection.reduce((accumulator, collection) => {
-    accumulator[collection.title.toLowerCase()] = collection;
+    accumulator[convertTitleToRoute(collection.title)] = collection;
     return accumulator;
   }, {});
 };

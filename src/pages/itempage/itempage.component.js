@@ -1,61 +1,13 @@
 import React from 'react';
-import SHOP_DATA from '../../collection-items'
 import { Container } from 'reactstrap';
 import { connect } from 'react-redux';
 import { toggleCartHidden, addItem } from '../../redux/cart/cart.actions';
-
+import { createStructuredSelector } from 'reselect';
+import { selectItemAndRecommendations } from '../../redux/shop/shop.selectors'
 
 class ItemPage extends React.Component {
   state = {
     itemSize: 0,
-  }
-
-  getItemData({ gender, category, id }) {
-
-    switch (category) {
-      case 'sneakers': {
-        const itemData = SHOP_DATA[1].items.filter(item => item.id === Number(id))[0]
-        const pmin = itemData.price - 50;
-        const pmax = itemData.price + 50;
-        const recommendations = SHOP_DATA[1].items.filter(item => item.item_gender === gender && item.id !== Number(id) && item.price <= pmax && item.price >= pmin)
-
-        return { itemData, recommendations };
-      }
-      case 'running': {
-        const itemData = SHOP_DATA[0].items.filter(item => item.id === Number(id))[0]
-        const pmin = itemData.price - 50;
-        const pmax = itemData.price + 50;
-        const recommendations = SHOP_DATA[0].items.filter(item => item.item_gender === gender && item.id !== Number(id) && item.price <= pmax && item.price >= pmin)
-
-        return { itemData, recommendations };
-      }
-      case 'boots': {
-        const itemData = SHOP_DATA[2].items.filter(item => item.id === Number(id))[0]
-        const pmin = itemData.price - 50;
-        const pmax = itemData.price + 50;
-        const recommendations = SHOP_DATA[2].items.filter(item => item.item_gender === gender && item.id !== Number(id) && item.price <= pmax && item.price >= pmin)
-
-        return { itemData, recommendations };
-      }
-      case 'topsellers': {
-        const itemData = SHOP_DATA[3].items.filter(item => item.id === Number(id))[0]
-        const pmin = itemData.price - 50;
-        const pmax = itemData.price + 50;
-        const recommendations = SHOP_DATA[3].items.filter(item => item.item_gender === gender && item.id !== Number(id) && item.price <= pmax && item.price >= pmin)
-
-        return { itemData, recommendations };
-      }
-      case 'new': {
-        const itemData = SHOP_DATA[4].items.filter(item => item.id === Number(id))[0]
-        const pmin = itemData.price - 50;
-        const pmax = itemData.price + 50;
-        const recommendations = SHOP_DATA[4].items.filter(item => item.item_gender === gender && item.id !== Number(id) && item.price <= pmax && item.price >= pmin)
-
-        return { itemData, recommendations };
-      }
-      default:
-        return
-    }
   }
 
   getColor(name) {
@@ -81,20 +33,16 @@ class ItemPage extends React.Component {
     }
   }
 
-
-
   render() {
-    const { itemData, recommendations } = this.getItemData(this.props.match.params);
-    const { name, imageUrl, price, size, color } = itemData;
-    const { toggleCartHidden, addItem, addItemSize, itemSize } = this.props;
+    const { collectionItem, toggleCartHidden, addItem } = this.props
+    const { item, recommendations } = collectionItem;
+    const { name, imageUrl, price, size, color } = item;
 
-    const sizeList = size.map(size => (
-      <li key={size} className={`${this.state.itemSize === size ? "selected" : ""}`} onClick={() => { this.setState({ itemSize: size }) }}>{size}</li>
-    ));
+    console.log(collectionItem)
 
     const btn = (this.state.itemSize ?
       <p className='button selected' style={{ cursor: 'pointer' }} onClick={() => {
-        addItem(itemData, this.state.itemSize)
+        addItem(item, this.state.itemSize)
         toggleCartHidden()
       }} >ADD TO CART</p>
       :
@@ -113,7 +61,10 @@ class ItemPage extends React.Component {
               <p className='color' style={{ background: this.getColor(color) }}></p>
               <p className='bold' style={{ margin: 0 }}>SELECT SIZE:</p>
               <ul className='size-list'>
-                {sizeList}
+                {
+                  size.map(size =>
+                    <li key={size} className={`${this.state.itemSize === size ? "selected" : ""}`} onClick={() => { this.setState({ itemSize: size }) }}>{size}</li>)
+                }
               </ul>
               {btn}
               <p>Free shipping &amp; 30-day returns, no questions asked</p>
@@ -160,6 +111,9 @@ class ItemPage extends React.Component {
 
 };
 
+const mapStateToProps = (state, ownProps) => createStructuredSelector({
+  collectionItem: selectItemAndRecommendations(ownProps.match.params.id),
+});
 
 const mapDispatchToProps = dispatch => ({
   addItem: (item, size) => dispatch(addItem(item, size)),
@@ -167,6 +121,6 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(ItemPage);

@@ -14,25 +14,19 @@ class ShopPage extends React.Component {
 
     render() {
         const { match } = this.props;
-        // const categoryOptions = "sneakers|running|boots|topsellers|new";
-        // const genderOptions = "mens|women";
         console.log('shop.js')
         return (
             <>
                 <Route
                     path={`${match.url}`}
                     exact
-                    // key={this.props.location.key}
-                    render={props => (
-                        <CollectionPageContainer  {...props} />
-                    )}
+                    render={() => <CollectionPageContainer gender={match.params.gender} />}
                 />
                 <Route
                     path={`${match.url}/:id(\\d+)`}
-                    exact
-                    render={props => (
-                        <ItemPageContainer {...props} /> // props have to be passed on the component to use match.params.
-                    )} />
+                    // exact
+                    render={props => <ItemPageContainer {...props} />} // props have to be passed on the component to use match.params.
+                />
             </>
         );
     }

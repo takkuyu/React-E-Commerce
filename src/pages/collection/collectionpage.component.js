@@ -25,22 +25,21 @@ import { setColorFilter, setPriceFilter, setSizeFilter, clearAllFilters, toggleF
 //   }
 // }
 
-const CollectionPage = ({ collection, filter, setSizeFilter, setColorFilter, setPriceFilter, clearAllFilters, results, toggleFilterMenu, currentFilter, match }) => {
+const CollectionPage = ({ filter, setSizeFilter, setColorFilter, setPriceFilter, clearAllFilters, results, toggleFilterMenu, currentFilter, gender, collection }) => {
 
-  const { title, items, routeName } = collection;
+  const { title, routeName, items, summary, imageUrl } = collection;
   const { price, color, size } = filter
-  const genderText = (match.params.gender === 'mens' ? "Men's" : "Women's")
-  const categorySummary = "The world's most comfortable shoes for life’s everyday adventures.";
+  const genderText = (gender === 'mens' ? "Men's" : "Women's")
+  const collectionImage = (gender === 'mens' ? imageUrl.men : imageUrl.women)
   // const categoryText = this.getCategoryTitle(this.props.match.params.category);
-
   return (
     <div className='collections-container'>
 
       <div className='collections-top'>
-        <img src={'imageLink'} alt='img' />
+        <img src={collectionImage} alt='img' />
         <div className='collections-top-content'>
           <h1>{genderText} {title}</h1>
-          <p>{categorySummary}</p>
+          <p>{summary}</p>
         </div>
       </div>
 
@@ -76,11 +75,22 @@ const CollectionPage = ({ collection, filter, setSizeFilter, setColorFilter, set
       <div className='collections-items-container'>
         <Container>
           <p className='search-result'>All - {results} results</p>
-          <Category
-            genderText={genderText}
-            routeName={routeName}
-            categoryTitle={title}
-            categoryItems={items} />
+          {
+            routeName === undefined ?
+              <>
+                <Category
+                  categoryTitle={"Sneakers"}
+                  categoryItems={items.sneakers} />
+                <Category
+                  categoryTitle={"Running Shoes"}
+                  categoryItems={items.runningshoes} />
+                <Category
+                  categoryTitle={"Boots"}
+                  categoryItems={items.boots} />
+              </>
+              :
+              <Category categoryItems={items} />
+          }
         </Container>
       </div>
     </div>

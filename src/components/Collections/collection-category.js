@@ -4,17 +4,19 @@ import {
 } from 'reactstrap';
 import Card from './card.component';
 
-const Category = ({ genderText, routeName, categoryTitle, categoryItems }) => {
+function convertTitleToRoute(title) {
+  return title.replace(/\s+/g, "").toLowerCase();
+}
 
+const Category = ({ categoryTitle, categoryItems }) => {
   return (
     <div className='collections-items-wrapper'>
       {
-        categoryItems.length === 0 ?
-          <div></div>
+        categoryItems.length === 0 || !categoryTitle ?
+          <></>
           :
           <div className='collections-title'>
-            <h1>{genderText} {categoryTitle}</h1>
-            <p>Our original everyday sneaker made with cozy wool.</p>
+            <h1>{categoryTitle}</h1>
           </div>
       }
       <div className='collections-items-content'>
@@ -23,17 +25,17 @@ const Category = ({ genderText, routeName, categoryTitle, categoryItems }) => {
             <Card
               key={id}
               id={id}
-              routeName={routeName}
+              routeName={categoryTitle ? convertTitleToRoute(categoryTitle) : undefined}
               {...otherSectionProps}
             />
           )
           )}
         </Row>
       </div>
-
     </div>
-
   );
 };
+
+
 
 export default Category;

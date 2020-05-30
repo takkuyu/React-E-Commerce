@@ -3,9 +3,10 @@ import { withRouter } from 'react-router-dom';
 import { Col } from 'reactstrap';
 
 const Card = ({ id, name, imageUrl, price, routeName, history, match }) => {
+  console.log(typeof(id))
 
-  const path = (match.params.category === undefined ? `${match.url}/${routeName}/${id}` : `${match.url}/${id}`);
-
+  const path = (routeName ? `${match.url}/${routeName}/${id}` : `${match.url}/${id}`);
+  // const path = `${match.url}/${id}`;
   return (
     <Col md='6' lg='4'>
       <div className='collections-card' onClick={() => history.push({
