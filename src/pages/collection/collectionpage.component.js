@@ -12,10 +12,14 @@ const CollectionPage = ({ filter, setSizeFilter, setColorFilter, setPriceFilter,
 
   const title = (collection.length > 1 ? "Shoes" : collection[0].title);
   const summary = (collection.length > 1 ? "Get the latest assortment of shoes online today." : collection[0].summary);
-  const collectionImage = (collection.length > 1 ? "https://i.ibb.co/4tnd427/sneakers-02.jpg" : (gender === 'mens' ? collection[0].imageUrl.men : collection[0].imageUrl.women));
+  const collectionImage = (collection.length > 1 ?
+    (gender === 'mens' ? "https://i.ibb.co/4tnd427/sneakers-02.jpg" : "https://i.ibb.co/nfWbqkS/women-all.jpg")
+    :
+    (gender === 'mens' ? collection[0].imageUrl.men : collection[0].imageUrl.women)
+  );
   const genderText = (gender === 'mens' ? "Men's" : "Women's");
   const { price, color, size } = filter;
-
+  console.log(currentFilter)
   return (
     <div className='collections-container'>
 
@@ -38,19 +42,19 @@ const CollectionPage = ({ filter, setSizeFilter, setColorFilter, setPriceFilter,
               price ?
                 <li onClick={() => { setPriceFilter(0) }} >${price.pmin} - ${price.pmax}<i className="fas fa-times"></i></li>
                 :
-                <li onClick={() => { toggleFilterMenu('price') }} >Price<i className="fas fa-angle-down"></i></li>
+                <li onClick={() => { toggleFilterMenu('price') }} className={currentFilter === 'price' ? 'active' : ''} >Price<i className="fas fa-angle-down"></i></li>
             }
             {
               color ?
                 <li onClick={() => { setColorFilter('') }} >{color}<i className="fas fa-times"></i></li>
                 :
-                <li onClick={() => { toggleFilterMenu('color') }} >Color<i className="fas fa-angle-down"></i></li>
+                <li onClick={() => { toggleFilterMenu('color') }} className={currentFilter === 'color' ? 'active' : ''} >Color<i className="fas fa-angle-down"></i></li>
             }
             {
               size ?
                 <li onClick={() => { setSizeFilter(0) }} >{size}<i className="fas fa-times"></i></li>
                 :
-                <li onClick={() => { toggleFilterMenu('size') }} >Size<i className="fas fa-angle-down"></i></li>
+                <li onClick={() => { toggleFilterMenu('size') }} className={currentFilter === 'size' ? 'active' : ''} >Size<i className="fas fa-angle-down"></i></li>
             }
           </ul>
         </Container>
@@ -60,7 +64,7 @@ const CollectionPage = ({ filter, setSizeFilter, setColorFilter, setPriceFilter,
         <Container>
           <p className='search-result'>All - {results} results</p>
           {
-            collection.map((collection, index) => <Category key={index} collection={collection}/>)
+            collection.map((collection, index) => <Category key={index} collection={collection} />)
           }
         </Container>
       </div>

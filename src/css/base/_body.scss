@@ -11,7 +11,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 62.5%;
-  // font-weight: 300;
   color: $Dark-Blue;
 
   h1,
@@ -23,13 +22,21 @@ body {
   }
 
   a {
-
     color: $black;
 
     &:hover {
       text-decoration: none;
       color: rgb(66, 66, 66);
       // transform: scale(1.1, 1.1);
+    }
+
+    &.white_link{
+      color: $white;
+
+      &:hover {
+        text-decoration: none;
+        color: #dee2e6;
+      }
     }
   }
 

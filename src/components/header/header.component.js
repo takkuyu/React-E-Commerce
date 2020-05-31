@@ -12,13 +12,13 @@ import { selectCartHidden, selectCartItemsCount } from '../../redux/cart/cart.se
 import { selectHeaderMenuOpen, selectHeaderGender } from '../../redux/header/header.selectors';
 import { closeAllDropDownMenu, openDropDownMenu } from '../../redux/header/header.actions';
 
-const Header = ({ toggleCartHidden, hidden, itemsCount, isLoggedin, isDropDownMenuOpen, gender, closeAllDropDownMenu, openDropDownMenu }) => (
+const Header = ({ toggleCartHidden, hidden, itemsCount, isLoggedin, isDropDownMenuOpen, headerGender, closeAllDropDownMenu, openDropDownMenu }) => (
   <>
     <header className="header">
       <ul className='header-left'>
         <li><i id='bars' className={`${isDropDownMenuOpen ? "fas fa-times" : "fas fa-bars"}`} onClick={() => openDropDownMenu('')} ></i></li>
-        <li className={`desktop_menu ${gender === 'mens' ? "is-active" : "inactive"}`} onClick={() => openDropDownMenu('mens')}>MEN</li>
-        <li className={`desktop_menu ${gender === 'women' ? "is-active" : "inactive"}`} onClick={() => openDropDownMenu('women')}>WOMEN</li>
+        <li className={`desktop_menu ${headerGender === 'mens' ? "is-active" : "inactive"}`} onClick={() => openDropDownMenu('mens')}>MEN</li>
+        <li className={`desktop_menu ${headerGender === 'women' ? "is-active" : "inactive"}`} onClick={() => openDropDownMenu('women')}>WOMEN</li>
       </ul>
       <div className='header-logo'>
         <Link to='/' onClick={closeAllDropDownMenu}><img src={logo} alt='logo' /></Link>
@@ -33,9 +33,9 @@ const Header = ({ toggleCartHidden, hidden, itemsCount, isLoggedin, isDropDownMe
         </div>
       </div>
     </header>
-    {
-      isDropDownMenuOpen ? <HeaderDropDownMenu gender={gender} closeAllDropDownMenu={closeAllDropDownMenu} /> : ''
-    }
+
+    <HeaderDropDownMenu state={isDropDownMenuOpen ? 'active' : ''} gender={headerGender} closeAllDropDownMenu={closeAllDropDownMenu} />
+
     {
       hidden ? '' : <ShoppingCartMenu toggleCartHidden={toggleCartHidden} itemsCount={itemsCount} />
     }
@@ -52,7 +52,7 @@ const mapStateToProps = createStructuredSelector({
   hidden: selectCartHidden,
   itemsCount: selectCartItemsCount,
   isDropDownMenuOpen: selectHeaderMenuOpen,
-  gender: selectHeaderGender,
+  headerGender: selectHeaderGender,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

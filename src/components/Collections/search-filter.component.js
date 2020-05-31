@@ -2,9 +2,9 @@ import React from 'react';
 import { Container } from 'reactstrap';
 
 const SearchFilter = ({ currentFilter, setPriceFilter, setColorFilter, setSizeFilter }) => (
-  <div className='search-filter'>
+  <div className={`search-filter ${currentFilter  ? "active" : ""}`}>
     <Container>
-      <div className={`search-filter-size-wrapper ${currentFilter === 'price' ? "open" : ""}`}>
+      <div className={`search-filter-content ${currentFilter === 'price' ? "open" : ""}`}>
         <ul className={`search-filter-price`} >
           <li onClick={() => setPriceFilter({ pmin: 50, pmax: 100 })} >$50 - $100</li>
           <li onClick={() => setPriceFilter({ pmin: 100, pmax: 150 })} >$100 - $150</li>
@@ -13,7 +13,7 @@ const SearchFilter = ({ currentFilter, setPriceFilter, setColorFilter, setSizeFi
         </ul>
       </div>
 
-      <div className={`search-filter-color-wrapper ${currentFilter === 'color' ? "open" : ""}`}>
+      <div className={`search-filter-content ${currentFilter === 'color' ? "open" : ""}`}>
         <ul className={`search-filter-color`} >
           <li onClick={() => setColorFilter('black')} style={{ backgroundColor: 'rgba(0,0,0,.8)' }}></li>
           <li onClick={() => setColorFilter('white')} style={{ backgroundColor: 'white', border: '1px solid rgb(211, 212, 213)' }}></li>
@@ -26,7 +26,7 @@ const SearchFilter = ({ currentFilter, setPriceFilter, setColorFilter, setSizeFi
         </ul>
       </div>
 
-      <div className={`search-filter-size-wrapper ${currentFilter === 'size' ? "open" : ""}`}>
+      <div className={`search-filter-content ${currentFilter === 'size' ? "open" : ""}`}>
         <ul className={`search-filter-size`} >
           <li onClick={() => setSizeFilter(8)} >8</li>
           <li onClick={() => setSizeFilter(9)} >9</li>

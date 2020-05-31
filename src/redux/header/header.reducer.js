@@ -3,7 +3,7 @@ import HeaderActionTypes from './header.types';
 const INITIAL_STATE = {
   isDropDownMenuOpen: false,
   isExtraMenuOpen: false,
-  gender: ''
+  headerGender: ''
 };
 
 const headerReducer = (state = INITIAL_STATE, action) => {
@@ -18,21 +18,21 @@ const headerReducer = (state = INITIAL_STATE, action) => {
         ...state,
         isExtraMenuOpen: !state.isExtraMenuOpen
       };
-    case HeaderActionTypes.SET_GENDER:
+    case HeaderActionTypes.SET_HEADER_GENDER:
       return {
         ...state,
-        gender: action.payload
+        headerGender: action.payload
       };
     case HeaderActionTypes.OPEN_DROP_DOWN_MENU:
       return {
         ...state,
-        gender: action.payload,
-        isDropDownMenuOpen: (state.gender !== action.payload ? true : !state.isDropDownMenuOpen)
+        headerGender: (state.headerGender === action.payload ? '' : action.payload),
+        isDropDownMenuOpen: (state.headerGender !== action.payload ? true : !state.isDropDownMenuOpen)
       }
     case HeaderActionTypes.TOGGLE_EXTRA_DROP_DOWN_MENU:
       return {
         ...state,
-        gender: action.payload,
+        headerGender: action.payload,
         isExtraMenuOpen: !state.isExtraMenuOpen
       }
     case HeaderActionTypes.CLOSE_ALL_DROP_DOWN_MENU:

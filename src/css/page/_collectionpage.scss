@@ -68,7 +68,6 @@
       }
     }
 
-
     p.search-result {
       display: none;
       font-size: $font-size-med;
@@ -128,13 +127,27 @@
         &:hover {
           cursor: pointer;
           transform: scale(1.1, 1.1);
+        }
 
+        &.active{
+          > i{
+            transition: all 0.4s;
+            transform: rotateX(180deg);
+          }
         }
       }
     }
 
   }
 
+  .collections-items-container{
+
+    .search-result{
+      @include laptop{
+        display: none;
+      }
+    }
+  }
 
 
 }

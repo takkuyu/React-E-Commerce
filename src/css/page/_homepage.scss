@@ -200,10 +200,6 @@
                     @include laptop {
                         width: 15em;
                     }
-
-                    @include desktop {
-                        width: 20em;
-                    }
                 }
             }
         }

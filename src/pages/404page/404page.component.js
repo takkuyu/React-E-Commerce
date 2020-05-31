@@ -1,13 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 
-function NoMatchPage() {
-
-  return (
-    <div className="404page" style={{marginTop:'5rem', height:'70em'}}>
-        <h1 style={{textAlign:'center'}}>Oops ! The page cannot be found.</h1>
-    </div>
-  );
-}
+const NoMatchPage = () => (
+  <div className="no_match_page">
+    <h1>Oops ! The page cannot be found.</h1>
+    <Link to="/" className='button' >GO BACK HOME</Link>
+  </div>
+);
 
 export default NoMatchPage;

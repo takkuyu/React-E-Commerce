@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import women_topsellers_img from '../../img/women-all.jpg';
 import women_newarrivals_img from '../../img/women-running.jpg';
 import men_topsellers_img from '../../img/topseller.jpg';
-import men_newarrivals_img from '../../img/new-arrivals.jpg';
+import men_newarrivals_img from '../../img/mens-new-arrivals.jpg';
 
 
 const LargeDropDownMenu = ({ gender, closeAllDropDownMenu }) => (

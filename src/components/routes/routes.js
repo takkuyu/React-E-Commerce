@@ -13,20 +13,19 @@ const AccountPageWithSpinner = WithSpinner(AccountPage);
 const Routes = (props) => {
 
   const { currentUser, isLoading } = props;
-  const categoryOptions = "sneakers|runningshoes|boots|topsellers|newarrivals";
   const genderOptions = "mens|women";
-  // console.log('routes')
+
   return (
-    <section>
+    <main className="main-container">
       <Switch >
         <Route path='/' exact component={HomePage} />
-        <Route path={`/shop/:gender(${genderOptions})/:category(${categoryOptions})?`} key={props.location.key} component={ShopPage} />
+        <Route path={`/shop/:gender(${genderOptions})/:category?`} key={props.location.key} component={ShopPage} />
         <Route path="/account/login" exact render={(props) => currentUser ? <AccountPage {...props} currentUser={currentUser} /> : <LoginPage />} />
         <Route path="/account" exact render={props => currentUser ? <AccountPageWithSpinner {...props} isLoading={isLoading} currentUser={currentUser} /> : <LoginPage />} />
         <Route path="/checkout" exact render={props => <CheckoutPage {...props} />} />
         <Route component={NoMatchPage} />{/* fall back page  */}
       </Switch>
-    </section >
+    </main >
   );
 };
 

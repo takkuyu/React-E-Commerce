@@ -14,6 +14,6 @@ export const selectHeaderExtraMenuOpen = createSelector(
 
 export const selectHeaderGender = createSelector(
   [selectHeader],
-  header => header.gender
+  header => header.headerGender
 );
 

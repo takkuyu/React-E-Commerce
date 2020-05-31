@@ -27,7 +27,7 @@ class ShopPage extends React.Component {
                 <Route
                     path={`${match.url}/:id(\\d+)`}
                     exact
-                    render={props => <ItemPageContainer {...props} />} // props have to be passed on the component to get match.params.id.
+                    render={props => <ItemPageContainer {...props} />} // props have to be passed on this component to get match.params.id.
                 />
             </>
         );

@@ -3,8 +3,8 @@ import LargeDropDownMenu from './header-dropdown-large.component'
 import SmallDropDownMenu from './header-dropdown-small.component'
 
 
-const HeaderDropDownMenu = ({ gender, closeAllDropDownMenu }) => (
-  <div className="header_dropdown">
+const HeaderDropDownMenu = ({ state, gender, closeAllDropDownMenu }) => (
+  <div className={`header_dropdown ${state}`}>
 
     <SmallDropDownMenu closeAllDropDownMenu={closeAllDropDownMenu} gender={gender} />
 
