@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 
 const selectShop = state => state.shop;
-const selectFilter = state => state.shop.filter; 
+const selectFilter = state => state.shop.filter;
 
 export const selectCollections = createSelector(
   [selectShop],
@@ -16,7 +16,7 @@ export const selectCollectionFilter = createSelector(
 export const selectFilteredCollection = createSelector(
   [selectCollections, selectFilter],
   (collections, filter) => {
-
+    console.log('filterdcollection selecter')
     if (filter) {
       return collections.map(collection => ({
         ...collection,
@@ -48,13 +48,16 @@ export const selectItemAndRecommendations = id =>
   createSelector(
     [selectCollections],
     (collection) => {
+      console.log(collection)
       const item = collection[0].items.filter(item => item.id === Number(id))[0];
+      console.log(item)
+
       const pmin = item.price - 50;
       const pmax = item.price + 50;
       const recommendations = collection[0].items.filter(item => item.id !== Number(id) && item.price <= pmax && item.price >= pmin)
       return { item, recommendations }
     }
-);
+  );
 
 
 export const selectCollectionCount = createSelector(

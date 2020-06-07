@@ -4,27 +4,28 @@ import {
 } from 'reactstrap';
 import Card from './card.component';
 
-const Category = ({ collection }) => {
-  const { title, items, routeName } = collection;
+const Category = ({ collection, isOverviewPage }) => {
+  const { title, items, routeName, summary } = collection;
+  // console.log(isOverviewPage)
 
   return (
     <div className='collections-items-wrapper'>
       {
-        items.length === 0 ?
+        items.length === 0 || !isOverviewPage ?
           <></>
           :
           <div className='collections-title'>
-            <h1>{title}</h1>
+            <h2>{title}</h2>
+            <p>{summary}</p>
           </div>
       }
       <div className='collections-items-content'>
         <Row>
-          {items.map(({ id, ...otherSectionProps }) => (
+          {items.map((item, index) => (
             <Card
-              key={id}
-              id={id}
+              key={index}
               routeName={routeName}
-              {...otherSectionProps}
+              item = {item}
             />
           )
           )}

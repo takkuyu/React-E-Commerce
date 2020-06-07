@@ -19,7 +19,7 @@ const CollectionPage = ({ filter, setSizeFilter, setColorFilter, setPriceFilter,
   );
   const genderText = (gender === 'mens' ? "Men's" : "Women's");
   const { price, color, size } = filter;
-  console.log(currentFilter)
+
   return (
     <div className='collections-container'>
 
@@ -64,7 +64,9 @@ const CollectionPage = ({ filter, setSizeFilter, setColorFilter, setPriceFilter,
         <Container>
           <p className='search-result'>All - {results} results</p>
           {
-            collection.map((collection, index) => <Category key={index} collection={collection} />)
+            collection.map((col, index) =>
+              <Category key={index} collection={col} isOverviewPage={collection.length > 1 ? true : false} />
+            )
           }
         </Container>
       </div>

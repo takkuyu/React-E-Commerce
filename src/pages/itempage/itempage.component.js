@@ -38,8 +38,6 @@ class ItemPage extends React.Component {
     const { item, recommendations } = collectionItem;
     const { name, imageUrl, price, size, color } = item;
 
-    console.log(this.props)
-
     return (
       <div className='itempage-container' style={{ marginTop: '5rem' }}>
         <Container>

@@ -11,7 +11,7 @@ const INITIAL_STATE = {
     size: 0
   },
   gender: undefined,
-  category: undefined
+  category: undefined,
 };
 
 const shopReducer = (state = INITIAL_STATE, action) => {
@@ -32,6 +32,11 @@ const shopReducer = (state = INITIAL_STATE, action) => {
         ...state,
         isFetching: false,
         errorMessage: action.payload
+      };
+    case ShopActionTypes.REFRESH_COLLECTIONS:
+      return {
+        ...state,
+        collections: null
       };
     case ShopActionTypes.SET_COLOR_FILTER:
       return {
