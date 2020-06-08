@@ -32,6 +32,8 @@ $space-and-half : $space*1.5;
 $space-double : $space*2;
 $space-quad : $space*4;
 $space-half : $space/2;
+$space-section-divider: 20em;
+
 $pad : 1em;
 $pad-and-half : $pad*1.5;
 $pad-double : $pad*2;
@@ -41,6 +43,7 @@ $pad-quarter :$pad/4;
 $z-index-low: 2;
 $z-index-med: 5;
 $z-index-high: 10;
+$z-index-high-2: 20;
 
 //Borders
 $border-med: 3px;

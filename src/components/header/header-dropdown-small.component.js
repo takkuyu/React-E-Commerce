@@ -21,8 +21,8 @@ const smallDropDownMenu = ({ toggleExtraDropDownMenu, gender, closeAllDropDownMe
                     <li className="link-list"><Link to={`/shop/${gender}/sneakers`} onClick={closeAllDropDownMenu}>Sneakers</Link></li>
                     <li className="link-list"><Link to={`/shop/${gender}/runningshoes`} onClick={closeAllDropDownMenu}>Running Shoes</Link></li>
                     <li className="link-list"><Link to={`/shop/${gender}/boots`} onClick={closeAllDropDownMenu}>Boots</Link></li>
-                    <li className="link-list"><Link to='/shop/newarrivals' onClick={closeAllDropDownMenu}>New Arrivals</Link></li>
-                    <li className="link-list"><Link to='/shop/topsellers' onClick={closeAllDropDownMenu}>Top Sellers</Link></li>
+                    <li className="link-list"><Link to={`/shop/${gender}/newarrivals`} onClick={closeAllDropDownMenu}>New Arrivals</Link></li>
+                    <li className="link-list"><Link to={`/shop/${gender}/topsellers`} onClick={closeAllDropDownMenu}>Top Sellers</Link></li>
                 </ul>
                 :
                 ''

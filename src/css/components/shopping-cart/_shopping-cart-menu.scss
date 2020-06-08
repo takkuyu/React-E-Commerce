@@ -3,10 +3,9 @@
     left: 0;
     right: 0;
     top: 0;
-    z-index: 9999;
+    z-index: $z-index-high-2;
     height: 100vh;
     width: 100vw;
-
 
     .blanket {
         height: 100%;
@@ -93,20 +92,17 @@
 
             ul {
 
-                li {
-                    height: 3rem;
-                    line-height: 3rem;
-                    border: 3px solid rgb(33, 42, 47);
-                    width: 100%;
-                    font-size: 1.5em;
-                    font-weight: 600;
+                li.button {
 
                     &:not(:last-child) {
-                        margin-bottom: 1rem;
+                        margin-bottom: 2rem;
                     }
 
-                    &:hover {
-                        cursor: pointer;
+                    padding: 0;
+
+                    a {
+                        display: block;
+                        padding: 0.8125em 1.125em;
                     }
                 }
             }

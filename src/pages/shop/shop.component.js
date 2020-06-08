@@ -7,18 +7,16 @@ import ItemPageContainer from '../itempage/itempage.container';
 
 class ShopPage extends React.Component {
 
-    constructor(props){
+    constructor(props) {
         super(props)
         props.refreshCollections();
     }
 
     componentDidMount() {
         console.log('didmount')
-        const { fetchCollectionsStartAsync, match, setGender, setCategory } = this.props;
+        const { fetchCollectionsStartAsync, match} = this.props;
 
         fetchCollectionsStartAsync(match.params.category, match.params.gender);
-        setGender(match.params.gender);
-        setCategory(match.params.category);
     }
 
     render() {
@@ -43,9 +41,11 @@ class ShopPage extends React.Component {
 
 
 const mapDispatchToProps = dispatch => ({
-    fetchCollectionsStartAsync: (category, gender) => dispatch(fetchCollectionsStartAsync(category, gender)),
-    setGender: (gender) => dispatch(setGender(gender)),
-    setCategory: (category) => dispatch(setCategory(category)),
+    fetchCollectionsStartAsync: (category, gender) => {
+        dispatch(fetchCollectionsStartAsync(category, gender))
+        dispatch(setGender(gender))
+        dispatch(setCategory(category))
+    },
     refreshCollections: () => dispatch(refreshCollections())
 });
 

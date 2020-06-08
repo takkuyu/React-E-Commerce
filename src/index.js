@@ -5,16 +5,17 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from './redux/store';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/style.scss';
+// import './css/styles/style.min.css';
 import App from './App';
 
 ReactDOM.render(
-  // <React.StrictMode>
+  <React.StrictMode>
     <Provider store={store}>
       <PersistGate persistor={persistor}>
         <App />
       </PersistGate>
     </Provider>
-  // </React.StrictMode>,
+  </React.StrictMode>
   ,
   document.getElementById('root')
 );

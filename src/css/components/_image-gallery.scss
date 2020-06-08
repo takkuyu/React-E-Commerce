@@ -14,17 +14,14 @@
     }
 
     .image_gallery-inner {
-      padding-top: 10em;
-      // padding-bottom: 10em;
 
       &.grid {
-        padding-top: 0;
-        padding-bottom: 0;
-
+        
         @include tablet {
           display: grid;
           grid-template: repeat(3, 33.33337%) / repeat(2, 50%); // height/width
           overflow: hidden;
+          margin-bottom: 10em;
         }
       }
 
@@ -112,11 +109,11 @@
 
         &.new-arrivals {
 
-            display: none;
+          display: none;
 
-            @include tablet {
-              display: block;
-            }
+          @include tablet {
+            display: block;
+          }
 
           .image {
 

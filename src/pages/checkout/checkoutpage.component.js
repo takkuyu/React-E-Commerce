@@ -72,7 +72,7 @@ const CheckoutPage = (props) => {
                         :
                         <div className='empty-container'>
                             <h2>Your cart is currently empty.</h2>
-                            <p className="button" onClick={() => this.props.history.push('/')}>CONTINUE SHOPPING</p>
+                            <p className="button" onClick={() => props.history.push('/')}>CONTINUE SHOPPING</p>
                         </div>
                 }
             </Container>

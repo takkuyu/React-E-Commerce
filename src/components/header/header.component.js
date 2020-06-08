@@ -25,7 +25,7 @@ const Header = ({ toggleCartHidden, hidden, itemsCount, isLoggedin, isDropDownMe
       </div>
       <div className='header-right'>
         <p className="desktop_menu">
-          {isLoggedin ? <Link to='/account'>ACCOUNT</Link> : <Link to='/account/login'>LOGIN</Link>}
+          {isLoggedin ? <Link to='/account' onClick={closeAllDropDownMenu}>ACCOUNT</Link> : <Link to='/account/login' onClick={closeAllDropDownMenu}>LOGIN</Link>}
         </p>
         <p className="desktop_menu">CONTACT</p>
         <div onClick={toggleCartHidden}>
@@ -34,10 +34,10 @@ const Header = ({ toggleCartHidden, hidden, itemsCount, isLoggedin, isDropDownMe
       </div>
     </header>
 
-    <HeaderDropDownMenu state={isDropDownMenuOpen ? 'active' : ''} gender={headerGender} closeAllDropDownMenu={closeAllDropDownMenu} />
+    <HeaderDropDownMenu state={isDropDownMenuOpen ? 'active' : 'inactive'} gender={headerGender} closeAllDropDownMenu={closeAllDropDownMenu} />
 
     {
-      hidden ? '' : <ShoppingCartMenu toggleCartHidden={toggleCartHidden} itemsCount={itemsCount} />
+      hidden ? '' : <ShoppingCartMenu toggleCartHidden={toggleCartHidden} itemsCount={itemsCount} closeAllDropDownMenu={closeAllDropDownMenu}/>
     }
   </>
 );

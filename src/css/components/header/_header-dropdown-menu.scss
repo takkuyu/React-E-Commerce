@@ -1,51 +1,35 @@
 .header_dropdown {
     box-shadow: 0 -1px 8px rgba(0, 0, 0, .1);
-    width: 100vw;
+    background-color: $white;
+    width: 100%;
     position: fixed;
-    z-index: 999;
+    z-index: $z-index-med;
     top: 5rem;
     left: 0;
-    background-color: $white;
-    max-height: 0;
+    transform: translateY(-100%);
     opacity: 0;
 
     &.active {
+        transform: translateY(0);
         transition: all 0.4s;
-        opacity: 1;
-        max-height: 100vh;
         -webkit-backface-visibility: hidden;
         backface-visibility: hidden;
+        opacity: 1;
 
-        .header_dropdown-desktop {
-            width: 100%;
-            
-            @include laptop {
-                display: block;
-            }
-        }
-        
         .blanket {
             @include laptop {
-                background-color: rgba(0, 0, 0, 0.7);
-                height: 100vh;
-                width: 100vw;
-                position: absolute;
-            }
-        }
-
-        .header_dropdown-mobile {
-            display: block;
-            height: 100vh;
-
-            @include laptop {
-                display: none;
+                display: block;
             }
         }
     }
 
     // mobile dripdown menu
     .header_dropdown-mobile {
-        display: none;
+        height: 100vh;
+
+        @include laptop {
+            display: none;
+        }
 
         ul {
 
@@ -108,6 +92,11 @@
     // desktop dripdown menu
     .header_dropdown-desktop {
         display: none;
+        width: 100%;
+
+        @include laptop {
+            display: block;
+        }
 
         .header_dropdown-main {
             display: flex;
@@ -163,6 +152,22 @@
                         background-size: cover;
                         margin: 0;
 
+                        &.mens-topsellers {
+                            background-image: url(../../../img/topseller.jpg);
+                        }
+
+                        &.women-topsellers {
+                            background-image: url(../../../img/women-all.jpg);
+                        }
+
+                        &.mens-newarrivals {
+                            background-image: url(../../../img/mens-new-arrivals.jpg);
+                        }
+
+                        &.women-newarrivals {
+                            background-image: url(../../../img/women-running.jpg);
+                        }
+
                         a {
                             height: 100%;
                             width: 100%;
@@ -178,5 +183,13 @@
                 }
             }
         }
+    }
+
+    .blanket {
+        display: none;
+        background-color: rgba(0, 0, 0, 0.7);
+        height: 100vh;
+        width: 100vw;
+        position: absolute;
     }
 }

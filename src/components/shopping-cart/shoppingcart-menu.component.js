@@ -9,7 +9,7 @@ import ShoppingCartIcon from './shoppingcart-icon.component'
 
 const ShoppingCartMenu = (props) => {
 
-    const { toggleCartHidden, cartItems, removeItem, addItem, clearItemFromCart, total, itemsCount } = props;
+    const { toggleCartHidden, cartItems, removeItem, addItem, clearItemFromCart, total, itemsCount, closeAllDropDownMenu } = props;
     const shippingMsg = (total < 50 ? <p>You're <span className="amount">$ {50 - total} CAD</span> away from free shipping!</p> : <p>Congrats! You get free standard shipping.</p>);
     const shippingFee = (total < 50 ? 'Standard Fees' : 'FREE');
 
@@ -29,11 +29,8 @@ const ShoppingCartMenu = (props) => {
                         (<div className='shopping_cart_menu-empty'>
                             <h2>Your Cart is Empty</h2>
                             <ul>
-                                <li>SHOP MEN'S</li>
-                                <li>SHOP WOMENS'S</li>
-                                <li>SHOP SOCKS</li>
-                                <li>SHOP NEW ARRIVALS</li>
-                                <li>SHOP WOMENS'S</li>
+                                <li className="button"><Link to={`/shop/mens`} onClick={() => { toggleCartHidden(); closeAllDropDownMenu(); }}>SHOP MEN'S</Link></li>
+                                <li className="button"><Link to={`/shop/women`} onClick={() => { toggleCartHidden(); closeAllDropDownMenu(); }}>SHOP WOMEN'S</Link></li>
                             </ul>
                         </div>)
                         :
@@ -55,7 +52,10 @@ const ShoppingCartMenu = (props) => {
                             <div className='summary'>
                                 <p>Subtotal <span>$ {total} CAD</span></p>
                                 <p>Shipping <span>{shippingFee}</span></p>
-                                <Link to="/checkout" className='button' onClick={toggleCartHidden}>CHECKOUT</Link>
+                                <Link to="/checkout" className='button' onClick={() => {
+                                    toggleCartHidden();
+                                    closeAllDropDownMenu();
+                                }}>CHECKOUT</Link>
                             </div>
                         </div>)
                 }

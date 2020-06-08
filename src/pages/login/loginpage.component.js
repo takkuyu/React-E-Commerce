@@ -45,8 +45,8 @@ class LoginPage extends React.Component {
                 confirmPassword: ''
             });
             
-            // this.props.history.push('/account'); // jump to the account page
-            return <Redirect to='/account' />
+            this.props.history.push('/account'); // jump to the account page
+            // return <Redirect to='/account' />
 
         } catch (error) {
             console.error(error);

@@ -117,14 +117,16 @@
         }
     }
 
+    .homepage_image_gallery{
+        margin-bottom: $space-section-divider;
+    }
+
 
     .homepage_newsletter {
         text-align: center;
-        padding: 15em 2.4em;
-        // background-image: url(https://images.unsplash.com/photo-1499756630622-6a7fd76720ab?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80);
-        // background-size: cover;
-        // background-position: center;
-        // height: 70em;
+        padding: 0 2.4em;
+        margin-bottom: $space-section-divider;
+
         p {
             font-size: 1.5em;
             margin-bottom: 2rem;
@@ -179,7 +181,8 @@
 
     .homepage_partners {
         text-align: center;
-        padding: 0 2.4em 15em;
+        padding: 0 2.4em;
+        margin-bottom: $space-section-divider;
 
         ul {
             margin: 0;
