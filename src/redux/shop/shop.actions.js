@@ -87,3 +87,7 @@ export const setCategory = category => ({
 export const refreshCollections = () => ({
   type: ShopActionTypes.REFRESH_COLLECTIONS,
 });
+
+export const refreshFilters = () => ({
+  type: ShopActionTypes.REFRESH_FILTERS,
+});

@@ -89,7 +89,7 @@ class ItemPage extends React.Component {
               {
                 recommendations.map(item => (
                   <div className='item-card' key={item.id} onClick={() => { history.push(`/shop/${gender}/${category}/${item.id}`) }}>
-                    <img src={item.imageUrl} alt='card image' />
+                    <img src={item.imageUrl} alt='card' />
                     <div className='card-content'>
                       <h2>{item.name}</h2>
                       <p>Lorem plus</p>

@@ -61,7 +61,7 @@ body button:focus {
 .button {
   width: 100%;
   background-color: #212a2f;
-  color: white;
+  color: #fff;
   font-size: 1.4em;
   letter-spacing: 2px;
   text-align: center;
@@ -73,6 +73,10 @@ body button:focus {
   margin-bottom: 1rem;
 }
 
+.button > a {
+  color: #fff;
+}
+
 .button:focus {
   outline: none;
 }
@@ -81,6 +85,10 @@ body button:focus {
   background-color: transparent;
   color: #212a2f;
   cursor: pointer;
+}
+
+.button:hover > a {
+  color: #212a2f;
 }
 
 .button.google-btn {
@@ -1133,35 +1141,30 @@ $COMPONENTS
   }
 }
 
-@keyframes SlideIn {
-  0% {
-    opacity: 0;
-    transform: translateY(-100%);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 .header_dropdown {
   box-shadow: 0 -1px 8px rgba(0, 0, 0, 0.1);
   background-color: #fff;
-  width: 100vw;
+  width: 100%;
   position: fixed;
   z-index: 5;
   top: 5rem;
   left: 0;
-  display: none;
+  transform: translateY(-100%);
+  opacity: 0;
 }
 
 .header_dropdown.active {
-  display: block;
+  transform: translateY(0);
+  transition: all 0.4s;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  animation-name: SlideIn;
-  animation-duration: .4s;
-  animation-fill-mode: forwards;
+  opacity: 1;
+}
+
+@media (min-width: 62em) {
+  .header_dropdown.active .blanket {
+    display: block;
+  }
 }
 
 .header_dropdown .header_dropdown-mobile {
@@ -1323,18 +1326,12 @@ $COMPONENTS
   position: absolute;
 }
 
-@media (min-width: 62em) {
-  .header_dropdown .blanket {
-    display: block;
-  }
-}
-
 .shopping_cart_menu {
   position: fixed;
   left: 0;
   right: 0;
   top: 0;
-  z-index: 9999;
+  z-index: 20;
   height: 100vh;
   width: 100vw;
 }
@@ -1420,21 +1417,17 @@ $COMPONENTS
   margin-bottom: 2.5rem;
 }
 
-.shopping_cart_menu .shopping_cart_menu-main .shopping_cart_menu-empty ul li {
-  height: 3rem;
-  line-height: 3rem;
-  border: 3px solid #212a2f;
-  width: 100%;
-  font-size: 1.5em;
-  font-weight: 600;
+.shopping_cart_menu .shopping_cart_menu-main .shopping_cart_menu-empty ul li.button {
+  padding: 0;
 }
 
-.shopping_cart_menu .shopping_cart_menu-main .shopping_cart_menu-empty ul li:not(:last-child) {
-  margin-bottom: 1rem;
+.shopping_cart_menu .shopping_cart_menu-main .shopping_cart_menu-empty ul li.button:not(:last-child) {
+  margin-bottom: 2rem;
 }
 
-.shopping_cart_menu .shopping_cart_menu-main .shopping_cart_menu-empty ul li:hover {
-  cursor: pointer;
+.shopping_cart_menu .shopping_cart_menu-main .shopping_cart_menu-empty ul li.button a {
+  display: block;
+  padding: 0.8125em 1.125em;
 }
 
 .shopping_cart_menu .shopping_cart_menu-main .shopping_cart_menu-bottom {

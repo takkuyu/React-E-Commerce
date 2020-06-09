@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import Routes from './components/routes/routes';
 import ScrollToTop from './components/scrollToTop.component'
-import { auth, createUserProfileDocument, addCollectionAndDocuments } from './firebase/firebase.utils';
+import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 import Header from './components/header/header.component';
 import Footer from './components/footer/footer.component';
 import { connect } from 'react-redux';
@@ -31,7 +31,6 @@ class App extends React.Component {
           })
           this.setState({ isLoading: false });
         });
-        // addCollectionAndDocuments('collections', SHOP_DATA.map(({ title, items }) => ({ title, items })))
       }
       else {
         setCurrentUser(userAuth);

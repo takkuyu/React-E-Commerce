@@ -1,7 +1,6 @@
 import React from 'react';
 import { Container } from 'reactstrap';
 import { signInWithGoogle, auth, createUserProfileDocument } from '../../firebase/firebase.utils';
-import { withRouter, Redirect } from 'react-router-dom'
 
 class LoginPage extends React.Component {
     constructor(props) {
@@ -35,19 +34,9 @@ class LoginPage extends React.Component {
 
             const displayName = newFirstName + ' ' + newLastName;
 
-            await createUserProfileDocument(user, displayName);
+            await createUserProfileDocument(user, { displayName });
 
-            this.setState({
-                newFirstName: '',
-                newLastName: '',
-                newEmail: '',
-                newPassword: '',
-                confirmPassword: ''
-            });
-            
             this.props.history.push('/account'); // jump to the account page
-            // return <Redirect to='/account' />
-
         } catch (error) {
             console.error(error);
         }
@@ -56,9 +45,8 @@ class LoginPage extends React.Component {
     handleSignin = async event => {
         event.preventDefault();
         const { email, password } = this.state;
-        
-        try {
 
+        try {
             await auth.signInWithEmailAndPassword(email, password);
 
             this.setState({ email: '', password: '' });
@@ -71,7 +59,7 @@ class LoginPage extends React.Component {
 
     handleChange = event => {
         const { value, name } = event.target;
-        this.setState({ [name]: value }); // @Note: need [] otehrwise a new state 'name' is created
+        this.setState({ [name]: value }); // need [] otherwise a new state 'name' is created
     };
 
     render() {
@@ -119,4 +107,4 @@ class LoginPage extends React.Component {
     }
 };
 
-export default withRouter(LoginPage);
+export default LoginPage

@@ -77,6 +77,11 @@ const shopReducer = (state = INITIAL_STATE, action) => {
         ...state,
         category: action.payload
       };
+    case ShopActionTypes.REFRESH_FILTERS:
+      return {
+        ...state,
+        filter: INITIAL_STATE.filter
+      };
     default:
       return state;
   }

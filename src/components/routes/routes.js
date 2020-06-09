@@ -20,8 +20,8 @@ const Routes = (props) => {
       <Switch >
         <Route path='/' exact component={HomePage} />
         <Route path={`/shop/:gender(${genderOptions})/:category?`} key={props.location.key} component={ShopPage} />
-        <Route path="/account/login" exact render={(props) => currentUser ? <AccountPage {...props} currentUser={currentUser} /> : <LoginPage />} />
-        <Route path="/account" exact render={props => currentUser ? <AccountPageWithSpinner {...props} isLoading={isLoading} currentUser={currentUser} /> : <LoginPage />} />
+        <Route path="/account/login" exact render={(props) => currentUser ? <AccountPage {...props} currentUser={currentUser} /> : <LoginPage {...props} />} />
+        <Route path="/account" exact render={props => currentUser ? <AccountPageWithSpinner {...props} isLoading={isLoading} currentUser={currentUser} /> : <LoginPage {...props} />} />
         <Route path="/checkout" exact render={props => <CheckoutPage {...props} />} />
         <Route component={NoMatchPage} />{/* fall back page  */}
       </Switch>

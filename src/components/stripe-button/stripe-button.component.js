@@ -34,7 +34,7 @@ const StripeCheckoutButton = ({ price, cartItems, clearAllItemsFromCart, current
       name='Takaya Clothing Ltd.'
       billingAddress
       shippingAddress
-      image='https://svgshare.com/i/KzP.svg'
+      image='https://i.ibb.co/ZTwPLSv/takaya-logo.png'
       description={`Your total is $${price}`}
       amount={priceForStripe}
       panelLabel='Pay Now'

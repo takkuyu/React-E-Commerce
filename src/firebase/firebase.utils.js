@@ -39,7 +39,7 @@ export const addPurchasedItemsToUser = async (uid, purchasedItems) => {
 
 };
 
-export const createUserProfileDocument = async (userAuth, displayName) => {
+export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) return; // When a user isn't signin
 
   const userRef = firestore.doc(`users/${userAuth.uid}`);
@@ -49,10 +49,11 @@ export const createUserProfileDocument = async (userAuth, displayName) => {
   if (!snapShot.exists) { // when the user does not exist
     try {
       await userRef.set({ //Create a new user collection
-        displayName: displayName,
+        displayName: userAuth.displayName,
         email: userAuth.email,
         createdAt: new Date(),
         purchasedItems: [],
+        ...additionalData
       });
     } catch (error) {
       console.log('error creating user', error.message);
