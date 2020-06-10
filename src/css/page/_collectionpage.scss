@@ -90,7 +90,7 @@
       display: block;
       margin: 0 auto 1rem;
 
-      @include laptop{
+      @include laptop {
         margin-bottom: 0;
       }
 
@@ -129,8 +129,10 @@
           transform: scale(1.1, 1.1);
         }
 
-        &.active{
-          > i{
+        &.active {
+          transform: scale(1.1);
+
+          >i {
             transition: all 0.4s;
             transform: rotateX(180deg);
           }
@@ -140,10 +142,10 @@
 
   }
 
-  .collections-items-container{
+  .collections-items-container {
 
-    .search-result{
-      @include laptop{
+    .search-result {
+      @include laptop {
         display: none;
       }
     }

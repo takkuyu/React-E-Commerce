@@ -16,7 +16,7 @@ class CollectionPage extends React.Component {
   }
 
   render() {
-    console.log('collection render')
+    console.log('colleCollectionPage render')
 
     const { filter, setSizeFilter, setColorFilter, setPriceFilter, clearAllFilters, results, toggleFilterMenu, currentFilter, gender, collection } = this.props;
     const title = (collection.length > 1 ? "Shoes" : collection[0].title);

@@ -1004,6 +1004,10 @@ body button:focus {
   transform: scale(1.1, 1.1);
 }
 
+.collections-container .search-bar ul li.active {
+  transform: scale(1.1);
+}
+
 .collections-container .search-bar ul li.active > i {
   transition: all 0.4s;
   transform: rotateX(180deg);

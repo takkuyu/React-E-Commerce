@@ -13,7 +13,7 @@ class ShopPage extends React.Component {
     }
 
     componentDidMount() {
-        console.log('didmount')
+        console.log('shop.js didmount')
         const { fetchCollectionsStartAsync, match} = this.props;
 
         fetchCollectionsStartAsync(match.params.category, match.params.gender);
@@ -21,7 +21,7 @@ class ShopPage extends React.Component {
 
     render() {
         const { match } = this.props;
-        console.log('shop.js')
+        console.log('shop.js render')
         return (
             <>
                 <Route

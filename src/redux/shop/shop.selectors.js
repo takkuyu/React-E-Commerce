@@ -16,7 +16,7 @@ export const selectCollectionFilter = createSelector(
 export const selectFilteredCollection = createSelector(
   [selectCollections, selectFilter],
   (collections, filter) => {
-    console.log('filterdcollection selecter')
+    console.log('selectFilteredCollection')
     if (filter) {
       return collections.map(collection => ({
         ...collection,
@@ -78,7 +78,9 @@ export const selectIsCollectionFetching = createSelector(
 
 export const selectIsCollectionsLoaded = createSelector(
   [selectShop],
-  shop => !!shop.collections
+  shop =>{ 
+    console.log('selectIsCollectionsLoaded -> ' + !!shop.collections)
+    return !!shop.collections}
 );
 
 export const selectCurrentFilter = createSelector(
