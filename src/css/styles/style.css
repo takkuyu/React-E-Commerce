@@ -1501,7 +1501,7 @@ $COMPONENTS
   position: absolute;
   top: 1.25rem;
   font-size: 1rem;
-  left: 0;
+  right: 0;
 }
 
 .items-card i.fa-times:hover {
