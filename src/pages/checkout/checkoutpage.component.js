@@ -8,7 +8,6 @@ import { clearItemFromCart, removeItem, addItem, clearAllItemsFromCart } from '.
 import { selectCurrentUser } from '../../redux/user/user.selectors';
 
 const CheckoutPage = (props) => {
-
     const { cartItems, removeItem, addItem, clearItemFromCart, clearAllItemsFromCart, subTotal, currentUser } = props;
     const shippingFee = (subTotal < 50 ? 'Standard Fees' : 'FREE');
     const taxes = (subTotal * 0.12).toFixed(2);

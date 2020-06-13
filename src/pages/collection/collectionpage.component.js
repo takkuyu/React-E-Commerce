@@ -11,13 +11,12 @@ import { setColorFilter, setPriceFilter, setSizeFilter, clearAllFilters, toggleF
 class CollectionPage extends React.Component {
 
   componentWillUnmount(){
-    console.log('will unmount')
+    // console.log('will unmount')
     this.props.refreshFilters()
   }
 
   render() {
-    console.log('colleCollectionPage render')
-
+    // console.log('colleCollectionPage render')
     const { filter, setSizeFilter, setColorFilter, setPriceFilter, clearAllFilters, results, toggleFilterMenu, currentFilter, gender, collection } = this.props;
     const title = (collection.length > 1 ? "Shoes" : collection[0].title);
     const summary = (collection.length > 1 ? "Get the latest assortment of shoes online today." : collection[0].summary);
@@ -31,7 +30,6 @@ class CollectionPage extends React.Component {
 
     return (
       <div className='collections-container'>
-
         <div className='collections-top'>
           <img src={collectionImage} alt='collection' />
           <div className='collections-top-content'>
@@ -39,7 +37,6 @@ class CollectionPage extends React.Component {
             <p>{summary}</p>
           </div>
         </div>
-
         <div className='search-bar'>
           <Container>
             <p className='search-result'>All - {results} results</p>
@@ -82,7 +79,6 @@ class CollectionPage extends React.Component {
       </div>
     );
   }
-
 };
 
 const mapStateToProps = createStructuredSelector({

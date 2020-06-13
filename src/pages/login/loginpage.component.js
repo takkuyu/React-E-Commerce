@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container } from 'reactstrap';
-import { signInWithGoogle, auth, createUserProfileDocument } from '../../firebase/firebase.utils';
+import { auth, createUserProfileDocument } from '../../firebase/firebase.utils';
 
 class LoginPage extends React.Component {
     constructor(props) {

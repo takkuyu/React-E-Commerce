@@ -6,8 +6,6 @@ import Card from './card.component';
 
 const Category = ({ collection, isOverviewPage }) => {
   const { title, items, routeName, summary } = collection;
-  // console.log(isOverviewPage)
-
   return (
     <div className='collections-items-wrapper'>
       {

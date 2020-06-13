@@ -16,7 +16,7 @@ export const selectCollectionFilter = createSelector(
 export const selectFilteredCollection = createSelector(
   [selectCollections, selectFilter],
   (collections, filter) => {
-    console.log('selectFilteredCollection')
+    // console.log('selectFilteredCollection')
     if (filter) {
       return collections.map(collection => ({
         ...collection,
@@ -48,10 +48,7 @@ export const selectItemAndRecommendations = id =>
   createSelector(
     [selectCollections],
     (collection) => {
-      console.log(collection)
       const item = collection[0].items.filter(item => item.id === Number(id))[0];
-      console.log(item)
-
       const pmin = item.price - 50;
       const pmax = item.price + 50;
       const recommendations = collection[0].items.filter(item => item.id !== Number(id) && item.price <= pmax && item.price >= pmin)
@@ -78,9 +75,10 @@ export const selectIsCollectionFetching = createSelector(
 
 export const selectIsCollectionsLoaded = createSelector(
   [selectShop],
-  shop =>{ 
-    console.log('selectIsCollectionsLoaded -> ' + !!shop.collections)
-    return !!shop.collections}
+  shop => {
+    // console.log('selectIsCollectionsLoaded -> ' + !!shop.collections)
+    return !!shop.collections
+  }
 );
 
 export const selectCurrentFilter = createSelector(

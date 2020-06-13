@@ -21,7 +21,7 @@ export const fetchCollectionsFailure = errorMessage => ({
 export const fetchCollectionsStartAsync = (category, gender) => {
   return dispatch => {
     const collectionRef = firestore.collection('collections');
-    console.log('will fetchCollectionsStart')
+    // console.log('will fetchCollectionsStart')
     dispatch(fetchCollectionsStart());
     collectionRef
       .get()
@@ -37,7 +37,7 @@ export const fetchCollectionsStartAsync = (category, gender) => {
           dispatch(fetchCollectionsSuccess(collectionsFilteredByGender));
         } else {
           const collectionFilteredByCategory = collectionsMap.filter(collection => collection.routeName === category)[0];
-          console.log('will fetchCollectionsSuccess')
+          // console.log('will fetchCollectionsSuccess')
           dispatch(fetchCollectionsSuccess(
             [{
               ...collectionFilteredByCategory,
