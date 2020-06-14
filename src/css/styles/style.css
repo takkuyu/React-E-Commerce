@@ -1311,6 +1311,22 @@ $COMPONENTS
   margin: 0;
 }
 
+.header_dropdown .header_dropdown-desktop .header_dropdown-main .header_dropdown-collections ul .collection-item.mens-topsellers {
+  background-image: url(../../img/topseller.jpg);
+}
+
+.header_dropdown .header_dropdown-desktop .header_dropdown-main .header_dropdown-collections ul .collection-item.women-topsellers {
+  background-image: url(../../img/women-all.jpg);
+}
+
+.header_dropdown .header_dropdown-desktop .header_dropdown-main .header_dropdown-collections ul .collection-item.mens-newarrivals {
+  background-image: url(../../img/mens-new-arrivals.jpg);
+}
+
+.header_dropdown .header_dropdown-desktop .header_dropdown-main .header_dropdown-collections ul .collection-item.women-newarrivals {
+  background-image: url(../../img/women-running.jpg);
+}
+
 .header_dropdown .header_dropdown-desktop .header_dropdown-main .header_dropdown-collections ul .collection-item a {
   height: 100%;
   width: 100%;
