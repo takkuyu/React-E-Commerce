@@ -12,7 +12,9 @@ class LoginPage extends React.Component {
             newPassword: '',
             confirmPassword: '',
             newFirstName: '',
-            newLastName: ''
+            newLastName: '',
+            errorLoginMessage: '',
+            errorSigninMessage: ''
         }
     }
 
@@ -22,7 +24,10 @@ class LoginPage extends React.Component {
         const { newFirstName, newLastName, newEmail, newPassword, confirmPassword } = this.state;
 
         if (newPassword !== confirmPassword) {
-            alert("passwords don't match");
+            this.setState({ errorSigninMessage: "Passwords don't match." })
+            return;
+        } else if (!newFirstName || !newLastName) {
+            this.setState({ errorSigninMessage: "Please enter your name." })
             return;
         }
 
@@ -38,7 +43,7 @@ class LoginPage extends React.Component {
 
             this.props.history.push('/account'); // jump to the account page
         } catch (error) {
-            console.error(error);
+            this.setState({ errorSigninMessage: error.message })
         }
     };
 
@@ -48,12 +53,10 @@ class LoginPage extends React.Component {
 
         try {
             await auth.signInWithEmailAndPassword(email, password);
-
             this.setState({ email: '', password: '' });
             this.props.history.push('/account'); // jump to the account page
-
         } catch (error) {
-            console.error(error);
+            this.setState({ errorLoginMessage: "Invalid email or password." })
         }
     };
 
@@ -68,6 +71,9 @@ class LoginPage extends React.Component {
                 <Container>
                     <div className='login-wrapper'>
                         <h1>LOGIN</h1>
+                        {
+                            this.state.errorLoginMessage ? <p className="error-message">{this.state.errorLoginMessage}</p> : <></>
+                        }
                         <form onSubmit={this.handleSignin}>
                             <label htmlFor='email'>EMAIL</label>
                             <input type='email' id='email' value={this.state.email} name='email' onChange={this.handleChange} />
@@ -80,6 +86,9 @@ class LoginPage extends React.Component {
                     <div className='register-wrapper'>
                         <h1>CREATE AN ACCOUNT</h1>
                         <p>Registering makes checkout fast and easy and saves your order information in your account.</p>
+                        {
+                            this.state.errorSigninMessage ? <p className="error-message">{this.state.errorSigninMessage}</p> : <></>
+                        }
                         <form onSubmit={this.handleRegister}>
                             <label htmlFor='firstName'>FIRST NAME</label>
                             <input type='text' id='firstName' value={this.state.newFirstName} name='newFirstName' onChange={this.handleChange} />

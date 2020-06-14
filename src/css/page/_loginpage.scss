@@ -4,7 +4,6 @@
 
     @include tablet {
         padding: 10em;
-
     }
 
     @include laptop {
@@ -14,76 +13,90 @@
     .container {
         display: flex;
         flex-wrap: wrap;
-    }
-
-    h1 {
-        font-size: 2.4em;
-        font-weight: 600;
-
-    }
-
-    label {
-        display: block;
-        font-size: 1.4em;
-        font-weight: 600;
-    }
-
-    input {
-        width: 100%;
-        margin-bottom: 19px;
-        -webkit-appearance: none;
-        border: 1px solid rgba(0, 0, 0, 0.1);
-        border-radius: 2px;
-        background-color: white;
-        font-weight: 400;
-        font-size: 1.6em;
-        padding: 19px 20px;
-
-        &:focus {
-            outline: none;
-        }
-    }
-
-
-    .login-wrapper {
-        width: 100%;
-
-        @include laptop {
-            width: 50%;
-            padding-right: 5%;
-        }
 
         h1 {
-            margin-bottom: 1em;
+            font-size: 2.4em;
+            font-weight: 600;
+    
         }
-
-
-    }
-
-    .register-wrapper {
-        margin-top: 5em;
-        width: 100%;
-
-        @include laptop {
-            margin-top: 0;
+    
+        label {
+            display: block;
+            font-size: 1.4em;
+            font-weight: 600;
         }
-
-        @include laptop {
-            width: 50%;
-            padding-left: 5%;
-        }
-
-        h1 {
-            margin-bottom: 1em;
-        }
-
-        p {
+    
+        input {
+            width: 100%;
+            margin-bottom: 19px;
+            -webkit-appearance: none;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 2px;
+            background-color: white;
+            font-weight: 400;
             font-size: 1.6em;
+            padding: 19px 20px;
+    
+            &:focus {
+                outline: none;
+            }
+        }
 
-            &.bold {
-                font-weight: 600;
-                text-align: center;
+        .error-message{
+            color: $error-text;
+            background-color: $error;
+            padding: 1rem;
+            font-size: .75rem !important;
+            border-radius: 3px;
+
+            &::before{
+                font-family: "Font Awesome 5 Free";
+                font-weight: 900;
+                content: "\f071";
+                padding-right: .7rem;
+            }
+        }
+    
+        .login-wrapper {
+            width: 100%;
+    
+            @include laptop {
+                width: 50%;
+                padding-right: 5%;
+            }
+    
+            h1 {
+                margin-bottom: 1em;
+            }
+    
+        }
+    
+        .register-wrapper {
+            margin-top: 5em;
+            width: 100%;
+    
+            @include laptop {
+                margin-top: 0;
+            }
+    
+            @include laptop {
+                width: 50%;
+                padding-left: 5%;
+            }
+    
+            h1 {
+                margin-bottom: 1em;
+            }
+    
+            p {
+                font-size: 1.6em;
+    
+                &.bold {
+                    font-weight: 600;
+                    text-align: center;
+                }
             }
         }
     }
+
 }
