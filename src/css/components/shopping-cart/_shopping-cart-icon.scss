@@ -9,18 +9,17 @@
 
         &::after {
             position: absolute;
-            right: 0%;
-            top: 1%;
+            right: 0;
             content: attr(data-count);
-            font-size: 30%;
-            padding: .7em;
+            font-size: .5rem;
+            line-height: .5rem;
+            min-width: .5rem;
+            min-height: .5rem;
+            padding: .25rem;
             border-radius: 50%;
-            // line-height: .8em;
-            line-height: 1.2em;
-            color: white;
+            color: $white;
             background: rgba(255, 0, 0, .85);
             text-align: center;
-            min-width: 1em;
             font-weight: bold;
             box-sizing: unset;
         }
