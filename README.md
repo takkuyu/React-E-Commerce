@@ -6,12 +6,12 @@
 - **Deployed** using Heroku
 
 ## Features
-- Integrated Stripe API for payment and implemented the checkout process .
-- Managed complex global states using Redux with Redux Thunk for asynchronous redux actions.
-- Deployed the app using Heroku.
-- Designed using Figma and implemented fully responsive pages which looks and work well on mobile, table, and pc.
-- Used CSS animations and grid layout for a better UI/UX.
-- Developed user authentication and established database connection using Firebase.
+- Integrated Stripe API for payment and implemented the checkout process
+- Managed complex global states using Redux with Redux Thunk for asynchronous redux actions
+- Deployed the app using Heroku
+- Designed using Figma and implemented fully responsive pages which looks and work well on mobile, tablet, and pc
+- Used CSS animations and grid layout for a better UI/UX
+- Developed user authentication and established database connection using Firebase
 
 ## User Level Features
 - Login or logout
