@@ -81,7 +81,10 @@ class LoginPage extends React.Component {
                             <input autoComplete="off" type='password' id='password' value={this.state.password} name='password' onChange={this.handleChange} />
                             <button className='button' type='button submit'>SIGN IN</button>
                         </form>
-                        {/* <button className='button google-btn' onClick={signInWithGoogle}>SIGN IN WITH GOOGLE</button> */}
+                        <div>
+                            <p class="h6">Quick login for demo</p>
+                            <p style={{fontSize: '.85rem'}} class="mb-1">Email: demo@mail.com | Password: demouser</p>
+                        </div>
                     </div>
                     <div className='register-wrapper'>
                         <h1>CREATE AN ACCOUNT</h1>
